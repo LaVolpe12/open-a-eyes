@@ -790,9 +790,8 @@ export default function QuestionnairePage() {
       setCurrentQuestionIndex(currentQuestionIndex + 1)
       window.scrollTo(0, 0)
     } else {
-      // Submit the form
-      console.log("Form submitted:", formData)
-      router.push("/questionnaire/thanks")
+      // Submit the form when reaching the last question
+      handleSubmit()
     }
   }
 
@@ -880,11 +879,11 @@ export default function QuestionnairePage() {
             </Button>
 
             <Button
-              onClick={handleSubmit}
+              onClick={goToNextQuestion}
               className="bg-blue-600 hover:bg-blue-700 text-white"
               disabled={!currentQuestion.isAnswered()}
             >
-              Absenden
+              {currentQuestionIndex === questions.length - 1 ? "Absenden" : "Weiter"}
             </Button>
           </CardFooter>
         </Card>
