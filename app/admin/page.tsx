@@ -62,7 +62,7 @@ export default function AdminPage() {
   useEffect(() => {
     const fetchSubmissions = async () => {
       try {
-        const response = await fetch('/api/get-submissions')
+        const response = await fetch('/api/submit-questionnaire')
         if (!response.ok) {
           throw new Error('Failed to fetch submissions')
         }
