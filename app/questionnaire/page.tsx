@@ -804,6 +804,13 @@ export default function QuestionnairePage() {
 
   const handleSubmit = async () => {
     try {
+      // Zeige Ladezustand an
+      const submitButton = document.querySelector('button[type="submit"]') as HTMLButtonElement
+      if (submitButton) {
+        submitButton.disabled = true
+        submitButton.textContent = "Wird gesendet..."
+      }
+
       const response = await fetch('/api/submit-questionnaire', {
         method: 'POST',
         headers: {
@@ -813,14 +820,23 @@ export default function QuestionnairePage() {
       })
 
       if (!response.ok) {
-        throw new Error('Failed to submit questionnaire')
+        const errorData = await response.json()
+        throw new Error(errorData.error || 'Failed to submit questionnaire')
       }
 
       // Nach erfolgreicher Übermittlung zur Danke-Seite navigieren
       router.push('/questionnaire/thanks')
     } catch (error) {
       console.error('Error submitting questionnaire:', error)
-      // Hier könnte man eine Fehlermeldung anzeigen
+      // Zeige Fehlermeldung an
+      alert('Es gab einen Fehler beim Absenden des Fragebogens. Bitte versuchen Sie es später erneut.')
+      
+      // Setze Button zurück
+      const submitButton = document.querySelector('button[type="submit"]') as HTMLButtonElement
+      if (submitButton) {
+        submitButton.disabled = false
+        submitButton.textContent = "Absenden"
+      }
     }
   }
 
@@ -882,6 +898,7 @@ export default function QuestionnairePage() {
               onClick={goToNextQuestion}
               className="bg-blue-600 hover:bg-blue-700 text-white"
               disabled={!currentQuestion.isAnswered()}
+              type="submit"
             >
               {currentQuestionIndex === questions.length - 1 ? "Absenden" : "Weiter"}
             </Button>
