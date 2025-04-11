@@ -1,41 +1,25 @@
 import { NextResponse } from 'next/server'
 import { FormData } from '@/app/questionnaire/questionnaire-context'
 
-// In einer Produktionsumgebung würden wir eine echte Datenbank verwenden
-// Für dieses Beispiel speichern wir die Daten in einer JSON-Datei
-import { promises as fs } from 'fs'
-import path from 'path'
+// In-memory storage for submissions (this will be reset when the serverless function restarts)
+let submissions: (FormData & { timestamp: string })[] = []
 
 export async function POST(request: Request) {
   try {
     const data: FormData = await request.json()
     
-    // Füge Timestamp hinzu
+    // Add timestamp
     const submission = {
       ...data,
       timestamp: new Date().toISOString(),
     }
 
-    // Speichere die Antworten in einer JSON-Datei
-    const filePath = path.join(process.cwd(), 'data', 'submissions.json')
-    
-    // Stelle sicher, dass das data-Verzeichnis existiert
-    await fs.mkdir(path.join(process.cwd(), 'data'), { recursive: true })
-    
-    // Lese existierende Submissions oder erstelle ein leeres Array
-    let submissions = []
-    try {
-      const fileContent = await fs.readFile(filePath, 'utf-8')
-      submissions = JSON.parse(fileContent)
-    } catch (error) {
-      // Datei existiert noch nicht oder ist leer
-    }
-    
-    // Füge neue Submission hinzu
+    // Add to in-memory storage
     submissions.push(submission)
     
-    // Speichere aktualisierte Submissions
-    await fs.writeFile(filePath, JSON.stringify(submissions, null, 2))
+    // Log the submission for debugging
+    console.log('Received submission:', submission)
+    console.log('Total submissions:', submissions.length)
 
     return NextResponse.json({ success: true })
   } catch (error) {
@@ -45,4 +29,9 @@ export async function POST(request: Request) {
       { status: 500 }
     )
   }
+}
+
+// Add a GET endpoint to retrieve submissions (for admin purposes)
+export async function GET() {
+  return NextResponse.json(submissions)
 } 
