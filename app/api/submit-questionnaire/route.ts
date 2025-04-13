@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server'
 import { FormData } from '@/app/questionnaire/questionnaire-context'
 import clientPromise from '@/lib/mongodb'
 
+// API Route for handling questionnaire submissions and retrieving them
 export async function POST(request: Request) {
   try {
     const data: FormData = await request.json()
