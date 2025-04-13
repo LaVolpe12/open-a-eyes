@@ -36,17 +36,23 @@ export async function POST(request: Request) {
 // Add a GET endpoint to retrieve submissions (for admin purposes)
 export async function GET() {
   try {
+    console.log('Attempting to connect to MongoDB...')
     const client = await clientPromise
+    console.log('Connected to MongoDB')
+    
     const db = client.db('open-a-eyes')
     const collection = db.collection('submissions')
 
     // Retrieve all submissions
+    console.log('Fetching submissions...')
     const submissions = await collection.find({}).toArray()
+    console.log(`Found ${submissions.length} submissions`)
+    
     return NextResponse.json(submissions)
   } catch (error) {
     console.error('Error retrieving submissions:', error)
     return NextResponse.json(
-      { error: 'Failed to retrieve submissions' },
+      { error: 'Failed to retrieve submissions', details: error instanceof Error ? error.message : 'Unknown error' },
       { status: 500 }
     )
   }
