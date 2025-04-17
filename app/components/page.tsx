@@ -179,7 +179,10 @@ export default function ComponentsPage() {
           width={80}
           height={80}
           className="object-cover"
-          unoptimized
+          priority={false}
+          loading="lazy"
+          sizes="80px"
+          quality={75}
         />
       </div>
     </TableCell>
@@ -205,7 +208,10 @@ export default function ComponentsPage() {
                 width={800}
                 height={800}
                 className="object-contain"
-                unoptimized
+                priority={true}
+                loading="eager"
+                sizes="(max-width: 768px) 100vw, 800px"
+                quality={90}
               />
             )}
           </div>
