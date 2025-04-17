@@ -30,21 +30,21 @@ export default function ComponentsPage() {
       name: "ZeroCam",
       description: "Kamera für Bilderfassung",
       price: "15-20€",
-      link: "#",
+      link: "https://www.reichelt.de/de/de/shop/produkt/raspberry_pi_zero_-_kamera_5mp_160_-242757?PROVID=2788&gad_source=1&gbraid=0AAAAADwnxta-pkUO2K43eiSIZLfJCQgih&gclid=Cj0KCQjwzYLABhD4ARIsALySuCRYc2TTHip3xd4FoMMPQh_bASQZIsSUiQEjAsoJIAcw8amlSpZSp68aApvoEALw_wcB",
       image: "/Einzelteile/ZeroCam.jpg"
     },
     {
       name: "Lautsprecher mit JST-PH2.0 mm",
       description: "Für Audioausgabe",
-      price: "5-10€",
-      link: "#",
+      price: "16.99€",
+      link: "https://www.az-delivery.de/products/2-stuck-dfplayer-mini-3-watt-8-ohm-mini-lautsprecher-mit-jst-ph2-0-mm-pin-schnittstelle-fur-arduino-raspberry-pi-und-elektronische-diy-projekte-inklusive-e-book?variant=39441379131488&utm_source=google&utm_medium=cpc&utm_campaign=16964979024&utm_content=166733588295&utm_term=&gad_source=1&gbraid=0AAAAADBFYGVMZJhv_GN2v-vk_surpkJa7&gclid=Cj0KCQjwzYLABhD4ARIsALySuCT6KaJ5HwzvznJb8pPu1muPQGUYymX0ZBdIUJDXAXupGyT7-EdxsukaAr28EALw_wcB",
       image: "/Einzelteile/Lautsprecher.jpg"
     },
     {
       name: "SD-Karte (min. 64 GB)",
       description: "Für Betriebssystem und Software",
-      price: "15-20€",
-      link: "#",
+      price: "12.90€",
+      link: "https://www.cyberport.de/?DEEP=4H20-04W&APID=109&wt_cc2=coma_sandisk_25q1_google_pla&campaign=22402392867&prodid=4H20-04W&adgroup=176758882759&gad_source=1&gbraid=0AAAAADtQIJyBKSL5FB6F4d99_jYEhc4LP&gclid=Cj0KCQjwzYLABhD4ARIsALySuCTXTxCsm-O5PPCHyzhb97olghDL7hVYLNjtNaN23Xf768mb0hfQ134aAgU9EALw_wcB",
       image: "/Einzelteile/SD-Karte.jpg"
     },
   ]
@@ -54,84 +54,84 @@ export default function ComponentsPage() {
       name: "Fassung",
       description: "3D-gedrucktes Brillengestell",
       price: "-",
-      link: "#",
+      link: "https://github.com/LaVolpe12/open-a-eyes/releases/download/v1.0.0/Fassung.stl",
       image: "/Einzelteile/Fassung.jpg"
     },
     { 
       name: "Kabelführung",
       description: "Für ordentliche Kabelverlegung",
       price: "-",
-      link: "#",
+      link: "https://github.com/LaVolpe12/open-a-eyes/releases/download/v1.0.0/Kabelfuehrung.stl",
       image: "/Einzelteile/Kabelfuehrung.jpg"
     },
     { 
       name: "Rechter Bügel",
       description: "Brillenbügel rechts",
       price: "-",
-      link: "#",
+      link: "https://github.com/LaVolpe12/open-a-eyes/releases/download/v1.0.0/Rechter_Buegel.stl",
       image: "/Einzelteile/Rechter_Buegel.jpg"
     },
     { 
       name: "Verbindungsteil vom rechten Bügel",
       description: "Verbindungselement",
       price: "-",
-      link: "#",
+      link: "https://github.com/LaVolpe12/open-a-eyes/releases/download/v1.0.0/Verbindungsteil_rechter_Buegel.stl",
       image: "/Einzelteile/Verbindungsteil_rechter_Buegel.jpg"
     },
     { 
       name: "Elektronik-Gehäuse",
       description: "Schutz für die Elektronik",
       price: "-",
-      link: "#",
+      link: "https://github.com/LaVolpe12/open-a-eyes/releases/download/v1.0.0/Elektronik-Gehaeuse.stl",
       image: "/Einzelteile/Elektronik-Gehaeuse.jpg"
     },
     { 
       name: "Kamera-Gehäuse",
       description: "Schutz für die Kamera",
       price: "-",
-      link: "#",
+      link: "https://github.com/LaVolpe12/open-a-eyes/releases/download/v1.0.0/Kamera-Gehaeuse.stl",
       image: "/Einzelteile/Kamera-Gehaeuse.jpg"
     },
     { 
       name: "Knopf",
       description: "Bedienknopf",
       price: "-",
-      link: "#",
+      link: "https://github.com/LaVolpe12/open-a-eyes/releases/download/v1.0.0/Knopf.stl",
       image: "/Einzelteile/Knopf.jpg"
     },
     { 
       name: "Abstandshalter",
       description: "Für korrekte Positionierung",
       price: "-",
-      link: "#",
+      link: "https://github.com/LaVolpe12/open-a-eyes/releases/download/v1.0.0/Abstandshalter.stl",
       image: "/Einzelteile/Abstandshalter.jpg"
     },
     { 
       name: "Linker Bügel",
       description: "Brillenbügel links",
       price: "-",
-      link: "#",
+      link: "https://github.com/LaVolpe12/open-a-eyes/releases/download/v1.0.0/Linker_Buegel.stl",
       image: "/Einzelteile/Linker_Buegel.jpg"
     },
     { 
       name: "Lautsprecher-Gehäuse",
       description: "Schutz für den Lautsprecher",
       price: "-",
-      link: "#",
+      link: "https://github.com/LaVolpe12/open-a-eyes/releases/download/v1.0.0/Lautsprecher-Gehaeuse.stl",
       image: "/Einzelteile/Lautsprecher-Gehaeuse.jpg"
     },
     { 
       name: "Hilfswerkzeug 1",
       description: "Montagehilfe",
       price: "-",
-      link: "#",
+      link: "https://github.com/LaVolpe12/open-a-eyes/releases/download/v1.0.0/Hilfswerkzeug_1.stl",
       image: "/Einzelteile/Hilfswerkzeug_1.jpg"
     },
     { 
       name: "Hilfswerkzeug 2",
       description: "Montagehilfe",
       price: "-",
-      link: "#",
+      link: "https://github.com/LaVolpe12/open-a-eyes/releases/download/v1.0.0/Hilfswerkzeug_2.stl",
       image: "/Einzelteile/Hilfswerkzeug_2.jpg"
     },
   ]
