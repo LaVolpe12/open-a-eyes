@@ -17,35 +17,35 @@ export default function ComponentsPage() {
       description: "Minicomputer für die Verarbeitung",
       price: "15-20€",
       link: "https://www.raspberrypi.com/products/raspberry-pi-zero-2-w/",
-      image: "/Einzelteile/raspberry-pi-zero.jpg"
+      image: "/Einzelteile/Raspberry_PI_Zero_2_WH.jpg"
     },
     {
       name: "SeeedStudio reSpeaker 2-Mics PI HAT",
       description: "Mikrofonmodul für Sprachbefehle",
       price: "25-30€",
       link: "https://www.seeedstudio.com/ReSpeaker-2-Mics-Pi-HAT.html",
-      image: "/Einzelteile/respeaker.jpg"
+      image: "/Einzelteile/reSpeaker_2-Mics_PI_HAT.jpg"
     },
     {
       name: "ZeroCam",
       description: "Kamera für Bilderfassung",
       price: "15-20€",
       link: "#",
-      image: "/Einzelteile/zerocam.jpg"
+      image: "/Einzelteile/ZeroCam.jpg"
     },
     {
       name: "Lautsprecher mit JST-PH2.0 mm",
       description: "Für Audioausgabe",
       price: "5-10€",
       link: "#",
-      image: "/Einzelteile/lautsprecher.jpg"
+      image: "/Einzelteile/Lautsprecher.jpg"
     },
     {
       name: "SD-Karte (min. 64 GB)",
       description: "Für Betriebssystem und Software",
       price: "15-20€",
       link: "#",
-      image: "/Einzelteile/sd-karte.jpg"
+      image: "/Einzelteile/SD-Karte.jpg"
     },
   ]
 
@@ -55,84 +55,84 @@ export default function ComponentsPage() {
       description: "3D-gedrucktes Brillengestell",
       price: "-",
       link: "#",
-      image: "/Einzelteile/fassung.jpg"
+      image: "/Einzelteile/Fassung.jpg"
     },
     { 
       name: "Kabelführung",
       description: "Für ordentliche Kabelverlegung",
       price: "-",
       link: "#",
-      image: "/Einzelteile/kabelfuehrung.jpg"
+      image: "/Einzelteile/Kabelfuehrung.jpg"
     },
     { 
       name: "Rechter Bügel",
       description: "Brillenbügel rechts",
       price: "-",
       link: "#",
-      image: "/Einzelteile/rechter-buegel.jpg"
+      image: "/Einzelteile/Rechter_Buegel.jpg"
     },
     { 
       name: "Verbindungsteil vom rechten Bügel",
       description: "Verbindungselement",
       price: "-",
       link: "#",
-      image: "/Einzelteile/verbindungsteil.jpg"
+      image: "/Einzelteile/Verbindungsteil_rechter_Buegel.jpg"
     },
     { 
       name: "Elektronik-Gehäuse",
       description: "Schutz für die Elektronik",
       price: "-",
       link: "#",
-      image: "/Einzelteile/elektronik-gehaeuse.jpg"
+      image: "/Einzelteile/Elektronik-Gehaeuse.jpg"
     },
     { 
       name: "Kamera-Gehäuse",
       description: "Schutz für die Kamera",
       price: "-",
       link: "#",
-      image: "/Einzelteile/kamera-gehaeuse.jpg"
+      image: "/Einzelteile/Kamera-Gehaeuse.jpg"
     },
     { 
       name: "Knopf",
       description: "Bedienknopf",
       price: "-",
       link: "#",
-      image: "/Einzelteile/knopf.jpg"
+      image: "/Einzelteile/Knopf.jpg"
     },
     { 
       name: "Abstandshalter",
       description: "Für korrekte Positionierung",
       price: "-",
       link: "#",
-      image: "/Einzelteile/abstandshalter.jpg"
+      image: "/Einzelteile/Abstandshalter.jpg"
     },
     { 
       name: "Linker Bügel",
       description: "Brillenbügel links",
       price: "-",
       link: "#",
-      image: "/Einzelteile/linker-buegel.jpg"
+      image: "/Einzelteile/Linker_Buegel.jpg"
     },
     { 
       name: "Lautsprecher-Gehäuse",
       description: "Schutz für den Lautsprecher",
       price: "-",
       link: "#",
-      image: "/Einzelteile/lautsprecher-gehaeuse.jpg"
+      image: "/Einzelteile/Lautsprecher-Gehaeuse.jpg"
     },
     { 
       name: "Hilfswerkzeug 1",
       description: "Montagehilfe",
       price: "-",
       link: "#",
-      image: "/Einzelteile/hilfswerkzeug-1.jpg"
+      image: "/Einzelteile/Hilfswerkzeug_1.jpg"
     },
     { 
       name: "Hilfswerkzeug 2",
       description: "Montagehilfe",
       price: "-",
       link: "#",
-      image: "/Einzelteile/hilfswerkzeug-2.jpg"
+      image: "/Einzelteile/Hilfswerkzeug_2.jpg"
     },
   ]
 
@@ -142,28 +142,28 @@ export default function ComponentsPage() {
       description: "4 Stück",
       price: "2-3€",
       link: "#",
-      image: "/Einzelteile/schraube-m2-20mm.jpg"
+      image: "/Einzelteile/Schrauben_und_Muttern.jpg"
     },
     {
       name: "M2 x 16 mm Gewindeschraube",
       description: "6 Stück",
       price: "2-3€",
       link: "#",
-      image: "/Einzelteile/schraube-m2-16mm.jpg"
+      image: "/Einzelteile/Schrauben_und_Muttern.jpg"
     },
     {
       name: "M2 x 6 mm Gewindeschraube",
       description: "1 Stück",
       price: "1-2€",
       link: "#",
-      image: "/Einzelteile/schraube-m2-6mm.jpg"
+      image: "/Einzelteile/Schrauben_und_Muttern.jpg"
     },
     {
       name: "M2 Mutter",
       description: "11 Stück",
       price: "2-3€",
       link: "#",
-      image: "/Einzelteile/mutter-m2.jpg"
+      image: "/Einzelteile/Schrauben_und_Muttern.jpg"
     },
   ]
 
