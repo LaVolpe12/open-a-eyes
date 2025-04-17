@@ -176,8 +176,10 @@ export default function ComponentsPage() {
         <Image
           src={src}
           alt={alt}
-          fill
+          width={80}
+          height={80}
           className="object-cover"
+          unoptimized
         />
       </div>
     </TableCell>
@@ -200,8 +202,10 @@ export default function ComponentsPage() {
               <Image
                 src={selectedImage}
                 alt="Vergrößerte Ansicht"
-                fill
+                width={800}
+                height={800}
                 className="object-contain"
+                unoptimized
               />
             )}
           </div>
