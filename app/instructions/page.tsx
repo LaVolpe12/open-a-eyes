@@ -14,48 +14,44 @@ export default function InstructionsPage() {
   const [allChecked, setAllChecked] = useState(false)
   const [progress, setProgress] = useState(0)
 
-  const components = [
-    { id: "raspberry", label: "Raspberry Pi Zero W" },
-    { id: "camera", label: "Raspberry Pi Kamera V2" },
-    { id: "speaker", label: "Kleiner Lautsprecher" },
-    { id: "microphone", label: "Mikrofon" },
-    { id: "battery", label: "Akku (3.7V LiPo)" },
-    { id: "sdcard", label: "Micro SD Karte (min. 16GB)" },
-    { id: "screws", label: "Kleine Schrauben (M2)" },
-    { id: "cables", label: "Kabel und Stecker" },
-    { id: "display", label: "Kleines Display (optional)" },
-  ]
-
-  const tools = [
-    { id: "screwdriver", label: "Kreuzschlitz-Schraubenzieher" },
-    { id: "hex", label: "Imbusschlüssel-Set" },
-    { id: "pliers", label: "Kleine Zange" },
-    { id: "soldering", label: "Lötkolben und Lötzinn" },
-    { id: "tape", label: "Isolierband" },
-    { id: "glue", label: "Heißklebepistole" },
+  const electronics = [
+    { id: "raspberry", label: "Raspberry PI Zero 2 WH" },
+    { id: "respeaker", label: "SeeedStudio reSpeaker 2-Mics PI HAT" },
+    { id: "zerocam", label: "ZeroCam" },
+    { id: "speaker", label: "Lautsprecher mit JST-PH2.0 mm" },
+    { id: "sdcard", label: "SD-Karte (min. 64 GB)" },
   ]
 
   const printedParts = [
-    { id: "frame", label: "Brillengestell" },
-    { id: "leftArm", label: "Bügel Links" },
-    { id: "rightArm", label: "Bügel Rechts" },
-    { id: "case1", label: "Gehäuse 1" },
-    { id: "case2", label: "Gehäuse 2" },
-    { id: "mount", label: "Kamerahalterung" },
-    { id: "cover", label: "Abdeckung" },
+    { id: "frame", label: "Fassung" },
+    { id: "cableGuide", label: "Kabelführung" },
+    { id: "rightArm", label: "Rechter Bügel" },
+    { id: "rightArmConnector", label: "Verbindungsteil vom rechten Bügel" },
+    { id: "electronicsCase", label: "Elektronik-Gehäuse" },
+    { id: "cameraCase", label: "Kamera-Gehäuse" },
+    { id: "button", label: "Knopf" },
+    { id: "spacer", label: "Abstandshalter" },
+    { id: "leftArm", label: "Linker Bügel" },
+    { id: "speakerCase", label: "Lautsprecher-Gehäuse" },
+    { id: "tool1", label: "Hilfswerkzeug 1" },
+    { id: "tool2", label: "Hilfswerkzeug 2" },
   ]
 
-  const allItems = [...components, ...tools, ...printedParts]
+  const screws = [
+    { id: "screw20", label: "4x M2 x 20 mm Gewindeschraube" },
+    { id: "screw16", label: "6x M2 x 16 mm Gewindeschraube" },
+    { id: "screw6", label: "1x M2 x 6 mm Gewindeschraube" },
+    { id: "nuts", label: "11x M2 Mutter" },
+  ]
+
+  const allItems = [...electronics, ...printedParts, ...screws]
 
   useEffect(() => {
-    const allItemsChecked = allItems.every((item) => checkedItems[item.id])
-    setAllChecked(allItemsChecked)
-
-    // Calculate progress
     const checkedCount = Object.values(checkedItems).filter(Boolean).length
-    const totalItems = allItems.length
-    setProgress(Math.round((checkedCount / totalItems) * 100))
-  }, [checkedItems])
+    const totalCount = allItems.length
+    setProgress(Math.round((checkedCount / totalCount) * 100))
+    setAllChecked(checkedCount === totalCount)
+  }, [checkedItems, allItems.length])
 
   const toggleItem = (id: string) => {
     setCheckedItems((prev) => ({
@@ -65,17 +61,12 @@ export default function InstructionsPage() {
   }
 
   const toggleAllItems = () => {
-    if (allChecked) {
-      // If all are checked, uncheck all
-      setCheckedItems({})
-    } else {
-      // Check all items
-      const newCheckedItems: Record<string, boolean> = {}
-      allItems.forEach((item) => {
-        newCheckedItems[item.id] = true
-      })
-      setCheckedItems(newCheckedItems)
-    }
+    const newValue = !allChecked
+    const newCheckedItems: Record<string, boolean> = {}
+    allItems.forEach((item) => {
+      newCheckedItems[item.id] = newValue
+    })
+    setCheckedItems(newCheckedItems)
   }
 
   return (
@@ -130,10 +121,10 @@ export default function InstructionsPage() {
               <CardContent className="pt-6">
                 <h2 className="text-xl font-semibold mb-4 flex items-center text-white">
                   <CheckSquare className="h-5 w-5 mr-2 text-blue-500" />
-                  Komponenten
+                  Elektronik
                 </h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  {components.map((item) => (
+                  {electronics.map((item) => (
                     <div key={item.id} className="flex items-start space-x-2">
                       <Checkbox
                         id={item.id}
@@ -157,37 +148,37 @@ export default function InstructionsPage() {
               <CardContent className="pt-6">
                 <h2 className="text-xl font-semibold mb-4 flex items-center text-white">
                   <CheckSquare className="h-5 w-5 mr-2 text-blue-500" />
-                  Werkzeuge
-                </h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  {tools.map((item) => (
-                    <div key={item.id} className="flex items-start space-x-2">
-                      <Checkbox
-                        id={item.id}
-                        checked={checkedItems[item.id] || false}
-                        onCheckedChange={() => toggleItem(item.id)}
-                        className="border-gray-500 data-[state=checked]:bg-blue-600 data-[state=checked]:text-white"
-                      />
-                      <Label
-                        htmlFor={item.id}
-                        className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 cursor-pointer text-gray-300"
-                      >
-                        {item.label}
-                      </Label>
-                    </div>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card className="bg-gray-800 border-gray-600">
-              <CardContent className="pt-6">
-                <h2 className="text-xl font-semibold mb-4 flex items-center text-white">
-                  <CheckSquare className="h-5 w-5 mr-2 text-blue-500" />
-                  3D-Druck Teile
+                  3D-gedruckte Bauteile
                 </h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   {printedParts.map((item) => (
+                    <div key={item.id} className="flex items-start space-x-2">
+                      <Checkbox
+                        id={item.id}
+                        checked={checkedItems[item.id] || false}
+                        onCheckedChange={() => toggleItem(item.id)}
+                        className="border-gray-500 data-[state=checked]:bg-blue-600 data-[state=checked]:text-white"
+                      />
+                      <Label
+                        htmlFor={item.id}
+                        className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 cursor-pointer text-gray-300"
+                      >
+                        {item.label}
+                      </Label>
+                    </div>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="bg-gray-800 border-gray-600">
+              <CardContent className="pt-6">
+                <h2 className="text-xl font-semibold mb-4 flex items-center text-white">
+                  <CheckSquare className="h-5 w-5 mr-2 text-blue-500" />
+                  Schrauben und Muttern
+                </h2>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {screws.map((item) => (
                     <div key={item.id} className="flex items-start space-x-2">
                       <Checkbox
                         id={item.id}
