@@ -18,22 +18,11 @@ export default function Home() {
         </div>
 
         <div className="space-y-6 max-w-md mx-auto w-full">
-          <Link href="/components" className="block w-full">
+          <Link href="/instructions" className="block w-full">
             <Button
               variant="default"
               size="lg"
               className="w-full py-8 text-lg bg-blue-600 hover:bg-blue-700 group transition-all rounded-xl"
-            >
-              <PlayCircle className="mr-2 h-5 w-5 group-hover:animate-pulse" />
-              Komponenten und Downloads
-            </Button>
-          </Link>
-
-          <Link href="/instructions" className="block w-full">
-            <Button
-              variant="outline"
-              size="lg"
-              className="w-full py-8 text-lg border-2 border-gray-600 bg-gray-700 text-gray-200 hover:bg-gray-600 group transition-all rounded-xl"
             >
               <BookOpen className="mr-2 h-5 w-5 group-hover:animate-pulse" />
               Anleitung für alle Level
@@ -48,6 +37,17 @@ export default function Home() {
             >
               <ClipboardList className="mr-2 h-5 w-5 group-hover:animate-pulse" />
               Fragebogen zum Zusammenbau
+            </Button>
+          </Link>
+
+          <Link href="/components" className="block w-full">
+            <Button
+              variant="outline"
+              size="lg"
+              className="w-full py-8 text-lg border-2 border-gray-600 bg-gray-700 text-gray-200 hover:bg-gray-600 group transition-all rounded-xl"
+            >
+              <PlayCircle className="mr-2 h-5 w-5 group-hover:animate-pulse" />
+              Komponenten und Downloads
             </Button>
           </Link>
         </div>
