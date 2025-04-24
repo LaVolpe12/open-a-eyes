@@ -1,6 +1,5 @@
 "use client"
 
-import { useState, useEffect } from "react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { ArrowLeft } from "lucide-react"
@@ -29,19 +28,6 @@ export default function InstructionsPage() {
             <p className="text-gray-300 mb-4">
               Willkommen bei der Open-A-Eyes Anleitung! Hier findest du eine detaillierte Schritt-für-Schritt-Anleitung zum Zusammenbau deiner KI-Brille.
             </p>
-
-            <div className="aspect-video mb-6">
-              <iframe
-                width="100%"
-                height="100%"
-                src="https://www.youtube.com/embed/AB-y0bRjPt8"
-                title="Open-A-Eyes Zusammenbau Anleitung"
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-                className="rounded-lg"
-              ></iframe>
-            </div>
 
             <div className="flex justify-center">
               <Link href="/instructions/steps">

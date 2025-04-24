@@ -127,13 +127,28 @@ export default function InstructionStepsPage() {
 
           <div className="grid md:grid-cols-2 gap-6 p-6">
             <div className="flex justify-center items-center bg-gray-800 rounded-lg p-4">
-              <Image
-                src={currentStepData.image || "/placeholder.svg"}
-                alt={`Schritt ${currentStep}`}
-                width={400}
-                height={400}
-                className="rounded-lg shadow-md"
-              />
+              {currentStep === 2 ? (
+                <div className="aspect-video w-full">
+                  <iframe
+                    width="100%"
+                    height="100%"
+                    src="https://www.youtube.com/embed/AB-y0bRjPt8"
+                    title="Open-A-Eyes Zusammenbau Anleitung"
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    className="rounded-lg"
+                  ></iframe>
+                </div>
+              ) : (
+                <Image
+                  src={currentStepData.image || "/placeholder.svg"}
+                  alt={`Schritt ${currentStep}`}
+                  width={400}
+                  height={400}
+                  className="rounded-lg shadow-md"
+                />
+              )}
             </div>
 
             <div className="space-y-6">
