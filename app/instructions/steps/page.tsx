@@ -8,9 +8,12 @@ import { ArrowLeft, ArrowRight, CheckCircle2 } from "lucide-react"
 import { Card, CardContent } from "@/components/ui/card"
 import { Progress } from "@/components/ui/progress"
 import { useRouter } from "next/navigation"
+import { Checkbox } from "@/components/ui/checkbox"
+import { Label } from "@/components/ui/label"
 
 export default function InstructionStepsPage() {
   const [currentStep, setCurrentStep] = useState(1)
+  const [checkedComponents, setCheckedComponents] = useState<Record<string, boolean>>({})
   const router = useRouter()
 
   const totalSteps = 4
@@ -77,6 +80,7 @@ export default function InstructionStepsPage() {
   const goToNextStep = () => {
     if (currentStep < totalSteps) {
       setCurrentStep(currentStep + 1)
+      setCheckedComponents({}) // Reset checked components when changing steps
       window.scrollTo(0, 0)
     } else {
       // Navigate to success page when all steps are completed
@@ -87,8 +91,16 @@ export default function InstructionStepsPage() {
   const goToPreviousStep = () => {
     if (currentStep > 1) {
       setCurrentStep(currentStep - 1)
+      setCheckedComponents({}) // Reset checked components when changing steps
       window.scrollTo(0, 0)
     }
+  }
+
+  const toggleComponent = (component: string) => {
+    setCheckedComponents((prev) => ({
+      ...prev,
+      [component]: !prev[component],
+    }))
   }
 
   const currentStepData = steps[currentStep - 1]
@@ -154,14 +166,25 @@ export default function InstructionStepsPage() {
             <div className="grid md:grid-cols-2 gap-6">
               <Card className="bg-gray-800 border-gray-600">
                 <CardContent className="pt-6">
-                  <h2 className="text-xl font-semibold mb-4 text-white">Benötigte Komponenten</h2>
-                  <ul className="list-disc pl-5 space-y-2">
+                  <h2 className="text-xl font-semibold mb-4 text-white">Das brauchst du</h2>
+                  <div className="space-y-3">
                     {currentStepData.components.map((component, index) => (
-                      <li key={index} className="text-gray-300">
-                        {component}
-                      </li>
+                      <div key={index} className="flex items-start space-x-2">
+                        <Checkbox
+                          id={`component-${index}`}
+                          checked={checkedComponents[component] || false}
+                          onCheckedChange={() => toggleComponent(component)}
+                          className="border-gray-500 data-[state=checked]:bg-blue-600 data-[state=checked]:text-white"
+                        />
+                        <Label
+                          htmlFor={`component-${index}`}
+                          className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 cursor-pointer text-gray-300"
+                        >
+                          {component}
+                        </Label>
+                      </div>
                     ))}
-                  </ul>
+                  </div>
                 </CardContent>
               </Card>
 
