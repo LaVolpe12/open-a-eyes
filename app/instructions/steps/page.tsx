@@ -4,16 +4,13 @@ import { useState } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
-import { Checkbox } from "@/components/ui/checkbox"
 import { ArrowLeft, ArrowRight, CheckCircle2 } from "lucide-react"
-import { Label } from "@/components/ui/label"
 import { Card, CardContent } from "@/components/ui/card"
 import { Progress } from "@/components/ui/progress"
 import { useRouter } from "next/navigation"
 
 export default function InstructionStepsPage() {
   const [currentStep, setCurrentStep] = useState(1)
-  const [completedSteps, setCompletedSteps] = useState<Record<number, boolean>>({})
   const router = useRouter()
 
   const totalSteps = 4
@@ -33,7 +30,7 @@ export default function InstructionStepsPage() {
       image: "/placeholder.svg?height=400&width=400",
     },
     {
-      title: "Zusammenbau des Brillengestells",
+      title: "Zusammenbau",
       components: ["Brillengestell", "Bügel Links", "Bügel Rechts", "Kleine Schrauben (M2)", "Imbusschlüssel"],
       instructions: [
         "Nimm das 3D-gedruckte Brillengestell und überprüfe, ob alle Kanten glatt sind.",
@@ -77,13 +74,6 @@ export default function InstructionStepsPage() {
     },
   ]
 
-  const handleStepComplete = (step: number) => {
-    setCompletedSteps((prev) => ({
-      ...prev,
-      [step]: !prev[step],
-    }))
-  }
-
   const goToNextStep = () => {
     if (currentStep < totalSteps) {
       setCurrentStep(currentStep + 1)
@@ -113,7 +103,7 @@ export default function InstructionStepsPage() {
               className="flex items-center gap-2 text-gray-200 bg-gray-700 hover:bg-gray-600 rounded-xl"
             >
               <ArrowLeft className="h-4 w-4" />
-              Zurück zur Checkliste
+              Zurück zur Übersicht
             </Button>
           </Link>
         </div>
@@ -125,7 +115,7 @@ export default function InstructionStepsPage() {
               Schritt {currentStep} von {totalSteps}
             </span>
           </div>
-          <Progress value={progress} className="h-2 bg-gray-600" indicatorClassName="bg-blue-600" />
+          <Progress value={progress} className="h-2 bg-gray-600 [&>div]:bg-blue-600" />
         </div>
 
         <div className="bg-gray-700 rounded-lg shadow-lg overflow-hidden">
@@ -173,53 +163,34 @@ export default function InstructionStepsPage() {
                 </CardContent>
               </Card>
 
-              <div className="flex flex-col space-y-4 pt-4">
-                <div className="flex items-start space-x-2">
-                  <Checkbox
-                    id={`complete-step-${currentStep}`}
-                    checked={completedSteps[currentStep] || false}
-                    onCheckedChange={() => handleStepComplete(currentStep)}
-                    className="border-gray-500 data-[state=checked]:bg-blue-600 data-[state=checked]:text-white"
-                  />
-                  <Label
-                    htmlFor={`complete-step-${currentStep}`}
-                    className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 cursor-pointer text-gray-300"
-                  >
-                    Ich habe alle Schritte problemlos durchgeführt
-                  </Label>
-                </div>
+              <div className="flex justify-between pt-4">
+                <Button
+                  onClick={goToPreviousStep}
+                  disabled={currentStep === 1}
+                  variant="outline"
+                  className="border-gray-600 bg-gray-700 text-gray-200 hover:bg-gray-600 rounded-xl"
+                >
+                  <ArrowLeft className="mr-2 h-4 w-4" />
+                  Zurück
+                </Button>
 
-                <div className="flex justify-between pt-2">
+                {currentStep < totalSteps ? (
                   <Button
-                    onClick={goToPreviousStep}
-                    disabled={currentStep === 1}
-                    variant="outline"
-                    className="border-gray-600 bg-gray-700 text-gray-200 hover:bg-gray-600 rounded-xl"
+                    onClick={goToNextStep}
+                    className="bg-blue-600 hover:bg-blue-700 rounded-xl"
                   >
-                    <ArrowLeft className="mr-2 h-4 w-4" />
-                    Zurück
+                    Weiter zu Schritt {currentStep + 1}
+                    <ArrowRight className="ml-2 h-4 w-4" />
                   </Button>
-
-                  {currentStep < totalSteps ? (
-                    <Button
-                      onClick={goToNextStep}
-                      disabled={!completedSteps[currentStep]}
-                      className="bg-blue-600 hover:bg-blue-700 disabled:bg-gray-600 disabled:text-gray-400 rounded-xl"
-                    >
-                      Weiter zu Schritt {currentStep + 1}
-                      <ArrowRight className="ml-2 h-4 w-4" />
-                    </Button>
-                  ) : (
-                    <Button
-                      onClick={goToNextStep}
-                      className="bg-green-600 hover:bg-green-700 disabled:bg-gray-600 disabled:text-gray-400 rounded-xl"
-                      disabled={!completedSteps[currentStep]}
-                    >
-                      <CheckCircle2 className="mr-2 h-4 w-4" />
-                      Anleitung abschließen
-                    </Button>
-                  )}
-                </div>
+                ) : (
+                  <Button
+                    onClick={goToNextStep}
+                    className="bg-green-600 hover:bg-green-700 rounded-xl"
+                  >
+                    <CheckCircle2 className="mr-2 h-4 w-4" />
+                    Anleitung abschließen
+                  </Button>
+                )}
               </div>
             </div>
           </div>
