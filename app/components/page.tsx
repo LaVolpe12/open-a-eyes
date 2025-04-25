@@ -240,6 +240,30 @@ export default function ComponentsPage() {
           </p>
 
           <div className="space-y-8">
+            <div className="bg-gray-800 rounded-lg p-6 mb-8">
+              <h2 className="text-xl font-semibold mb-4 text-white">Downloads</h2>
+              <div className="flex flex-col sm:flex-row gap-4">
+                <Button
+                  asChild
+                  className="bg-blue-600 hover:bg-blue-700 text-white"
+                >
+                  <Link href="https://github.com/LaVolpe12/open-a-eyes/releases/download/v1.0.0/3D-Modelle.zip">
+                    <Download className="mr-2 h-4 w-4" />
+                    3D-Modelle
+                  </Link>
+                </Button>
+                <Button
+                  asChild
+                  className="bg-blue-600 hover:bg-blue-700 text-white"
+                >
+                  <Link href="https://github.com/LaVolpe12/open-a-eyes/releases/download/v1.0.0/Software.zip">
+                    <Download className="mr-2 h-4 w-4" />
+                    Software
+                  </Link>
+                </Button>
+              </div>
+            </div>
+
             <div className="overflow-x-auto">
               <h2 className="text-xl font-semibold mb-4 text-white">Elektronik</h2>
               <Table className="border-collapse w-full">
@@ -349,34 +373,6 @@ export default function ComponentsPage() {
                   ))}
                 </TableBody>
               </Table>
-            </div>
-          </div>
-
-          <div className="mt-8 p-4 bg-gray-800 rounded-lg border border-gray-600">
-            <h2 className="text-lg font-semibold mb-2 flex items-center text-white">
-              <Download className="h-5 w-5 mr-2 text-blue-500" />
-              Downloads
-            </h2>
-            <p className="text-gray-300 mb-4">Lade dir hier alle notwendigen Dateien für dein Projekt herunter:</p>
-            <div className="flex flex-col sm:flex-row gap-4">
-              <Button className="bg-blue-600 hover:bg-blue-700 rounded-xl">
-                <Download className="mr-2 h-4 w-4" />
-                Code und 3D-Modelle (.zip)
-              </Button>
-              <Button
-                variant="outline"
-                className="border-gray-600 text-gray-200 bg-gray-700 hover:bg-gray-600 rounded-xl"
-              >
-                <Download className="mr-2 h-4 w-4" />
-                Nur 3D-Modelle (.stl)
-              </Button>
-              <Button
-                variant="outline"
-                className="border-gray-600 text-gray-200 bg-gray-700 hover:bg-gray-600 rounded-xl"
-              >
-                <Download className="mr-2 h-4 w-4" />
-                Nur Quellcode (.zip)
-              </Button>
             </div>
           </div>
         </div>
