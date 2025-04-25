@@ -247,7 +247,7 @@ export default function ComponentsPage() {
                   asChild
                   className="bg-blue-600 hover:bg-blue-700 text-white"
                 >
-                  <Link href="https://github.com/LaVolpe12/open-a-eyes/releases/download/v1.0.0/3D-Modelle.zip">
+                  <Link href="https://drive.google.com/file/d/1KpDreYGmDURJrR_RDKt6IjK-QTh45qdg/view?usp=sharing">
                     <Download className="mr-2 h-4 w-4" />
                     3D-Modelle
                   </Link>
@@ -256,7 +256,7 @@ export default function ComponentsPage() {
                   asChild
                   className="bg-blue-600 hover:bg-blue-700 text-white"
                 >
-                  <Link href="https://github.com/LaVolpe12/open-a-eyes/releases/download/v1.0.0/Software.zip">
+                  <Link href="https://drive.google.com/file/d/1z3g_nLzVUI8tefPy9BgpnXQ7TdAwLYP4/view?usp=sharing">
                     <Download className="mr-2 h-4 w-4" />
                     Software
                   </Link>
