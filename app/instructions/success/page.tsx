@@ -42,7 +42,7 @@ export default function SuccessPage() {
             <div className="flex justify-center">
               <div className="relative w-[420px] h-[280px]">
                 <Image
-                  src="/Einzelteile/Foto_1.jpg"
+                  src="/Einzelteile/Foto_1.jpeg"
                   alt="Fertige KI-Brille"
                   fill
                   className="rounded-lg border border-gray-600 object-cover"
