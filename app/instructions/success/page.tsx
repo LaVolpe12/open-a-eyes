@@ -40,14 +40,15 @@ export default function SuccessPage() {
             </div>
 
             <div className="flex justify-center">
-              <Image
-                src="/Einzelteile/Foto_1.jpg"
-                alt="Fertig gebaute KI-Brille"
-                width={800}
-                height={600}
-                className="rounded-lg border border-gray-600 shadow-lg"
-                priority
-              />
+              <div className="relative w-[420px] h-[280px]">
+                <Image
+                  src="/Einzelteile/Foto_1.jpg"
+                  alt="Fertige KI-Brille"
+                  fill
+                  className="rounded-lg border border-gray-600 object-cover"
+                  priority
+                />
+              </div>
             </div>
 
             <div className="flex flex-col sm:flex-row justify-center gap-6">
