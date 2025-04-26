@@ -117,6 +117,12 @@ export default function InstructionStepsPage() {
       image: null
     },
     {
+      title: "3D-Druckteile bestellen",
+      components: [],
+      instructions: [],
+      image: null
+    },
+    {
       title: "Installation der Elektronik",
       components: ["Raspberry Pi Zero W", "Kamera", "Gehäuse 1", "Gehäuse 2", "Kamerahalterung", "Lötkolben", "Kabel"],
       instructions: [
@@ -299,8 +305,39 @@ export default function InstructionStepsPage() {
                   </div>
                 ) : (
                   <div className="space-y-6">
-                    <div className="flex justify-center items-center bg-gray-800 rounded-lg p-4">
-                      {currentStep === 3 ? (
+                    {currentStep === 3 ? (
+                      <div className="space-y-6">
+                        <div className="flex justify-center items-center bg-gray-800 rounded-lg p-4">
+                          <div className="aspect-video w-full max-w-3xl">
+                            <iframe
+                              width="100%"
+                              height="100%"
+                              src="https://www.youtube.com/embed/lmDetSYANEU"
+                              title="3D-Druck Anleitung"
+                              frameBorder="0"
+                              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                              allowFullScreen
+                              className="rounded-lg"
+                            ></iframe>
+                          </div>
+                        </div>
+
+                        <div className="bg-gray-800 rounded-lg p-6 text-center">
+                          <Button
+                            asChild
+                            className="bg-blue-600 hover:bg-blue-700 text-white mb-4"
+                          >
+                            <Link href="https://www.3ddesign24.de/produkt/3d-druck-service/">
+                              Hier gehts zum 3D-Druck-Shop
+                            </Link>
+                          </Button>
+                          <p className="text-gray-300">
+                            Falls du einen eigenen 3D-Drucker besitzt oder dir die Teile bei einem anderen Anbieter ausdrucken lassen möchtest, kannst du diesen Schritt überspringen.
+                          </p>
+                        </div>
+                      </div>
+                    ) : currentStep === 4 ? (
+                      <div className="flex justify-center items-center bg-gray-800 rounded-lg p-4">
                         <div className="aspect-video w-full max-w-3xl">
                           <iframe
                             width="100%"
@@ -313,7 +350,9 @@ export default function InstructionStepsPage() {
                             className="rounded-lg"
                           ></iframe>
                         </div>
-                      ) : (
+                      </div>
+                    ) : (
+                      <div className="flex justify-center items-center bg-gray-800 rounded-lg p-4">
                         <Image
                           src={currentStepData.image || "/placeholder.svg"}
                           alt={`Schritt ${currentStep}`}
@@ -321,8 +360,8 @@ export default function InstructionStepsPage() {
                           height={400}
                           className="rounded-lg shadow-md"
                         />
-                      )}
-                    </div>
+                      </div>
+                    )}
 
                     {currentStep !== 2 && (
                       <div className="grid md:grid-cols-2 gap-6">
