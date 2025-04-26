@@ -21,14 +21,24 @@ export default function InstructionStepsPage() {
 
   const steps = [
     {
-      title: "Vorbereitung der Komponenten",
-      components: ["Raspberry Pi Zero W", "Micro SD Karte", "Kreuzschlitz-Schraubenzieher"],
+      title: "Elektronik und Bauteile bestellen",
+      components: [
+        "Raspberry PI Zero 2 WH (15-20€)",
+        "SeeedStudio reSpeaker 2-Mics PI HAT (25-30€)",
+        "ZeroCam (15-20€)",
+        "Lautsprecher mit JST-PH2.0 mm (16.99€)",
+        "SD-Karte (min. 64 GB) (12.90€)",
+        "M2 x 20 mm Gewindeschraube (4 Stück) (2-3€)",
+        "M2 x 16 mm Gewindeschraube (6 Stück) (2-3€)",
+        "M2 x 6 mm Gewindeschraube (1 Stück) (1-2€)",
+        "M2 Mutter (11 Stück) (2-3€)"
+      ],
       instructions: [
-        "Packe den Raspberry Pi Zero W aus und überprüfe auf Beschädigungen.",
-        "Formatiere die Micro SD Karte mit dem SD Card Formatter Tool.",
-        "Lade das Raspberry Pi OS Lite von der offiziellen Website herunter.",
-        "Verwende das Raspberry Pi Imager, um das Betriebssystem auf die SD-Karte zu flashen.",
-        "Aktiviere SSH, indem du eine leere Datei namens 'ssh' (ohne Dateiendung) im Boot-Verzeichnis der SD-Karte erstellst.",
+        "Bestelle alle elektronischen Komponenten und mechanischen Bauteile aus der Liste.",
+        "Achte darauf, dass die SD-Karte mindestens 64 GB Speicherplatz hat.",
+        "Überprüfe die Lieferzeiten der Komponenten und bestelle rechtzeitig.",
+        "Lager die Komponenten sicher und trocken, bis du mit dem Zusammenbau beginnst.",
+        "Überprüfe alle Komponenten auf Beschädigungen nach Erhalt."
       ],
       image: "/placeholder.svg?height=400&width=400",
     },
