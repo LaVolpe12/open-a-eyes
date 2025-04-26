@@ -274,7 +274,7 @@ export default function InstructionStepsPage() {
                 {currentStep === 2 ? (
                   <div className="space-y-6">
                     <div className="bg-gray-800 rounded-lg p-6">
-                      <h2 className="text-xl font-semibold mb-4 text-white">Downloads</h2>
+                      <h2 className="text-xl font-semibold mb-4 text-white">Lade folgende Dateien herunter</h2>
                       <div className="flex flex-col gap-4">
                         <Button
                           asChild
@@ -366,38 +366,38 @@ export default function InstructionStepsPage() {
                     )}
                   </div>
                 )}
-
-                <div className="flex justify-between pt-4">
-                  <Button
-                    onClick={goToPreviousStep}
-                    disabled={currentStep === 1}
-                    variant="outline"
-                    className="border-gray-600 bg-gray-700 text-gray-200 hover:bg-gray-600 rounded-xl"
-                  >
-                    <ArrowLeft className="mr-2 h-4 w-4" />
-                    Zurück
-                  </Button>
-
-                  {currentStep < totalSteps ? (
-                    <Button
-                      onClick={goToNextStep}
-                      className="bg-blue-600 hover:bg-blue-700 rounded-xl"
-                    >
-                      Weiter zu Schritt {currentStep + 1}
-                      <ArrowRight className="ml-2 h-4 w-4" />
-                    </Button>
-                  ) : (
-                    <Button
-                      onClick={goToNextStep}
-                      className="bg-green-600 hover:bg-green-700 rounded-xl"
-                    >
-                      <CheckCircle2 className="mr-2 h-4 w-4" />
-                      Anleitung abschließen
-                    </Button>
-                  )}
-                </div>
               </div>
             )}
+
+            <div className="flex justify-between pt-4">
+              <Button
+                onClick={goToPreviousStep}
+                disabled={currentStep === 1}
+                variant="outline"
+                className="border-gray-600 bg-gray-700 text-gray-200 hover:bg-gray-600 rounded-xl"
+              >
+                <ArrowLeft className="mr-2 h-4 w-4" />
+                Zurück
+              </Button>
+
+              {currentStep < totalSteps ? (
+                <Button
+                  onClick={goToNextStep}
+                  className="bg-blue-600 hover:bg-blue-700 rounded-xl"
+                >
+                  Weiter zu Schritt {currentStep + 1}
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Button>
+              ) : (
+                <Button
+                  onClick={goToNextStep}
+                  className="bg-green-600 hover:bg-green-700 rounded-xl"
+                >
+                  <CheckCircle2 className="mr-2 h-4 w-4" />
+                  Anleitung abschließen
+                </Button>
+              )}
+            </div>
           </div>
         </div>
       </div>
