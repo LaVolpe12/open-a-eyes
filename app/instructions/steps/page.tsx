@@ -148,20 +148,6 @@ export default function InstructionStepsPage() {
       image: "/placeholder.svg"
     },
     {
-      title: "OpenAI API-Key erstellen",
-      components: [],
-      instructions: [],
-      video: {
-        url: "https://www.youtube.com/embed/We2D3KKj648",
-        timestamps: [
-          { time: "00:00", title: "Einleitung" },
-          { time: "00:14", title: "Registrierung" },
-          { time: "02:34", title: "API-Key generieren" },
-          { time: "04:20", title: "Zahlungsmethode hinterlegen" }
-        ]
-      }
-    },
-    {
       title: "Überprüfe, ob alle Komponenten vorhanden sind",
       components: [
         {
@@ -204,6 +190,20 @@ export default function InstructionStepsPage() {
         }
       ],
       instructions: []
+    },
+    {
+      title: "OpenAI API-Key erstellen",
+      components: [],
+      instructions: [],
+      video: {
+        url: "https://www.youtube.com/embed/We2D3KKj648",
+        timestamps: [
+          { time: "00:00", title: "Einleitung" },
+          { time: "00:14", title: "Registrierung" },
+          { time: "02:34", title: "API-Key generieren" },
+          { time: "04:20", title: "Zahlungsmethode hinterlegen" }
+        ]
+      }
     },
     {
       title: "SD-Karte vorbereiten",
@@ -268,31 +268,34 @@ export default function InstructionStepsPage() {
 
   const handleCheckAll = (checked: boolean) => {
     const newCheckedItems: { [key: string]: boolean } = {}
-    if (checked) {
-      steps[currentStep - 1].components.forEach((component) => {
-        if ('items' in component) {
-          component.items.forEach((item) => {
-            newCheckedItems[item.name] = true
-          })
-        }
-      })
-    }
+    const allItems = steps[currentStep - 1].components.flatMap((component) => {
+      if ('items' in component) {
+        return component.items.map(item => item.name)
+      }
+      return []
+    })
+    
+    allItems.forEach(itemName => {
+      newCheckedItems[itemName] = checked
+    })
+    
     setCheckedItems(newCheckedItems)
     setAllChecked(checked)
   }
 
   const handleItemCheck = (itemName: string, checked: boolean) => {
-    setCheckedItems((prev) => ({ ...prev, [itemName]: checked }))
+    const newCheckedItems = { ...checkedItems, [itemName]: checked }
+    setCheckedItems(newCheckedItems)
     
     // Check if all items are checked
     const allItems = steps[currentStep - 1].components.flatMap((component) => {
       if ('items' in component) {
-        return component.items
+        return component.items.map(item => item.name)
       }
       return []
     })
     
-    const areAllChecked = allItems.every((item) => checkedItems[item.name])
+    const areAllChecked = allItems.every((item) => newCheckedItems[item])
     setAllChecked(areAllChecked)
   }
 
