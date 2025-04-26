@@ -149,17 +149,24 @@ export default function InstructionStepsPage() {
     },
     {
       title: "OpenAI API-Key erstellen",
-      components: [],
-      instructions: [],
-      video: {
-        url: "https://www.youtube.com/embed/We2D3KKj648",
-        timestamps: [
-          { time: "00:00", title: "Einleitung" },
-          { time: "00:14", title: "Registrierung" },
-          { time: "02:34", title: "API-Key generieren" },
-          { time: "04:20", title: "Zahlungsmethode hinterlegen" }
-        ]
-      }
+      components: [
+        {
+          category: "API-Key Erstellung",
+          items: [
+            { name: "Registrierung bei OpenAI", checked: false },
+            { name: "API-Key generieren", checked: false },
+            { name: "Zahlungsmethode hinterlegen", checked: false }
+          ]
+        }
+      ],
+      instructions: [
+        "1. Gehe zu https://platform.openai.com/",
+        "2. Erstelle ein Konto oder melde dich an",
+        "3. Navigiere zu den API-Einstellungen",
+        "4. Generiere einen neuen API-Key",
+        "5. Hinterlege eine gültige Zahlungsmethode",
+        "6. Speichere den API-Key sicher - er wird später benötigt"
+      ]
     },
     {
       title: "Überprüfe, ob alle Komponenten vorhanden sind",
@@ -203,8 +210,7 @@ export default function InstructionStepsPage() {
           ]
         }
       ],
-      instructions: [],
-      image: "/placeholder.svg"
+      instructions: []
     },
     {
       title: "SD-Karte vorbereiten",
