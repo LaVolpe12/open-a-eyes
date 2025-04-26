@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useRef } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
@@ -53,13 +53,14 @@ export default function InstructionStepsPage() {
   const [checkedItems, setCheckedItems] = useState<{ [key: string]: boolean }>({})
   const [allChecked, setAllChecked] = useState(false)
   const router = useRouter()
+  const videoRef = useRef<HTMLIFrameElement>(null)
 
   const totalSteps = 5
   const progress = (currentStep / totalSteps) * 100
 
   const steps: Step[] = [
     {
-      title: "1. Elektronik und Bauteile bestellen",
+      title: "Elektronik und Bauteile bestellen",
       components: [
         {
           name: "Raspberry PI Zero 2 WH",
@@ -170,7 +171,7 @@ export default function InstructionStepsPage() {
       }
     },
     {
-      title: "5. Überprüfe, ob alle Komponenten vorhanden sind",
+      title: "Überprüfe, ob alle Komponenten vorhanden sind",
       components: [
         {
           category: "Elektronik und Montageteile",
@@ -279,6 +280,20 @@ export default function InstructionStepsPage() {
   };
 
   const componentNames = getComponentNames(currentStepData.components);
+
+  const handleTimestampClick = (timeString: string) => {
+    const [minutes, seconds] = timeString.split(':').map(Number)
+    const totalSeconds = minutes * 60 + seconds
+    
+    if (videoRef.current) {
+      videoRef.current.src = `${currentStepData.video?.url}?start=${totalSeconds}`
+    }
+  }
+
+  const formatTimestamp = (timeString: string) => {
+    const [minutes, seconds] = timeString.split(':')
+    return `${minutes}:${seconds}`
+  }
 
   return (
     <main className="flex min-h-screen flex-col p-6 bg-gradient-to-b from-gray-800 to-gray-900">
@@ -475,6 +490,7 @@ export default function InstructionStepsPage() {
                     >
                       <div className="aspect-video w-full max-w-3xl">
                         <iframe
+                          ref={videoRef}
                           width="100%"
                           height="100%"
                           src={currentStepData.video?.url}
@@ -496,10 +512,14 @@ export default function InstructionStepsPage() {
                       <h2 className="text-xl font-semibold mb-4 text-white">Abschnitte und Link</h2>
                       <div className="space-y-4">
                         {currentStepData.video?.timestamps.map((timestamp, index) => (
-                          <div key={index} className="flex items-center space-x-4">
-                            <span className="text-blue-400 font-medium">{timestamp.time}</span>
-                            <span className="text-gray-300">{timestamp.title}</span>
-                          </div>
+                          <button
+                            key={index}
+                            onClick={() => handleTimestampClick(timestamp.time)}
+                            className="flex items-center space-x-4 w-full p-2 rounded-lg hover:bg-gray-700 transition-colors duration-200"
+                          >
+                            <span className="text-blue-400 font-medium">{formatTimestamp(timestamp.time)}</span>
+                            <span className="text-gray-300 text-left">{timestamp.title}</span>
+                          </button>
                         ))}
                         {currentStepData.video?.link && (
                           <div className="mt-6">
