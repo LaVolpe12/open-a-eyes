@@ -85,23 +85,23 @@ function InstructionStepsContent() {
       components: [
         {
           name: "Raspberry PI Zero 2 WH",
-          description: "Hauptprozessor",
-          price: "15-20€",
-          link: "https://www.raspberrypi.com/products/raspberry-pi-zero-2-w/",
+          description: "Minicomputer für die Verarbeitung",
+          price: "20,90€",
+          link: "https://www.berrybase.de/raspberry-pi-zero-2-wh",
           image: "/Einzelteile/Raspberry_PI_Zero_2_WH.jpg"
         },
         {
           name: "SeeedStudio reSpeaker 2-Mics PI HAT",
           description: "Mikrofonmodul für Sprachbefehle",
-          price: "25-30€",
-          link: "https://www.seeedstudio.com/ReSpeaker-2-Mics-Pi-HAT.html",
+          price: "14,20€",
+          link: "https://www.berrybase.de/respeaker-2-mics-hat-fuer-raspberry-pi?utm_source=google&utm_medium=cpc&gad_source=1&gbraid=0AAAAADSQJK7VY1e4u0AY_IKtkZebC8n5m&gclid=Cj0KCQjwiLLABhCEARIsAJYS6ukzah_D9xPWQ9KNnVa5u86xkfVltUOS8oETJ28-qP5-vHg75XoiXMkaApLvEALw_wcB",
           image: "/Einzelteile/reSpeaker_2-Mics_PI_HAT.jpg"
         },
         {
           name: "ZeroCam",
           description: "Kamera für Bilderfassung",
-          price: "15-20€",
-          link: "https://www.reichelt.de/de/de/shop/produkt/raspberry_pi_zero_-_kamera_5mp_160_-242757",
+          price: "15,50€",
+          link: "https://www.berrybase.de/kamera-fuer-raspberry-pi-zero?utm_source=google&utm_medium=cpc&gad_source=1&gbraid=0AAAAADSQJK7v4d7RXQoQXJ6iR2Y2C2tJ_&gclid=Cj0KCQjwiLLABhCEARIsAJYS6ulK2AQw0I7Qk6CsMtdoX51sWkj3Eh7KOKtyBUYnwXvVP4yl7meeQhUaAgB5EALw_wcB",
           image: "/Einzelteile/ZeroCam.jpg"
         },
         {
@@ -114,8 +114,8 @@ function InstructionStepsContent() {
         {
           name: "SD-Karte (min. 64 GB)",
           description: "Für Betriebssystem und Software",
-          price: "12.90€",
-          link: "https://www.reichelt.de/de/de/shop/produkt/microsdhc-speicherkarte_32gb_sandisk_extreme_pro-262417?PROVID=2788&gad_source=1&gbraid=0AAAAADwnxtagBO9rx-1paUKg9rxOgI2Zj&gclid=Cj0KCQjwiLLABhCEARIsAJYS6ulTysMHc-jhy57e5gyvuKPcrgl3oplr0vbpd7Kw5iwQKpvcEM8k1ZcaAsLPEALw_wcB",
+          price: "9,60€",
+          link: "https://www.berrybase.de/sandisk-extreme-pro-microsdhc-a1-uhs-i-u3-speicherkarte-adapter-32gb?gclid=Cj0KCQjwiLLABhCEARIsAJYS6ulK2AQw0I7Qk6CsMtdoX51sWkj3Eh7KOKtyBUYnwXvVP4yl7meeQhUaAgB5EALw_wcB&sl_tcb&utm_source=google&utm_medium=cpc",
           image: "/Einzelteile/SD-Karte.jpg"
         },
         {
@@ -881,7 +881,7 @@ function InstructionStepsContent() {
                         ))}
                       </div>
                     </motion.div>
-                  </div>
+            </div>
                 ) : null}
               </motion.div>
             </AnimatePresence>
