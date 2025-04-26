@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useRef, useEffect } from "react"
+import { useState, useRef, useEffect, Suspense } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
@@ -49,6 +49,14 @@ interface Step {
 }
 
 export default function InstructionStepsPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <InstructionStepsContent />
+    </Suspense>
+  )
+}
+
+function InstructionStepsContent() {
   const [currentStep, setCurrentStep] = useState(1)
   const [checkedItems, setCheckedItems] = useState<{ [key: string]: boolean }>({})
   const [allChecked, setAllChecked] = useState(false)
