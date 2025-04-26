@@ -55,7 +55,7 @@ export default function InstructionStepsPage() {
   const router = useRouter()
   const videoRef = useRef<HTMLIFrameElement>(null)
 
-  const totalSteps = 6
+  const totalSteps = 7
   const progress = (currentStep / totalSteps) * 100
 
   const steps: Step[] = [
@@ -232,6 +232,29 @@ export default function InstructionStepsPage() {
           title: "Raspberry PI Imager Download",
           url: "https://www.raspberrypi.com/software/"
         }
+      }
+    },
+    {
+      title: "Zusammenbau",
+      components: [],
+      instructions: [],
+      video: {
+        url: "https://www.youtube.com/embed/AB-y0bRjPt8",
+        timestamps: [
+          { time: "00:00", title: "Einleitung" },
+          { time: "00:30", title: "Raspberry PI & reSpeaker" },
+          { time: "01:00", title: "SD-Karte" },
+          { time: "01:22", title: "Kamera" },
+          { time: "03:06", title: "Rechter Bügel & Verbindungsteil" },
+          { time: "06:25", title: "Lautsprecher anschließen" },
+          { time: "07:58", title: "Kamera-Gehäuse" },
+          { time: "10:08", title: "Abstandshalter" },
+          { time: "10:50", title: "Elektronik-Gehäuse & Knopf" },
+          { time: "13:47", title: "Verschrauben mit Hilfswerkzeug" },
+          { time: "15:58", title: "Fassung & Kabelführung" },
+          { time: "19:29", title: "Lautsprecher-Gehäuse" },
+          { time: "21:11", title: "Linker Bügel" }
+        ]
       }
     }
   ]
@@ -668,6 +691,63 @@ export default function InstructionStepsPage() {
                           height="100%"
                           src={currentStepData.video?.url}
                           title="SD-Karte vorbereiten"
+                          frameBorder="0"
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                          allowFullScreen
+                          className="rounded-lg shadow-lg"
+                        ></iframe>
+                      </div>
+                    </motion.div>
+
+                    <motion.div 
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.5, delay: 0.2 }}
+                      className="bg-gray-800 rounded-lg p-6"
+                    >
+                      <h2 className="text-xl font-semibold mb-4 text-white">Abschnitte und Link</h2>
+                      <div className="space-y-4">
+                        {currentStepData.video?.timestamps.map((timestamp, index) => (
+                          <button
+                            key={index}
+                            onClick={() => handleTimestampClick(timestamp.time)}
+                            className="flex items-center space-x-4 w-full p-2 rounded-lg hover:bg-gray-700 transition-colors duration-200"
+                          >
+                            <span className="text-blue-400 font-medium">{formatTimestamp(timestamp.time)}</span>
+                            <span className="text-gray-300 text-left">{timestamp.title}</span>
+                          </button>
+                        ))}
+                        {currentStepData.video?.link && (
+                          <div className="mt-6">
+                            <Button
+                              asChild
+                              className="bg-blue-600 hover:bg-blue-700 text-white"
+                            >
+                              <Link href={currentStepData.video.link.url} target="_blank" rel="noopener noreferrer">
+                                {currentStepData.video.link.title}
+                                <ExternalLink className="ml-2 h-4 w-4" />
+                              </Link>
+                            </Button>
+                          </div>
+                        )}
+                      </div>
+                    </motion.div>
+                  </div>
+                ) : currentStep === 7 ? (
+                  <div className="space-y-6">
+                    <motion.div 
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.5 }}
+                      className="flex justify-center items-center bg-gray-800 rounded-lg p-4"
+                    >
+                      <div className="aspect-video w-full max-w-3xl">
+                        <iframe
+                          ref={videoRef}
+                          width="100%"
+                          height="100%"
+                          src={currentStepData.video?.url}
+                          title="Zusammenbau"
                           frameBorder="0"
                           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                           allowFullScreen
