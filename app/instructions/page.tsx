@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { ArrowLeft, ArrowRight, ShoppingCart, Download, Box, CheckCircle2, HardDrive, Wrench, PlayCircle } from "lucide-react"
+import { ArrowLeft, ArrowRight, ShoppingCart, Download, Box, CheckCircle2, HardDrive, Wrench, PlayCircle, Cpu } from "lucide-react"
 import { Card, CardContent } from "@/components/ui/card"
 import { motion, AnimatePresence } from "framer-motion"
 
@@ -26,6 +26,12 @@ const steps = [
     color: "from-blue-500 to-blue-600"
   },
   {
+    title: "OpenAI API-Key erstellen",
+    description: "Erstelle einen API-Key für die KI-Funktionalität deiner Brille.",
+    icon: Cpu,
+    color: "from-blue-500 to-blue-600"
+  },
+  {
     title: "Überprüfe, ob alle Komponenten vorhanden sind",
     description: "Stelle sicher, dass du alle benötigten Teile für den Zusammenbau hast.",
     icon: CheckCircle2,
@@ -33,7 +39,7 @@ const steps = [
   },
   {
     title: "SD-Karte vorbereiten",
-    description: "Richte die SD-Karte mit dem Betriebssystem ein und konfiguriere die API-Keys.",
+    description: "Richte die SD-Karte mit dem Betriebssystem und der Software ein.",
     icon: HardDrive,
     color: "from-blue-500 to-blue-600"
   },
@@ -41,6 +47,12 @@ const steps = [
     title: "Zusammenbau",
     description: "Baue deine KI-Brille Schritt für Schritt zusammen.",
     icon: Wrench,
+    color: "from-blue-500 to-blue-600"
+  },
+  {
+    title: "Deine Brille ist einsatzbereit!",
+    description: "Lerne, wie du deine KI-Brille benutzt und starte durch!",
+    icon: PlayCircle,
     color: "from-blue-500 to-blue-600"
   }
 ]
