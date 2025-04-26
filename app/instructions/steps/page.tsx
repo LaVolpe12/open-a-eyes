@@ -148,6 +148,20 @@ export default function InstructionStepsPage() {
       image: "/placeholder.svg"
     },
     {
+      title: "OpenAI API-Key erstellen",
+      components: [],
+      instructions: [],
+      video: {
+        url: "https://www.youtube.com/embed/We2D3KKj648",
+        timestamps: [
+          { time: "00:00", title: "Einleitung" },
+          { time: "00:14", title: "Registrierung" },
+          { time: "02:34", title: "API-Key generieren" },
+          { time: "04:20", title: "Zahlungsmethode hinterlegen" }
+        ]
+      }
+    },
+    {
       title: "Überprüfe, ob alle Komponenten vorhanden sind",
       components: [
         {
@@ -192,31 +206,16 @@ export default function InstructionStepsPage() {
       instructions: []
     },
     {
-      title: "OpenAI API-Key erstellen",
+      title: "SD-Karte vorbereiten",
       components: [],
       instructions: [],
       video: {
         url: "https://www.youtube.com/embed/We2D3KKj648",
         timestamps: [
           { time: "00:00", title: "Einleitung" },
-          { time: "00:14", title: "Registrierung" },
-          { time: "02:34", title: "API-Key generieren" },
-          { time: "04:20", title: "Zahlungsmethode hinterlegen" }
-        ]
-      }
-    },
-    {
-      title: "SD-Karte vorbereiten",
-      components: [],
-      instructions: [],
-      video: {
-        url: "https://www.youtube.com/embed/i4tvI5U2_mM",
-        timestamps: [
-          { time: "00:25", title: "Raspberry PI Imager installieren", link: "https://www.raspberrypi.com/software/" },
-          { time: "01:31", title: "Image konfigurieren und auf SD-Karte schreiben" },
-          { time: "06:39", title: "API Key einfügen" },
-          { time: "08:44", title: "Informationen zur ersten Einrichtung" },
-          { time: "09:22", title: "Informationen, wie weitere API-Keys eingefügt werden können" }
+          { time: "00:14", title: "SD-Karte formatieren" },
+          { time: "02:34", title: "Image auf SD-Karte schreiben" },
+          { time: "04:20", title: "SD-Karte einlegen" }
         ]
       }
     },
@@ -225,21 +224,12 @@ export default function InstructionStepsPage() {
       components: [],
       instructions: [],
       video: {
-        url: "https://www.youtube.com/embed/AB-y0bRjPt8",
+        url: "https://www.youtube.com/embed/We2D3KKj648",
         timestamps: [
           { time: "00:00", title: "Einleitung" },
-          { time: "00:30", title: "Raspberry PI & reSpeaker" },
-          { time: "01:00", title: "SD-Karte" },
-          { time: "01:22", title: "Kamera" },
-          { time: "03:06", title: "Rechter Bügel & Verbindungsteil" },
-          { time: "06:25", title: "Lautsprecher anschließen" },
-          { time: "07:58", title: "Kamera-Gehäuse" },
-          { time: "10:08", title: "Abstandshalter" },
-          { time: "10:50", title: "Elektronik-Gehäuse & Knopf" },
-          { time: "13:47", title: "Verschrauben mit Hilfswerkzeug" },
-          { time: "15:58", title: "Fassung & Kabelführung" },
-          { time: "19:29", title: "Lautsprecher-Gehäuse" },
-          { time: "21:11", title: "Linker Bügel" }
+          { time: "00:14", title: "3D-Druckteile vorbereiten" },
+          { time: "02:34", title: "Elektronik einbauen" },
+          { time: "04:20", title: "Zusammenbau abschließen" }
         ]
       }
     }
