@@ -213,50 +213,64 @@ export default function InstructionStepsPage() {
 
           <div className="p-6">
             {currentStep === 1 ? (
-              <div className="overflow-x-auto">
-                <Table className="border-collapse w-full">
-                  <TableHeader>
-                    <TableRow className="border-b border-gray-600">
-                      <TableHead className="w-[100px] text-gray-200">Bild</TableHead>
-                      <TableHead className="w-[200px] text-gray-200">Komponente</TableHead>
-                      <TableHead className="w-[300px] text-gray-200">Beschreibung</TableHead>
-                      <TableHead className="text-gray-200">Preis (ca.)</TableHead>
-                      <TableHead className="text-right text-gray-200">Link</TableHead>
-                    </TableRow>
-                  </TableHeader>
-                  <TableBody>
-                    {(currentStepData.components as Component[]).map((component, index) => (
-                      <TableRow key={index} className="border-b border-gray-600">
-                        <TableCell className="w-[100px]">
-                          <div className="relative w-20 h-20 rounded-lg overflow-hidden">
-                            <Image
-                              src={component.image}
-                              alt={component.name}
-                              width={80}
-                              height={80}
-                              className="object-cover"
-                            />
-                          </div>
-                        </TableCell>
-                        <TableCell className="font-medium text-white">{component.name}</TableCell>
-                        <TableCell className="text-gray-300">{component.description}</TableCell>
-                        <TableCell className="text-gray-300">{component.price}</TableCell>
-                        <TableCell className="text-right">
-                          <a
-                            href={component.link}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="inline-flex items-center text-blue-400 hover:text-blue-300"
-                          >
-                            <ShoppingCart className="h-4 w-4 mr-1" />
-                            <span className="hidden sm:inline">Kaufen</span>
-                            <ExternalLink className="h-3 w-3 ml-1" />
-                          </a>
-                        </TableCell>
+              <div className="space-y-6">
+                <div className="bg-gray-800 rounded-lg p-6">
+                  <p className="text-gray-300 mb-4">
+                    Zuerst musst du dir die nötigen elektronischen sowie mechanischen Komponenten bestellen. 
+                    In der nachfolgenden Einkaufsliste findest du alle benötigten Teile mit Links zu den jeweiligen Händlern.
+                  </p>
+                  <p className="text-gray-300">
+                    Falls du die Bauteile bereits besorgt hast, kannst du diesen Schritt überspringen. 
+                    Eine alternative Übersicht findest du auch auf der Startseite unter "Komponenten und Downloads".
+                  </p>
+                </div>
+
+                <div className="overflow-x-auto">
+                  <h2 className="text-xl font-semibold mb-4 text-white">Einkaufsliste</h2>
+                  <Table className="border-collapse w-full">
+                    <TableHeader>
+                      <TableRow className="border-b border-gray-600">
+                        <TableHead className="w-[100px] text-gray-200">Bild</TableHead>
+                        <TableHead className="w-[200px] text-gray-200">Komponente</TableHead>
+                        <TableHead className="w-[300px] text-gray-200">Beschreibung</TableHead>
+                        <TableHead className="text-gray-200">Preis (ca.)</TableHead>
+                        <TableHead className="text-right text-gray-200">Link</TableHead>
                       </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
+                    </TableHeader>
+                    <TableBody>
+                      {(currentStepData.components as Component[]).map((component, index) => (
+                        <TableRow key={index} className="border-b border-gray-600">
+                          <TableCell className="w-[100px]">
+                            <div className="relative w-20 h-20 rounded-lg overflow-hidden">
+                              <Image
+                                src={component.image}
+                                alt={component.name}
+                                width={80}
+                                height={80}
+                                className="object-cover"
+                              />
+                            </div>
+                          </TableCell>
+                          <TableCell className="font-medium text-white">{component.name}</TableCell>
+                          <TableCell className="text-gray-300">{component.description}</TableCell>
+                          <TableCell className="text-gray-300">{component.price}</TableCell>
+                          <TableCell className="text-right">
+                            <a
+                              href={component.link}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex items-center text-blue-400 hover:text-blue-300"
+                            >
+                              <ShoppingCart className="h-4 w-4 mr-1" />
+                              <span className="hidden sm:inline">Kaufen</span>
+                              <ExternalLink className="h-3 w-3 ml-1" />
+                            </a>
+                          </TableCell>
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+                </div>
               </div>
             ) : (
               <div className="space-y-6">
