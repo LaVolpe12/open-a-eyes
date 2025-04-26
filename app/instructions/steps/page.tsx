@@ -38,6 +38,10 @@ interface Step {
   components: StepComponent[]
   instructions?: string[]
   image?: string
+  video?: {
+    url: string
+    timestamps: { time: string; title: string; link?: string }[]
+  }
 }
 
 export default function InstructionStepsPage() {
@@ -46,7 +50,7 @@ export default function InstructionStepsPage() {
   const [allChecked, setAllChecked] = useState(false)
   const router = useRouter()
 
-  const totalSteps = 4
+  const totalSteps = 5
   const progress = (currentStep / totalSteps) * 100
 
   const steps: Step[] = [
@@ -290,6 +294,21 @@ export default function InstructionStepsPage() {
       ],
       image: "/placeholder.svg?height=400&width=400",
     },
+    {
+      title: "SD-Karte vorbereiten",
+      components: [],
+      instructions: [],
+      video: {
+        url: "https://www.youtube.com/embed/i4tvI5U2_mM",
+        timestamps: [
+          { time: "00:25", title: "Raspberry PI Imager installieren", link: "https://www.raspberrypi.com/software/" },
+          { time: "01:31", title: "Image konfigurieren und auf SD-Karte schreiben" },
+          { time: "06:39", title: "API Key einfügen" },
+          { time: "08:44", title: "Informationen zur ersten Einrichtung" },
+          { time: "09:22", title: "Informationen, wie weitere API-Keys eingefügt werden können" }
+        ]
+      }
+    }
   ]
 
   const goToNextStep = () => {
@@ -482,7 +501,7 @@ export default function InstructionStepsPage() {
                             asChild
                             className="bg-blue-600 hover:bg-blue-700 text-white"
                           >
-                            <Link href="https://drive.google.com/file/d/1KpDreYGmDURJrR_RDKt6IjK-QTh45qdg/view?usp=sharing">
+                            <Link href="https://drive.google.com/file/d/1z3g_nLzVUI8tefPy9BgpnXQ7TdAwLYP4/view?usp=sharing">
                               <Download className="mr-2 h-4 w-4" />
                               STL-Dateien herunterladen
                             </Link>
@@ -491,7 +510,7 @@ export default function InstructionStepsPage() {
                             asChild
                             className="bg-blue-600 hover:bg-blue-700 text-white"
                           >
-                            <Link href="https://drive.google.com/file/d/1z3g_nLzVUI8tefPy9BgpnXQ7TdAwLYP4/view?usp=sharing">
+                            <Link href="https://drive.google.com/file/d/1KpDreYGmDURJrR_RDKt6IjK-QTh45qdg/view?usp=sharing">
                               <Download className="mr-2 h-4 w-4" />
                               Betriebssystem-Image herunterladen
                             </Link>
@@ -635,6 +654,69 @@ export default function InstructionStepsPage() {
                           }
                           return null
                         })}
+                      </div>
+                    </motion.div>
+                  </div>
+                ) : currentStep === 5 ? (
+                  <div className="space-y-6">
+                    <motion.div 
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.5 }}
+                      className="flex justify-center items-center bg-gray-800 rounded-lg p-4"
+                    >
+                      <div className="aspect-video w-full max-w-3xl">
+                        <iframe
+                          width="100%"
+                          height="100%"
+                          src={steps[4].video?.url}
+                          title="SD-Karte vorbereiten"
+                          frameBorder="0"
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                          allowFullScreen
+                          className="rounded-lg shadow-lg"
+                          id="youtube-player"
+                        ></iframe>
+                      </div>
+                    </motion.div>
+
+                    <motion.div 
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.5, delay: 0.2 }}
+                      className="bg-gray-800 rounded-lg p-6"
+                    >
+                      <h2 className="text-xl font-semibold mb-4 text-white">Abschnitte</h2>
+                      <div className="space-y-3">
+                        {steps[4].video?.timestamps.map((timestamp, index) => (
+                          <motion.div
+                            key={index}
+                            initial={{ opacity: 0, x: -20 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ duration: 0.3, delay: index * 0.1 }}
+                            className="flex items-center space-x-2 bg-gray-700 p-3 rounded-lg hover:bg-gray-600 transition-all duration-300 hover:scale-[1.02] cursor-pointer"
+                            onClick={() => {
+                              const player = document.getElementById('youtube-player') as HTMLIFrameElement;
+                              const [minutes, seconds] = timestamp.time.split(':').map(Number);
+                              const timeInSeconds = minutes * 60 + seconds;
+                              player.src = `${steps[4].video?.url}?start=${timeInSeconds}`;
+                            }}
+                          >
+                            <span className="text-blue-400 font-medium">{timestamp.time}</span>
+                            <span className="text-white flex-1">{timestamp.title}</span>
+                            {timestamp.link && (
+                              <a
+                                href={timestamp.link}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-blue-400 hover:text-blue-300"
+                                onClick={(e) => e.stopPropagation()}
+                              >
+                                <ExternalLink className="h-4 w-4" />
+                              </a>
+                            )}
+                          </motion.div>
+                        ))}
                       </div>
                     </motion.div>
                   </div>
