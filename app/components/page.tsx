@@ -23,28 +23,28 @@ export default function ComponentsPage() {
       name: "SeeedStudio reSpeaker 2-Mics PI HAT",
       description: "Mikrofonmodul für Sprachbefehle",
       price: "14,20€",
-      link: "https://www.berrybase.de/respeaker-2-mics-hat-fuer-raspberry-pi?utm_source=google&utm_medium=cpc&gad_source=1&gbraid=0AAAAADSQJK7VY1e4u0AY_IKtkZebC8n5m&gclid=Cj0KCQjwiLLABhCEARIsAJYS6ukzah_D9xPWQ9KNnVa5u86xkfVltUOS8oETJ28-qP5-vHg75XoiXMkaApLvEALw_wcB",
+      link: "https://www.berrybase.de/respeaker-2-mics-hat-fuer-raspberry-pi",
       image: "/Einzelteile/reSpeaker_2-Mics_PI_HAT.jpg"
     },
     {
       name: "ZeroCam",
       description: "Kamera für Bilderfassung",
       price: "15,50€",
-      link: "https://www.berrybase.de/kamera-fuer-raspberry-pi-zero?utm_source=google&utm_medium=cpc&gad_source=1&gbraid=0AAAAADSQJK7v4d7RXQoQXJ6iR2Y2C2tJ_&gclid=Cj0KCQjwiLLABhCEARIsAJYS6ulK2AQw0I7Qk6CsMtdoX51sWkj3Eh7KOKtyBUYnwXvVP4yl7meeQhUaAgB5EALw_wcB",
+      link: "https://www.berrybase.de/kamera-fuer-raspberry-pi-zero",
       image: "/Einzelteile/ZeroCam.jpg"
     },
     {
       name: "Lautsprecher mit JST-PH2.0 mm",
       description: "Für Audioausgabe",
       price: "16.99€",
-      link: "https://www.az-delivery.de/products/2-stuck-dfplayer-mini-3-watt-8-ohm-mini-lautsprecher-mit-jst-ph2-0-mm-pin-schnittstelle-fur-arduino-raspberry-pi-und-elektronische-diy-projekte-inklusive-e-book?variant=39441379131488&utm_source=google&utm_medium=cpc&utm_campaign=16964979024&utm_content=166733588295&utm_term=&gad_source=1&gbraid=0AAAAADBFYGVMZJhv_GN2v-vk_surpkJa7&gclid=Cj0KCQjwzYLABhD4ARIsALySuCT6KaJ5HwzvznJb8pPu1muPQGUYymX0ZBdIUJDXAXupGyT7-EdxsukaAr28EALw_wcB",
+      link: "https://www.az-delivery.de/products/2-stuck-dfplayer-mini-3-watt-8-ohm-mini-lautsprecher-mit-jst-ph2-0-mm-pin-schnittstelle-fur-arduino-raspberry-pi-und-elektronische-diy-projekte-inklusive-e-book?variant=39441379131488",
       image: "/Einzelteile/Lautsprecher.jpg"
     },
     {
       name: "SD-Karte (min. 64 GB)",
       description: "Für Betriebssystem und Software",
       price: "9,60€",
-      link: "https://www.berrybase.de/sandisk-extreme-pro-microsdhc-a1-uhs-i-u3-speicherkarte-adapter-32gb?gclid=Cj0KCQjwiLLABhCEARIsAJYS6ulK2AQw0I7Qk6CsMtdoX51sWkj3Eh7KOKtyBUYnwXvVP4yl7meeQhUaAgB5EALw_wcB&sl_tcb&utm_source=google&utm_medium=cpc",
+      link: "https://www.berrybase.de/sandisk-extreme-pro-microsdhc-a1-uhs-i-u3-speicherkarte-adapter-32gb",
       image: "/Einzelteile/SD-Karte.jpg"
     },
   ]
