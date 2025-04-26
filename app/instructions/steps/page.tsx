@@ -50,12 +50,12 @@ export default function InstructionStepsPage() {
   const [allChecked, setAllChecked] = useState(false)
   const router = useRouter()
 
-  const totalSteps = 4
+  const totalSteps = 5
   const progress = (currentStep / totalSteps) * 100
 
   const steps: Step[] = [
     {
-      title: "Elektronik und Bauteile bestellen",
+      title: "1. Elektronik und Bauteile bestellen",
       components: [
         {
           name: "Raspberry PI Zero 2 WH",
@@ -125,7 +125,7 @@ export default function InstructionStepsPage() {
       image: "/placeholder.svg"
     },
     {
-      title: "Download der benötigten Dateien",
+      title: "2. Download der benötigten Dateien",
       components: [],
       instructions: [
         "Lade folgende Dateien herunter:",
@@ -135,7 +135,7 @@ export default function InstructionStepsPage() {
       image: "/placeholder.svg"
     },
     {
-      title: "3D-Druckteile bestellen",
+      title: "3. 3D-Druckteile bestellen",
       components: [
         {
           name: "3D-Druckteile",
@@ -148,7 +148,28 @@ export default function InstructionStepsPage() {
       image: "/placeholder.svg"
     },
     {
-      title: "Überprüfe, ob alle Komponenten vorhanden sind",
+      title: "4. SD-Karte vorbereiten",
+      components: [],
+      instructions: [
+        "1. Lade den Raspberry Pi Imager herunter und installiere ihn",
+        "2. Schließe die SD-Karte an deinen Computer an",
+        "3. Wähle das Open-A-Eyes Image aus",
+        "4. Schreibe das Image auf die SD-Karte",
+        "5. Füge deinen API-Key in die Konfigurationsdatei ein"
+      ],
+      video: {
+        url: "https://www.youtube.com/embed/i4tvI5U2_mM",
+        timestamps: [
+          { time: "00:25", title: "Raspberry PI Imager installieren", link: "https://www.raspberrypi.com/software/" },
+          { time: "01:31", title: "Image konfigurieren und auf SD-Karte schreiben" },
+          { time: "06:39", title: "API Key einfügen" },
+          { time: "08:44", title: "Informationen zur ersten Einrichtung" },
+          { time: "09:22", title: "Informationen, wie weitere API-Keys eingefügt werden können" }
+        ]
+      }
+    },
+    {
+      title: "5. Überprüfe, ob alle Komponenten vorhanden sind",
       components: [
         {
           category: "Elektronik und Montageteile",
@@ -466,6 +487,103 @@ export default function InstructionStepsPage() {
 
                       <div className="space-y-8">
                         {steps[3].components.map((component, index) => {
+                          if ('category' in component) {
+                            return (
+                              <motion.div 
+                                key={index}
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ duration: 0.5, delay: index * 0.1 }}
+                                className="space-y-2"
+                              >
+                                <h3 className="text-lg font-semibold text-white flex items-center gap-2">
+                                  {component.category === "Elektronik und Montageteile" && (
+                                    <motion.div
+                                      initial={{ scale: 0 }}
+                                      animate={{ scale: 1 }}
+                                      transition={{ type: "spring", stiffness: 500, damping: 30 }}
+                                    >
+                                      <CircuitBoard className="h-5 w-5 text-blue-400" />
+                                    </motion.div>
+                                  )}
+                                  {component.category === "3D-Druckteile" && (
+                                    <motion.div
+                                      initial={{ scale: 0 }}
+                                      animate={{ scale: 1 }}
+                                      transition={{ type: "spring", stiffness: 500, damping: 30 }}
+                                    >
+                                      <Box className="h-5 w-5 text-blue-400" />
+                                    </motion.div>
+                                  )}
+                                  {component.category === "Sonstiges" && (
+                                    <motion.div
+                                      initial={{ scale: 0 }}
+                                      animate={{ scale: 1 }}
+                                      transition={{ type: "spring", stiffness: 500, damping: 30 }}
+                                    >
+                                      <Settings className="h-5 w-5 text-blue-400" />
+                                    </motion.div>
+                                  )}
+                                  {component.category}
+                                </h3>
+                                <div className="space-y-2 pl-4">
+                                  {component.items.map((item, itemIndex) => (
+                                    <motion.div 
+                                      key={itemIndex}
+                                      initial={{ opacity: 0, x: -20 }}
+                                      animate={{ opacity: 1, x: 0 }}
+                                      transition={{ duration: 0.3, delay: itemIndex * 0.05 }}
+                                      className="flex items-center space-x-2 bg-gray-700 p-3 rounded-lg hover:bg-gray-600 transition-all duration-300 hover:scale-[1.02]"
+                                    >
+                                      <Checkbox
+                                        checked={checkedItems[item.name] || false}
+                                        onCheckedChange={(checked) => handleItemCheck(item.name, checked as boolean)}
+                                        className="h-5 w-5 border-2 border-blue-500 data-[state=checked]:bg-blue-500 transition-all duration-300"
+                                      />
+                                      <label className="text-white flex-1">{item.name}</label>
+                                      {checkedItems[item.name] && (
+                                        <motion.div
+                                          initial={{ scale: 0 }}
+                                          animate={{ scale: 1 }}
+                                          transition={{ type: "spring", stiffness: 500, damping: 30 }}
+                                        >
+                                          <CheckCircle2 className="h-5 w-5 text-green-500" />
+                                        </motion.div>
+                                      )}
+                                    </motion.div>
+                                  ))}
+                                </div>
+                              </motion.div>
+                            )
+                          }
+                          return null
+                        })}
+                      </div>
+                    </motion.div>
+                  </div>
+                ) : currentStep === 5 ? (
+                  <div className="space-y-6">
+                    <motion.div 
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.5 }}
+                      className="bg-gray-800 rounded-lg p-6"
+                    >
+                      <div className="flex items-center space-x-2 mb-6">
+                        <Checkbox
+                          checked={allChecked}
+                          onCheckedChange={handleCheckAll}
+                          className="h-6 w-6 border-2 border-blue-500 data-[state=checked]:bg-blue-500 transition-all duration-300"
+                        />
+                        <Label
+                          className="text-lg font-medium text-white"
+                        >
+                          Alle Komponenten überprüfen
+                        </Label>
+                      </div>
+
+                      <div className="space-y-8">
+                        {steps[4].components.map((component, index) => {
                           if ('category' in component) {
                             return (
                               <motion.div 
