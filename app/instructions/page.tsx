@@ -17,31 +17,31 @@ const steps = [
     title: "Download der benötigten Dateien",
     description: "Lade die STL-Dateien für den 3D-Druck und das Betriebssystem-Image herunter.",
     icon: Download,
-    color: "from-purple-500 to-purple-600"
+    color: "from-blue-500 to-blue-600"
   },
   {
     title: "3D-Druckteile bestellen",
     description: "Bestelle die 3D-gedruckten Teile oder drucke sie selbst aus.",
     icon: Printer,
-    color: "from-green-500 to-green-600"
+    color: "from-blue-500 to-blue-600"
   },
   {
     title: "Überprüfe, ob alle Komponenten vorhanden sind",
     description: "Stelle sicher, dass du alle benötigten Teile für den Zusammenbau hast.",
     icon: CheckCircle2,
-    color: "from-yellow-500 to-yellow-600"
+    color: "from-blue-500 to-blue-600"
   },
   {
     title: "SD-Karte vorbereiten",
     description: "Richte die SD-Karte mit dem Betriebssystem ein und konfiguriere die API-Keys.",
     icon: Settings,
-    color: "from-red-500 to-red-600"
+    color: "from-blue-500 to-blue-600"
   },
   {
     title: "Zusammenbau",
     description: "Baue deine KI-Brille Schritt für Schritt zusammen.",
     icon: Wrench,
-    color: "from-indigo-500 to-indigo-600"
+    color: "from-blue-500 to-blue-600"
   }
 ]
 
@@ -103,7 +103,7 @@ export default function InstructionsPage() {
                 >
                   {/* Connection Line */}
                   {index < steps.length - 1 && (
-                    <div className="absolute left-6 top-16 bottom-0 w-0.5 bg-gradient-to-b from-blue-500 to-transparent" />
+                    <div className="absolute left-12 top-16 bottom-0 w-0.5 bg-gradient-to-b from-blue-500 to-transparent" />
                   )}
 
                   <Link href={`/instructions/steps?step=${index + 1}`}>
@@ -111,7 +111,7 @@ export default function InstructionsPage() {
                       <CardContent className="p-6">
                         <div className="flex items-start gap-4">
                           <motion.div
-                            className={`flex-shrink-0 w-12 h-12 rounded-xl bg-gradient-to-br ${step.color} flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}
+                            className="flex-shrink-0 w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center group-hover:scale-110 transition-transform duration-300"
                             whileHover={{ rotate: 10 }}
                           >
                             <step.icon className="h-6 w-6 text-white" />
