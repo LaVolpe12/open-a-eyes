@@ -68,7 +68,7 @@ export default function ConsentPage() {
 
             <p className="text-gray-200">
               Weitere Informationen zum Datenschutz sowie meine Rechte finde ich in der{" "}
-              <Link href="#" className="text-blue-400 hover:underline">
+              <Link href="/privacy" className="text-blue-400 hover:underline">
                 Datenschutzerklärung
               </Link>
               .
