@@ -55,7 +55,7 @@ export default function InstructionStepsPage() {
   const router = useRouter()
   const videoRef = useRef<HTMLIFrameElement>(null)
 
-  const totalSteps = 5
+  const totalSteps = 6
   const progress = (currentStep / totalSteps) * 100
 
   const steps: Step[] = [
@@ -214,6 +214,25 @@ export default function InstructionStepsPage() {
       ],
       instructions: [],
       image: "/placeholder.svg"
+    },
+    {
+      title: "SD-Karte vorbereiten",
+      components: [],
+      instructions: [],
+      video: {
+        url: "https://www.youtube.com/embed/i4tvI5U2_mM",
+        timestamps: [
+          { time: "00:25", title: "Raspberry PI Imager installieren" },
+          { time: "01:31", title: "Image konfigurieren und auf SD-Karte schreiben" },
+          { time: "06:39", title: "API Key einfügen" },
+          { time: "08:44", title: "Informationen zur ersten Einrichtung" },
+          { time: "09:22", title: "Informationen, wie weitere API-Keys eingefügt werden können" }
+        ],
+        link: {
+          title: "Raspberry PI Imager Download",
+          url: "https://www.raspberrypi.com/software/"
+        }
+      }
     }
   ]
 
@@ -631,6 +650,63 @@ export default function InstructionStepsPage() {
                           }
                           return null
                         })}
+                      </div>
+                    </motion.div>
+                  </div>
+                ) : currentStep === 6 ? (
+                  <div className="space-y-6">
+                    <motion.div 
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.5 }}
+                      className="flex justify-center items-center bg-gray-800 rounded-lg p-4"
+                    >
+                      <div className="aspect-video w-full max-w-3xl">
+                        <iframe
+                          ref={videoRef}
+                          width="100%"
+                          height="100%"
+                          src={currentStepData.video?.url}
+                          title="SD-Karte vorbereiten"
+                          frameBorder="0"
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                          allowFullScreen
+                          className="rounded-lg shadow-lg"
+                        ></iframe>
+                      </div>
+                    </motion.div>
+
+                    <motion.div 
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.5, delay: 0.2 }}
+                      className="bg-gray-800 rounded-lg p-6"
+                    >
+                      <h2 className="text-xl font-semibold mb-4 text-white">Abschnitte und Link</h2>
+                      <div className="space-y-4">
+                        {currentStepData.video?.timestamps.map((timestamp, index) => (
+                          <button
+                            key={index}
+                            onClick={() => handleTimestampClick(timestamp.time)}
+                            className="flex items-center space-x-4 w-full p-2 rounded-lg hover:bg-gray-700 transition-colors duration-200"
+                          >
+                            <span className="text-blue-400 font-medium">{formatTimestamp(timestamp.time)}</span>
+                            <span className="text-gray-300 text-left">{timestamp.title}</span>
+                          </button>
+                        ))}
+                        {currentStepData.video?.link && (
+                          <div className="mt-6">
+                            <Button
+                              asChild
+                              className="bg-blue-600 hover:bg-blue-700 text-white"
+                            >
+                              <Link href={currentStepData.video.link.url} target="_blank" rel="noopener noreferrer">
+                                {currentStepData.video.link.title}
+                                <ExternalLink className="ml-2 h-4 w-4" />
+                              </Link>
+                            </Button>
+                          </div>
+                        )}
                       </div>
                     </motion.div>
                   </div>
