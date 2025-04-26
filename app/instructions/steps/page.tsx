@@ -115,7 +115,7 @@ function InstructionStepsContent() {
           name: "SD-Karte (min. 64 GB)",
           description: "Für Betriebssystem und Software",
           price: "12.90€",
-          link: "https://www.cyberport.de/?DEEP=4H20-04W",
+          link: "https://www.reichelt.de/de/de/shop/produkt/microsdhc-speicherkarte_32gb_sandisk_extreme_pro-262417?PROVID=2788&gad_source=1&gbraid=0AAAAADwnxtagBO9rx-1paUKg9rxOgI2Zj&gclid=Cj0KCQjwiLLABhCEARIsAJYS6ulTysMHc-jhy57e5gyvuKPcrgl3oplr0vbpd7Kw5iwQKpvcEM8k1ZcaAsLPEALw_wcB",
           image: "/Einzelteile/SD-Karte.jpg"
         },
         {
