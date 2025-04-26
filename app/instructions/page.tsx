@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { ArrowLeft, ArrowRight, ShoppingCart, Download, Box, CheckCircle2, HardDrive, Wrench, PlayCircle, Brain } from "lucide-react"
+import { ArrowLeft, ArrowRight, ShoppingCart, Download, Printer, CheckCircle2, Settings, Cpu, Wrench, PlayCircle, Box, HardDrive } from "lucide-react"
 import { Card, CardContent } from "@/components/ui/card"
 import { motion, AnimatePresence } from "framer-motion"
 
@@ -23,12 +23,6 @@ const steps = [
     title: "3D-Druckteile bestellen",
     description: "Bestelle die 3D-gedruckten Teile oder drucke sie selbst aus.",
     icon: Box,
-    color: "from-blue-500 to-blue-600"
-  },
-  {
-    title: "OpenAI API-Key erstellen",
-    description: "Erstelle einen OpenAI API-Key für die Sprachsteuerung deiner KI-Brille.",
-    icon: Brain,
     color: "from-blue-500 to-blue-600"
   },
   {
