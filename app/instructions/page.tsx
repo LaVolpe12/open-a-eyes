@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { ArrowLeft, ArrowRight, ShoppingCart, Download, Printer, CheckCircle2, Settings, Cpu, Wrench, PlayCircle, Box, HardDrive } from "lucide-react"
+import { ArrowLeft, ArrowRight, ShoppingCart, Download, Box, CheckCircle2, HardDrive, Wrench, PlayCircle } from "lucide-react"
 import { Card, CardContent } from "@/components/ui/card"
 import { motion, AnimatePresence } from "framer-motion"
 
@@ -127,8 +127,8 @@ export default function InstructionsPage() {
                   </Link>
                 </motion.div>
               ))}
-            </div>
           </div>
+        </div>
         </motion.div>
       </div>
     </main>
