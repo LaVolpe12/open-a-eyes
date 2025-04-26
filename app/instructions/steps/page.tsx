@@ -12,7 +12,7 @@ import { Checkbox } from "@/components/ui/checkbox"
 import { Label } from "@/components/ui/label"
 import { Table, TableHeader, TableBody, TableCell, TableRow, TableHead } from "@/components/ui/table"
 
-type Component = {
+interface Component {
   name: string
   description: string
   price: string
@@ -20,16 +20,29 @@ type Component = {
   image: string
 }
 
-type Step = {
+interface ChecklistItem {
+  name: string
+  checked: boolean
+}
+
+interface ChecklistCategory {
+  category: string
+  items: ChecklistItem[]
+}
+
+type StepComponent = Component | ChecklistCategory
+
+interface Step {
   title: string
-  components: Component[] | string[]
-  instructions: string[]
-  image: string | null
+  components: StepComponent[]
+  instructions?: string[]
+  image?: string
 }
 
 export default function InstructionStepsPage() {
   const [currentStep, setCurrentStep] = useState(1)
-  const [checkedComponents, setCheckedComponents] = useState<Record<string, boolean>>({})
+  const [checkedItems, setCheckedItems] = useState<{ [key: string]: boolean }>({})
+  const [allChecked, setAllChecked] = useState(false)
   const router = useRouter()
 
   const totalSteps = 4
@@ -41,10 +54,10 @@ export default function InstructionStepsPage() {
       components: [
         {
           name: "Raspberry PI Zero 2 WH",
-          description: "Minicomputer für die Verarbeitung",
+          description: "Hauptprozessor",
           price: "15-20€",
-          link: "https://www.raspberrypi.com/products/raspberry-pi-zero-2-w/",
-          image: "/Einzelteile/Raspberry_PI_Zero_2_WH.jpg"
+          link: "",
+          image: "/placeholder.svg"
         },
         {
           name: "SeeedStudio reSpeaker 2-Mics PI HAT",
@@ -104,7 +117,7 @@ export default function InstructionStepsPage() {
         }
       ],
       instructions: [],
-      image: null
+      image: "/placeholder.svg"
     },
     {
       title: "Download der benötigten Dateien",
@@ -114,17 +127,119 @@ export default function InstructionStepsPage() {
         "1. STL-Datei mit allen benötigten 3D-Druckteilen",
         "2. Image-Datei mit dem speziellen Open-A-Eyes Betriebssystem"
       ],
-      image: null
+      image: "/placeholder.svg"
     },
     {
       title: "3D-Druckteile bestellen",
-      components: [],
+      components: [
+        {
+          name: "3D-Druckteile",
+          description: "Alle benötigten 3D-Druckteile",
+          price: "",
+          link: "https://www.3ddesign24.de/produkt/3d-druck-service/",
+          image: "/placeholder.svg"
+        }
+      ],
+      image: "/placeholder.svg"
+    },
+    {
+      title: "Überprüfe, ob alle Komponenten vorhanden sind",
+      components: [
+        {
+          category: "Elektronik und Montageteile",
+          items: [
+            { name: "Raspberry PI Zero 2 WH", checked: false },
+            { name: "SeeedStudio reSpeaker 2-Mics PI HAT", checked: false },
+            { name: "ZeroCam", checked: false },
+            { name: "Lautsprecher mit JST-PH2.0 mm", checked: false },
+            { name: "SD-Karte (min. 64 GB)", checked: false },
+            { name: "M2 x 20 mm Gewindeschraube (4 Stück)", checked: false },
+            { name: "M2 x 16 mm Gewindeschraube (6 Stück)", checked: false },
+            { name: "M2 x 6 mm Gewindeschraube (1 Stück)", checked: false },
+            { name: "M2 Mutter (11 Stück)", checked: false }
+          ]
+        },
+        {
+          category: "3D-Druckteile",
+          items: [
+            { name: "Fassung", checked: false },
+            { name: "Kabelführung", checked: false },
+            { name: "Rechter Bügel", checked: false },
+            { name: "Verbindungsteil vom rechten Bügel", checked: false },
+            { name: "Elektronik-Gehäuse", checked: false },
+            { name: "Kamera-Gehäuse", checked: false },
+            { name: "Knopf", checked: false },
+            { name: "Abstandshalter", checked: false },
+            { name: "Linker Bügel", checked: false },
+            { name: "Lautsprecher-Gehäuse", checked: false },
+            { name: "Hilfswerkzeug 1", checked: false },
+            { name: "Hilfswerkzeug 2", checked: false }
+          ]
+        },
+        {
+          category: "Sonstiges",
+          items: [
+            { name: "Computer oder Laptop", checked: false },
+            { name: "Kreditkarte (für deine API)", checked: false }
+          ]
+        }
+      ],
       instructions: [],
-      image: null
+      image: "/placeholder.svg"
     },
     {
       title: "Installation der Elektronik",
-      components: ["Raspberry Pi Zero W", "Kamera", "Gehäuse 1", "Gehäuse 2", "Kamerahalterung", "Lötkolben", "Kabel"],
+      components: [
+        {
+          name: "Raspberry Pi Zero W",
+          description: "Hauptprozessor",
+          price: "",
+          link: "",
+          image: "/placeholder.svg"
+        },
+        {
+          name: "Kamera",
+          description: "Für die Bildaufnahme",
+          price: "",
+          link: "",
+          image: "/placeholder.svg"
+        },
+        {
+          name: "Gehäuse 1",
+          description: "Unteres Gehäuseteil",
+          price: "",
+          link: "",
+          image: ""
+        },
+        {
+          name: "Gehäuse 2",
+          description: "Oberes Gehäuseteil",
+          price: "",
+          link: "",
+          image: ""
+        },
+        {
+          name: "Kamerahalterung",
+          description: "Für die Kamera",
+          price: "",
+          link: "",
+          image: ""
+        },
+        {
+          name: "Lötkolben",
+          description: "Für elektrische Verbindungen",
+          price: "",
+          link: "",
+          image: ""
+        },
+        {
+          name: "Kabel",
+          description: "Für die Verbindungen",
+          price: "",
+          link: "",
+          image: ""
+        }
+      ],
       instructions: [
         "Öffne das Gehäuse 1 und platziere den Raspberry Pi Zero W darin.",
         "Verbinde das Kamerakabel mit dem Raspberry Pi (CSI-Anschluss).",
@@ -138,7 +253,29 @@ export default function InstructionStepsPage() {
     },
     {
       title: "Software-Installation und Test",
-      components: ["Micro SD Karte", "Computer mit WLAN", "Akku"],
+      components: [
+        {
+          name: "Micro SD Karte",
+          description: "Für das Betriebssystem",
+          price: "",
+          link: "",
+          image: ""
+        },
+        {
+          name: "Computer mit WLAN",
+          description: "Für die Konfiguration",
+          price: "",
+          link: "",
+          image: ""
+        },
+        {
+          name: "Akku",
+          description: "Für die Stromversorgung",
+          price: "",
+          link: "",
+          image: ""
+        }
+      ],
       instructions: [
         "Setze die vorbereitete Micro SD Karte in den Raspberry Pi ein.",
         "Verbinde den Akku mit dem Raspberry Pi.",
@@ -157,7 +294,8 @@ export default function InstructionStepsPage() {
   const goToNextStep = () => {
     if (currentStep < totalSteps) {
       setCurrentStep(currentStep + 1)
-      setCheckedComponents({}) // Reset checked components when changing steps
+      setCheckedItems({})
+      setAllChecked(false)
       window.scrollTo(0, 0)
     } else {
       // Navigate to success page when all steps are completed
@@ -168,19 +306,54 @@ export default function InstructionStepsPage() {
   const goToPreviousStep = () => {
     if (currentStep > 1) {
       setCurrentStep(currentStep - 1)
-      setCheckedComponents({}) // Reset checked components when changing steps
+      setCheckedItems({})
+      setAllChecked(false)
       window.scrollTo(0, 0)
     }
   }
 
-  const toggleComponent = (component: string) => {
-    setCheckedComponents((prev) => ({
-      ...prev,
-      [component]: !prev[component],
-    }))
+  const handleCheckAll = (checked: boolean) => {
+    const newCheckedItems: { [key: string]: boolean } = {}
+    if (checked) {
+      steps[currentStep - 1].components.forEach((component) => {
+        if ('items' in component) {
+          component.items.forEach((item) => {
+            newCheckedItems[item.name] = true
+          })
+        }
+      })
+    }
+    setCheckedItems(newCheckedItems)
+    setAllChecked(checked)
+  }
+
+  const handleItemCheck = (itemName: string, checked: boolean) => {
+    setCheckedItems((prev) => ({ ...prev, [itemName]: checked }))
+    
+    // Check if all items are checked
+    const allItems = steps[currentStep - 1].components.flatMap((component) => {
+      if ('items' in component) {
+        return component.items
+      }
+      return []
+    })
+    
+    const areAllChecked = allItems.every((item) => checkedItems[item.name])
+    setAllChecked(areAllChecked)
   }
 
   const currentStepData = steps[currentStep - 1]
+
+  const getComponentNames = (components: StepComponent[]): string[] => {
+    return components.flatMap(component => {
+      if ('items' in component) {
+        return component.items.map(item => item.name);
+      }
+      return [component.name];
+    });
+  };
+
+  const componentNames = getComponentNames(currentStepData.components);
 
   return (
     <main className="flex min-h-screen flex-col p-6 bg-gradient-to-b from-gray-800 to-gray-900">
@@ -335,18 +508,43 @@ export default function InstructionStepsPage() {
                     </div>
                   </div>
                 ) : currentStep === 4 ? (
-                  <div className="flex justify-center items-center bg-gray-800 rounded-lg p-4">
-                    <div className="aspect-video w-full max-w-3xl">
-                      <iframe
-                        width="100%"
-                        height="100%"
-                        src="https://www.youtube.com/embed/AB-y0bRjPt8"
-                        title="Open-A-Eyes Zusammenbau Anleitung"
-                        frameBorder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowFullScreen
-                        className="rounded-lg"
-                      ></iframe>
+                  <div className="space-y-6">
+                    <div className="bg-gray-800 rounded-lg p-6">
+                      <div className="flex items-center space-x-2 mb-6">
+                        <Checkbox
+                          checked={allChecked}
+                          onCheckedChange={handleCheckAll}
+                        />
+                        <Label
+                          className="text-lg font-medium text-white"
+                        >
+                          Alle Komponenten überprüfen
+                        </Label>
+                      </div>
+
+                      <div className="space-y-8">
+                        {steps[3].components.map((component, index) => {
+                          if ('category' in component) {
+                            return (
+                              <div key={index} className="space-y-2">
+                                <h3 className="text-lg font-semibold text-white">{component.category}</h3>
+                                <div className="space-y-1 pl-4">
+                                  {component.items.map((item, itemIndex) => (
+                                    <div key={itemIndex} className="flex items-center space-x-2">
+                                      <Checkbox
+                                        checked={checkedItems[item.name] || false}
+                                        onCheckedChange={(checked) => handleItemCheck(item.name, checked as boolean)}
+                                      />
+                                      <label className="text-white">{item.name}</label>
+                                    </div>
+                                  ))}
+                                </div>
+                              </div>
+                            )
+                          }
+                          return null
+                        })}
+                      </div>
                     </div>
                   </div>
                 ) : (
@@ -367,12 +565,12 @@ export default function InstructionStepsPage() {
                       <CardContent className="pt-6">
                         <h2 className="text-xl font-semibold mb-4 text-white">Das brauchst du</h2>
                         <div className="space-y-3">
-                          {(currentStepData.components as string[]).map((component, index) => (
+                          {componentNames.map((component, index) => (
                             <div key={index} className="flex items-start space-x-2">
                               <Checkbox
                                 id={`component-${index}`}
-                                checked={checkedComponents[component] || false}
-                                onCheckedChange={() => toggleComponent(component)}
+                                checked={checkedItems[component] || false}
+                                onCheckedChange={(checked) => handleItemCheck(component, checked as boolean)}
                                 className="border-gray-500 data-[state=checked]:bg-blue-600 data-[state=checked]:text-white"
                               />
                               <Label
@@ -391,7 +589,7 @@ export default function InstructionStepsPage() {
                       <CardContent className="pt-6">
                         <h2 className="text-xl font-semibold mb-4 text-white">Anleitung</h2>
                         <ol className="list-decimal pl-5 space-y-3">
-                          {currentStepData.instructions.map((instruction, index) => (
+                          {currentStepData.instructions?.map((instruction, index) => (
                             <li key={index} className="text-gray-300">
                               {instruction}
                             </li>
