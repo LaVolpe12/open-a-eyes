@@ -85,8 +85,8 @@ function InstructionStepsContent() {
           name: "Raspberry PI Zero 2 WH",
           description: "Hauptprozessor",
           price: "15-20€",
-          link: "",
-          image: "/placeholder.svg"
+          link: "https://www.raspberrypi.com/products/raspberry-pi-zero-2-w/",
+          image: "/Einzelteile/Raspberry_PI_Zero_2_WH.jpg"
         },
         {
           name: "SeeedStudio reSpeaker 2-Mics PI HAT",
@@ -226,7 +226,7 @@ function InstructionStepsContent() {
         {
           category: "Sonstiges",
           items: [
-            { name: "Computer oder Laptop", checked: false },
+            { name: "Computer", checked: false },
             { name: "Kreditkarte (für deine API)", checked: false }
           ]
         }
