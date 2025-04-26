@@ -4,7 +4,7 @@ import { useState } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
-import { ArrowLeft, ArrowRight, CheckCircle2, ShoppingCart, ExternalLink, Download } from "lucide-react"
+import { ArrowLeft, ArrowRight, CheckCircle2, ShoppingCart, ExternalLink, Download, Cpu, Printer, Wrench } from "lucide-react"
 import { Card, CardContent } from "@/components/ui/card"
 import { Progress } from "@/components/ui/progress"
 import { useRouter } from "next/navigation"
@@ -514,6 +514,7 @@ export default function InstructionStepsPage() {
                         <Checkbox
                           checked={allChecked}
                           onCheckedChange={handleCheckAll}
+                          className="h-6 w-6 border-2 border-blue-500 data-[state=checked]:bg-blue-500"
                         />
                         <Label
                           className="text-lg font-medium text-white"
@@ -527,15 +528,24 @@ export default function InstructionStepsPage() {
                           if ('category' in component) {
                             return (
                               <div key={index} className="space-y-2">
-                                <h3 className="text-lg font-semibold text-white">{component.category}</h3>
-                                <div className="space-y-1 pl-4">
+                                <h3 className="text-lg font-semibold text-white flex items-center gap-2">
+                                  {component.category === "Elektronik und Montageteile" && <Cpu className="h-5 w-5 text-blue-400" />}
+                                  {component.category === "3D-Druckteile" && <Printer className="h-5 w-5 text-blue-400" />}
+                                  {component.category === "Sonstiges" && <Wrench className="h-5 w-5 text-blue-400" />}
+                                  {component.category}
+                                </h3>
+                                <div className="space-y-2 pl-4">
                                   {component.items.map((item, itemIndex) => (
-                                    <div key={itemIndex} className="flex items-center space-x-2">
+                                    <div key={itemIndex} className="flex items-center space-x-2 bg-gray-700 p-3 rounded-lg hover:bg-gray-600 transition-colors">
                                       <Checkbox
                                         checked={checkedItems[item.name] || false}
                                         onCheckedChange={(checked) => handleItemCheck(item.name, checked as boolean)}
+                                        className="h-5 w-5 border-2 border-blue-500 data-[state=checked]:bg-blue-500"
                                       />
-                                      <label className="text-white">{item.name}</label>
+                                      <label className="text-white flex-1">{item.name}</label>
+                                      {checkedItems[item.name] && (
+                                        <CheckCircle2 className="h-5 w-5 text-green-500" />
+                                      )}
                                     </div>
                                   ))}
                                 </div>
@@ -559,7 +569,7 @@ export default function InstructionStepsPage() {
                   </div>
                 )}
 
-                {currentStep !== 2 && (
+                {currentStep !== 2 && currentStep !== 3 && currentStep !== 4 && (
                   <div className="grid md:grid-cols-2 gap-6">
                     <Card className="bg-gray-800 border-gray-600">
                       <CardContent className="pt-6">
