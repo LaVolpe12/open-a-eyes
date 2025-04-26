@@ -149,24 +149,17 @@ export default function InstructionStepsPage() {
     },
     {
       title: "OpenAI API-Key erstellen",
-      components: [
-        {
-          category: "API-Key Erstellung",
-          items: [
-            { name: "Registrierung bei OpenAI", checked: false },
-            { name: "API-Key generieren", checked: false },
-            { name: "Zahlungsmethode hinterlegen", checked: false }
-          ]
-        }
-      ],
-      instructions: [
-        "1. Gehe zu https://platform.openai.com/",
-        "2. Erstelle ein Konto oder melde dich an",
-        "3. Navigiere zu den API-Einstellungen",
-        "4. Generiere einen neuen API-Key",
-        "5. Hinterlege eine gültige Zahlungsmethode",
-        "6. Speichere den API-Key sicher - er wird später benötigt"
-      ]
+      components: [],
+      instructions: [],
+      video: {
+        url: "https://www.youtube.com/embed/We2D3KKj648",
+        timestamps: [
+          { time: "00:00", title: "Einleitung" },
+          { time: "00:14", title: "Registrierung" },
+          { time: "02:34", title: "API-Key generieren" },
+          { time: "04:20", title: "Zahlungsmethode hinterlegen" }
+        ]
+      }
     },
     {
       title: "Überprüfe, ob alle Komponenten vorhanden sind",
@@ -472,12 +465,13 @@ export default function InstructionStepsPage() {
                         <iframe
                           width="100%"
                           height="100%"
-                          src="https://www.youtube.com/embed/lmDetSYANEU"
-                          title="3D-Druck Anleitung"
+                          src={steps[3].video?.url}
+                          title="OpenAI API-Key erstellen"
                           frameBorder="0"
                           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                           allowFullScreen
                           className="rounded-lg shadow-lg"
+                          id="youtube-player"
                         ></iframe>
                       </div>
                     </motion.div>
@@ -486,19 +480,29 @@ export default function InstructionStepsPage() {
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.5, delay: 0.2 }}
-                      className="bg-gray-800 rounded-lg p-6 text-center"
+                      className="bg-gray-800 rounded-lg p-6"
                     >
-                      <Button
-                        asChild
-                        className="bg-blue-600 hover:bg-blue-700 text-white mb-4 text-lg py-6 transition-all duration-300 hover:scale-105"
-                      >
-                        <Link href="https://www.3ddesign24.de/produkt/3d-druck-service/">
-                          Hier gehts zum 3D-Druck-Shop
-                        </Link>
-                      </Button>
-                      <p className="text-gray-300">
-                        Falls du einen eigenen 3D-Drucker besitzt oder dir die Teile bei einem anderen Anbieter ausdrucken lassen möchtest, kannst du diesen Schritt überspringen.
-                      </p>
+                      <h2 className="text-xl font-semibold mb-4 text-white">Abschnitte</h2>
+                      <div className="space-y-3">
+                        {steps[3].video?.timestamps.map((timestamp, index) => (
+                          <motion.div
+                            key={index}
+                            initial={{ opacity: 0, x: -20 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ duration: 0.3, delay: index * 0.1 }}
+                            className="flex items-center space-x-2 bg-gray-700 p-3 rounded-lg hover:bg-gray-600 transition-all duration-300 hover:scale-[1.02] cursor-pointer"
+                            onClick={() => {
+                              const player = document.getElementById('youtube-player') as HTMLIFrameElement;
+                              const [minutes, seconds] = timestamp.time.split(':').map(Number);
+                              const timeInSeconds = minutes * 60 + seconds;
+                              player.src = `${steps[3].video?.url}?start=${timeInSeconds}`;
+                            }}
+                          >
+                            <span className="text-blue-400 font-medium">{timestamp.time}</span>
+                            <span className="text-white flex-1">{timestamp.title}</span>
+                          </motion.div>
+                        ))}
+                      </div>
                     </motion.div>
                   </div>
                 ) : currentStep === 4 ? (
@@ -518,12 +522,12 @@ export default function InstructionStepsPage() {
                         <Label
                           className="text-lg font-medium text-white"
                         >
-                          Alle Komponenten überprüfen
+                          Ich habe bereits alle Komponenten
                         </Label>
                       </div>
 
                       <div className="space-y-8">
-                        {steps[3].components.map((component, index) => {
+                        {steps[4].components.map((component, index) => {
                           if ('category' in component) {
                             return (
                               <motion.div 
