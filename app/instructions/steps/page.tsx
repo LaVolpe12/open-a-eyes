@@ -129,7 +129,7 @@ export default function InstructionStepsPage() {
       image: "/placeholder.svg"
     },
     {
-      title: "2. Download der benötigten Dateien",
+      title: "Download der benötigten Dateien",
       components: [],
       instructions: [
         "Lade folgende Dateien herunter:",
@@ -139,7 +139,7 @@ export default function InstructionStepsPage() {
       image: "/placeholder.svg"
     },
     {
-      title: "3. 3D-Druckteile bestellen",
+      title: "3D-Druckteile bestellen",
       components: [
         {
           name: "3D-Druckteile",
@@ -471,94 +471,49 @@ export default function InstructionStepsPage() {
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.5 }}
+                      className="flex justify-center items-center bg-gray-800 rounded-lg p-4"
+                    >
+                      <div className="aspect-video w-full max-w-3xl">
+                        <iframe
+                          width="100%"
+                          height="100%"
+                          src={currentStepData.video?.url}
+                          title="OpenAI API-Key erstellen"
+                          frameBorder="0"
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                          allowFullScreen
+                          className="rounded-lg shadow-lg"
+                        ></iframe>
+                      </div>
+                    </motion.div>
+
+                    <motion.div 
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.5, delay: 0.2 }}
                       className="bg-gray-800 rounded-lg p-6"
                     >
-                      <div className="flex items-center space-x-2 mb-6">
-                        <Checkbox
-                          checked={allChecked}
-                          onCheckedChange={handleCheckAll}
-                          className="h-6 w-6 border-2 border-blue-500 data-[state=checked]:bg-blue-500 transition-all duration-300"
-                        />
-                        <Label
-                          className="text-lg font-medium text-white"
-                        >
-                          Alle Komponenten überprüfen
-                        </Label>
-                      </div>
-
-                      <div className="space-y-8">
-                        {steps[3].components.map((component, index) => {
-                          if ('category' in component) {
-                            return (
-                              <motion.div 
-                                key={index}
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ duration: 0.5, delay: index * 0.1 }}
-                                className="space-y-2"
-                              >
-                                <h3 className="text-lg font-semibold text-white flex items-center gap-2">
-                                  {component.category === "Elektronik und Montageteile" && (
-                                    <motion.div
-                                      initial={{ scale: 0 }}
-                                      animate={{ scale: 1 }}
-                                      transition={{ type: "spring", stiffness: 500, damping: 30 }}
-                                    >
-                                      <CircuitBoard className="h-5 w-5 text-blue-400" />
-                                    </motion.div>
-                                  )}
-                                  {component.category === "3D-Druckteile" && (
-                                    <motion.div
-                                      initial={{ scale: 0 }}
-                                      animate={{ scale: 1 }}
-                                      transition={{ type: "spring", stiffness: 500, damping: 30 }}
-                                    >
-                                      <Box className="h-5 w-5 text-blue-400" />
-                                    </motion.div>
-                                  )}
-                                  {component.category === "Sonstiges" && (
-                                    <motion.div
-                                      initial={{ scale: 0 }}
-                                      animate={{ scale: 1 }}
-                                      transition={{ type: "spring", stiffness: 500, damping: 30 }}
-                                    >
-                                      <Settings className="h-5 w-5 text-blue-400" />
-                                    </motion.div>
-                                  )}
-                                  {component.category}
-                                </h3>
-                                <div className="space-y-2 pl-4">
-                                  {component.items.map((item, itemIndex) => (
-                                    <motion.div 
-                                      key={itemIndex}
-                                      initial={{ opacity: 0, x: -20 }}
-                                      animate={{ opacity: 1, x: 0 }}
-                                      transition={{ duration: 0.3, delay: itemIndex * 0.05 }}
-                                      className="flex items-center space-x-2 bg-gray-700 p-3 rounded-lg hover:bg-gray-600 transition-all duration-300 hover:scale-[1.02]"
-                                    >
-                                      <Checkbox
-                                        checked={checkedItems[item.name] || false}
-                                        onCheckedChange={(checked) => handleItemCheck(item.name, checked as boolean)}
-                                        className="h-5 w-5 border-2 border-blue-500 data-[state=checked]:bg-blue-500 transition-all duration-300"
-                                      />
-                                      <label className="text-white flex-1">{item.name}</label>
-                                      {checkedItems[item.name] && (
-                                        <motion.div
-                                          initial={{ scale: 0 }}
-                                          animate={{ scale: 1 }}
-                                          transition={{ type: "spring", stiffness: 500, damping: 30 }}
-                                        >
-                                          <CheckCircle2 className="h-5 w-5 text-green-500" />
-                                        </motion.div>
-                                      )}
-                                    </motion.div>
-                                  ))}
-                                </div>
-                              </motion.div>
-                            )
-                          }
-                          return null
-                        })}
+                      <h2 className="text-xl font-semibold mb-4 text-white">Abschnitte und Link</h2>
+                      <div className="space-y-4">
+                        {currentStepData.video?.timestamps.map((timestamp, index) => (
+                          <div key={index} className="flex items-center space-x-4">
+                            <span className="text-blue-400 font-medium">{timestamp.time}</span>
+                            <span className="text-gray-300">{timestamp.title}</span>
+                          </div>
+                        ))}
+                        {currentStepData.video?.link && (
+                          <div className="mt-6">
+                            <Button
+                              asChild
+                              className="bg-blue-600 hover:bg-blue-700 text-white"
+                            >
+                              <Link href={currentStepData.video.link.url} target="_blank" rel="noopener noreferrer">
+                                {currentStepData.video.link.title}
+                                <ExternalLink className="ml-2 h-4 w-4" />
+                              </Link>
+                            </Button>
+                          </div>
+                        )}
                       </div>
                     </motion.div>
                   </div>
