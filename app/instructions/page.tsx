@@ -2,41 +2,53 @@
 
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { ArrowLeft, ArrowRight } from "lucide-react"
+import { ArrowLeft, ArrowRight, ShoppingCart, Download, Printer, CheckCircle2, Settings, Cpu, Wrench } from "lucide-react"
 import { Card, CardContent } from "@/components/ui/card"
-import { motion } from "framer-motion"
+import { motion, AnimatePresence } from "framer-motion"
 
 const steps = [
   {
     title: "Elektronik und Bauteile bestellen",
-    description: "Bestelle alle benötigten elektronischen und mechanischen Komponenten für deine KI-Brille."
+    description: "Bestelle alle benötigten elektronischen und mechanischen Komponenten für deine KI-Brille.",
+    icon: ShoppingCart,
+    color: "from-blue-500 to-blue-600"
   },
   {
     title: "Download der benötigten Dateien",
-    description: "Lade die STL-Dateien für den 3D-Druck und das Betriebssystem-Image herunter."
+    description: "Lade die STL-Dateien für den 3D-Druck und das Betriebssystem-Image herunter.",
+    icon: Download,
+    color: "from-purple-500 to-purple-600"
   },
   {
     title: "3D-Druckteile bestellen",
-    description: "Bestelle die 3D-gedruckten Teile oder drucke sie selbst aus."
+    description: "Bestelle die 3D-gedruckten Teile oder drucke sie selbst aus.",
+    icon: Printer,
+    color: "from-green-500 to-green-600"
   },
   {
     title: "Überprüfe, ob alle Komponenten vorhanden sind",
-    description: "Stelle sicher, dass du alle benötigten Teile für den Zusammenbau hast."
+    description: "Stelle sicher, dass du alle benötigten Teile für den Zusammenbau hast.",
+    icon: CheckCircle2,
+    color: "from-yellow-500 to-yellow-600"
   },
   {
     title: "SD-Karte vorbereiten",
-    description: "Richte die SD-Karte mit dem Betriebssystem ein und konfiguriere die API-Keys."
+    description: "Richte die SD-Karte mit dem Betriebssystem ein und konfiguriere die API-Keys.",
+    icon: Settings,
+    color: "from-red-500 to-red-600"
   },
   {
     title: "Zusammenbau",
-    description: "Baue deine KI-Brille Schritt für Schritt zusammen."
+    description: "Baue deine KI-Brille Schritt für Schritt zusammen.",
+    icon: Wrench,
+    color: "from-indigo-500 to-indigo-600"
   }
 ]
 
 export default function InstructionsPage() {
   return (
     <main className="flex min-h-screen flex-col p-6 bg-gradient-to-b from-gray-800 to-gray-900">
-      <div className="max-w-4xl mx-auto w-full">
+      <div className="max-w-6xl mx-auto w-full">
         <div className="flex justify-between items-center mb-8">
           <Link href="/">
             <Button
@@ -62,38 +74,51 @@ export default function InstructionsPage() {
               Willkommen bei der Open-A-Eyes Anleitung! Hier findest du eine detaillierte Schritt-für-Schritt-Anleitung zum Zusammenbau deiner KI-Brille.
             </p>
 
-            <div className="flex justify-center">
+            <div className="flex justify-center mb-8">
               <Link href="/instructions/steps">
                 <Button
-                  className="bg-blue-600 hover:bg-blue-700 rounded-xl transition-all duration-300 hover:scale-105"
+                  className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white text-lg py-6 px-8 rounded-xl transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl"
                   size="lg"
                 >
+                  <Cpu className="mr-2 h-6 w-6" />
                   Anleitung starten
                 </Button>
               </Link>
             </div>
           </div>
 
-          <div className="space-y-4">
-            <h2 className="text-xl font-semibold text-white mb-4">Schritte der Anleitung</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="relative">
+            {/* Background Grid */}
+            <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-10" />
+            
+            {/* Interactive Map */}
+            <div className="relative grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {steps.map((step, index) => (
                 <motion.div
                   key={index}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                 >
                   <Link href={`/instructions/steps?step=${index + 1}`}>
-                    <Card className="bg-gray-800 border-gray-700 hover:border-blue-500 transition-all duration-300 hover:scale-[1.02] cursor-pointer">
-                      <CardContent className="p-4">
-                        <div className="flex items-center gap-4">
-                          <div className="flex-shrink-0 w-10 h-10 rounded-full bg-blue-600 flex items-center justify-center">
-                            <span className="text-white font-bold">{index + 1}</span>
-                          </div>
+                    <Card className="bg-gray-800 border-gray-700 hover:border-blue-500 transition-all duration-300 hover:scale-[1.02] cursor-pointer group">
+                      <CardContent className="p-6">
+                        <div className="flex items-start gap-4">
+                          <motion.div
+                            className={`flex-shrink-0 w-12 h-12 rounded-xl bg-gradient-to-br ${step.color} flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}
+                            whileHover={{ rotate: 10 }}
+                          >
+                            <step.icon className="h-6 w-6 text-white" />
+                          </motion.div>
                           <div>
-                            <h3 className="text-lg font-semibold text-white">{step.title}</h3>
-                            <p className="text-sm text-gray-400">{step.description}</p>
+                            <div className="flex items-center gap-2 mb-2">
+                              <span className="text-sm font-medium text-gray-400">Schritt {index + 1}</span>
+                              <div className="h-px flex-1 bg-gray-700" />
+                            </div>
+                            <h3 className="text-lg font-semibold text-white group-hover:text-blue-400 transition-colors duration-300">
+                              {step.title}
+                            </h3>
+                            <p className="text-sm text-gray-400 mt-2">{step.description}</p>
                           </div>
                         </div>
                       </CardContent>
@@ -101,6 +126,30 @@ export default function InstructionsPage() {
                   </Link>
                 </motion.div>
               ))}
+            </div>
+
+            {/* Connection Lines */}
+            <div className="absolute inset-0 pointer-events-none hidden lg:block">
+              {steps.map((_, index) => {
+                if (index < steps.length - 1) {
+                  return (
+                    <motion.div
+                      key={index}
+                      className="absolute h-0.5 bg-gradient-to-r from-blue-500 to-blue-600"
+                      style={{
+                        top: '50%',
+                        left: `${(index + 1) * (100 / steps.length)}%`,
+                        width: `${100 / steps.length}%`,
+                        transform: 'translateY(-50%)',
+                      }}
+                      initial={{ scaleX: 0 }}
+                      animate={{ scaleX: 1 }}
+                      transition={{ duration: 0.5, delay: index * 0.1 }}
+                    />
+                  )
+                }
+                return null
+              })}
             </div>
           </div>
         </motion.div>
