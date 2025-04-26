@@ -303,106 +303,102 @@ export default function InstructionStepsPage() {
                       </div>
                     </div>
                   </div>
-                ) : (
+                ) : currentStep === 3 ? (
                   <div className="space-y-6">
-                    {currentStep === 3 ? (
-                      <div className="space-y-6">
-                        <div className="flex justify-center items-center bg-gray-800 rounded-lg p-4">
-                          <div className="aspect-video w-full max-w-3xl">
-                            <iframe
-                              width="100%"
-                              height="100%"
-                              src="https://www.youtube.com/embed/lmDetSYANEU"
-                              title="3D-Druck Anleitung"
-                              frameBorder="0"
-                              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                              allowFullScreen
-                              className="rounded-lg"
-                            ></iframe>
-                          </div>
-                        </div>
+                    <div className="flex justify-center items-center bg-gray-800 rounded-lg p-4">
+                      <div className="aspect-video w-full max-w-3xl">
+                        <iframe
+                          width="100%"
+                          height="100%"
+                          src="https://www.youtube.com/embed/lmDetSYANEU"
+                          title="3D-Druck Anleitung"
+                          frameBorder="0"
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                          allowFullScreen
+                          className="rounded-lg"
+                        ></iframe>
+                      </div>
+                    </div>
 
-                        <div className="bg-gray-800 rounded-lg p-6 text-center">
-                          <Button
-                            asChild
-                            className="bg-blue-600 hover:bg-blue-700 text-white mb-4"
-                          >
-                            <Link href="https://www.3ddesign24.de/produkt/3d-druck-service/">
-                              Hier gehts zum 3D-Druck-Shop
-                            </Link>
-                          </Button>
-                          <p className="text-gray-300">
-                            Falls du einen eigenen 3D-Drucker besitzt oder dir die Teile bei einem anderen Anbieter ausdrucken lassen möchtest, kannst du diesen Schritt überspringen.
-                          </p>
-                        </div>
-                      </div>
-                    ) : currentStep === 4 ? (
-                      <div className="flex justify-center items-center bg-gray-800 rounded-lg p-4">
-                        <div className="aspect-video w-full max-w-3xl">
-                          <iframe
-                            width="100%"
-                            height="100%"
-                            src="https://www.youtube.com/embed/AB-y0bRjPt8"
-                            title="Open-A-Eyes Zusammenbau Anleitung"
-                            frameBorder="0"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowFullScreen
-                            className="rounded-lg"
-                          ></iframe>
-                        </div>
-                      </div>
-                    ) : (
-                      <div className="flex justify-center items-center bg-gray-800 rounded-lg p-4">
-                        <Image
-                          src={currentStepData.image || "/placeholder.svg"}
-                          alt={`Schritt ${currentStep}`}
-                          width={400}
-                          height={400}
-                          className="rounded-lg shadow-md"
-                        />
-                      </div>
-                    )}
+                    <div className="bg-gray-800 rounded-lg p-6 text-center">
+                      <Button
+                        asChild
+                        className="bg-blue-600 hover:bg-blue-700 text-white mb-4 text-lg py-6"
+                      >
+                        <Link href="https://www.3ddesign24.de/produkt/3d-druck-service/">
+                          Hier gehts zum 3D-Druck-Shop
+                        </Link>
+                      </Button>
+                      <p className="text-gray-300">
+                        Falls du einen eigenen 3D-Drucker besitzt oder dir die Teile bei einem anderen Anbieter ausdrucken lassen möchtest, kannst du diesen Schritt überspringen.
+                      </p>
+                    </div>
+                  </div>
+                ) : currentStep === 4 ? (
+                  <div className="flex justify-center items-center bg-gray-800 rounded-lg p-4">
+                    <div className="aspect-video w-full max-w-3xl">
+                      <iframe
+                        width="100%"
+                        height="100%"
+                        src="https://www.youtube.com/embed/AB-y0bRjPt8"
+                        title="Open-A-Eyes Zusammenbau Anleitung"
+                        frameBorder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                        className="rounded-lg"
+                      ></iframe>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="flex justify-center items-center bg-gray-800 rounded-lg p-4">
+                    <Image
+                      src={currentStepData.image || "/placeholder.svg"}
+                      alt={`Schritt ${currentStep}`}
+                      width={400}
+                      height={400}
+                      className="rounded-lg shadow-md"
+                    />
+                  </div>
+                )}
 
-                    {currentStep !== 2 && (
-                      <div className="grid md:grid-cols-2 gap-6">
-                        <Card className="bg-gray-800 border-gray-600">
-                          <CardContent className="pt-6">
-                            <h2 className="text-xl font-semibold mb-4 text-white">Das brauchst du</h2>
-                            <div className="space-y-3">
-                              {(currentStepData.components as string[]).map((component, index) => (
-                                <div key={index} className="flex items-start space-x-2">
-                                  <Checkbox
-                                    id={`component-${index}`}
-                                    checked={checkedComponents[component] || false}
-                                    onCheckedChange={() => toggleComponent(component)}
-                                    className="border-gray-500 data-[state=checked]:bg-blue-600 data-[state=checked]:text-white"
-                                  />
-                                  <Label
-                                    htmlFor={`component-${index}`}
-                                    className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 cursor-pointer text-gray-300"
-                                  >
-                                    {component}
-                                  </Label>
-                                </div>
-                              ))}
+                {currentStep !== 2 && (
+                  <div className="grid md:grid-cols-2 gap-6">
+                    <Card className="bg-gray-800 border-gray-600">
+                      <CardContent className="pt-6">
+                        <h2 className="text-xl font-semibold mb-4 text-white">Das brauchst du</h2>
+                        <div className="space-y-3">
+                          {(currentStepData.components as string[]).map((component, index) => (
+                            <div key={index} className="flex items-start space-x-2">
+                              <Checkbox
+                                id={`component-${index}`}
+                                checked={checkedComponents[component] || false}
+                                onCheckedChange={() => toggleComponent(component)}
+                                className="border-gray-500 data-[state=checked]:bg-blue-600 data-[state=checked]:text-white"
+                              />
+                              <Label
+                                htmlFor={`component-${index}`}
+                                className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 cursor-pointer text-gray-300"
+                              >
+                                {component}
+                              </Label>
                             </div>
-                          </CardContent>
-                        </Card>
+                          ))}
+                        </div>
+                      </CardContent>
+                    </Card>
 
-                        <Card className="bg-gray-800 border-gray-600">
-                          <CardContent className="pt-6">
-                            <h2 className="text-xl font-semibold mb-4 text-white">Anleitung</h2>
-                            <ol className="list-decimal pl-5 space-y-3">
-                              {currentStepData.instructions.map((instruction, index) => (
-                                <li key={index} className="text-gray-300">
-                                  {instruction}
-                                </li>
-                              ))}
-                            </ol>
-                          </CardContent>
-                        </Card>
-                      </div>
-                    )}
+                    <Card className="bg-gray-800 border-gray-600">
+                      <CardContent className="pt-6">
+                        <h2 className="text-xl font-semibold mb-4 text-white">Anleitung</h2>
+                        <ol className="list-decimal pl-5 space-y-3">
+                          {currentStepData.instructions.map((instruction, index) => (
+                            <li key={index} className="text-gray-300">
+                              {instruction}
+                            </li>
+                          ))}
+                        </ol>
+                      </CardContent>
+                    </Card>
                   </div>
                 )}
               </div>
