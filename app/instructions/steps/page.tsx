@@ -381,6 +381,27 @@ function InstructionStepsContent() {
     return `${minutes}:${seconds}`
   }
 
+  const ImageCell = ({ src, alt }: { src: string; alt: string }) => (
+    <TableCell className="w-[100px]">
+      <div 
+        className="relative w-20 h-20 rounded-lg overflow-hidden cursor-pointer transition-transform hover:scale-105"
+        onClick={() => setSelectedImage(src)}
+      >
+        <Image
+          src={src}
+          alt={alt}
+          width={80}
+          height={80}
+          className="object-cover"
+          priority={false}
+          loading="lazy"
+          sizes="80px"
+          quality={75}
+        />
+      </div>
+    </TableCell>
+  )
+
   return (
     <main className="flex min-h-screen flex-col p-6 bg-gradient-to-b from-gray-800 to-gray-900">
       <div className="max-w-6xl mx-auto w-full">
@@ -465,24 +486,7 @@ function InstructionStepsContent() {
                         <TableBody>
                           {(currentStepData.components as Component[]).map((component, index) => (
                             <TableRow key={index} className="border-b border-gray-600">
-                              <TableCell className="w-[100px]">
-                                <div 
-                                  className="relative w-20 h-20 rounded-lg overflow-hidden cursor-pointer transition-transform hover:scale-105"
-                                  onClick={() => setSelectedImage(component.image)}
-                                >
-                                  <Image
-                                    src={component.image}
-                                    alt={component.name}
-                                    width={80}
-                                    height={80}
-                                    className="object-cover"
-                                    priority={false}
-                                    loading="lazy"
-                                    sizes="80px"
-                                    quality={75}
-                                  />
-                                </div>
-                              </TableCell>
+                              <ImageCell src={component.image} alt={component.name} />
                               <TableCell className="font-medium text-white">{component.name}</TableCell>
                               <TableCell className="text-gray-300">{component.description}</TableCell>
                               <TableCell className="text-gray-300">{component.price}</TableCell>
