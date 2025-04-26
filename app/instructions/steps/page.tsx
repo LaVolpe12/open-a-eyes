@@ -298,102 +298,106 @@ export default function InstructionStepsPage() {
                     </div>
                   </div>
                 ) : (
-                  <div className="flex justify-center items-center bg-gray-800 rounded-lg p-4">
-                    {currentStep === 3 ? (
-                      <div className="aspect-video w-full max-w-3xl">
-                        <iframe
-                          width="100%"
-                          height="100%"
-                          src="https://www.youtube.com/embed/AB-y0bRjPt8"
-                          title="Open-A-Eyes Zusammenbau Anleitung"
-                          frameBorder="0"
-                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                          allowFullScreen
-                          className="rounded-lg"
-                        ></iframe>
+                  <div className="space-y-6">
+                    <div className="flex justify-center items-center bg-gray-800 rounded-lg p-4">
+                      {currentStep === 3 ? (
+                        <div className="aspect-video w-full max-w-3xl">
+                          <iframe
+                            width="100%"
+                            height="100%"
+                            src="https://www.youtube.com/embed/AB-y0bRjPt8"
+                            title="Open-A-Eyes Zusammenbau Anleitung"
+                            frameBorder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowFullScreen
+                            className="rounded-lg"
+                          ></iframe>
+                        </div>
+                      ) : (
+                        <Image
+                          src={currentStepData.image || "/placeholder.svg"}
+                          alt={`Schritt ${currentStep}`}
+                          width={400}
+                          height={400}
+                          className="rounded-lg shadow-md"
+                        />
+                      )}
+                    </div>
+
+                    {currentStep !== 2 && (
+                      <div className="grid md:grid-cols-2 gap-6">
+                        <Card className="bg-gray-800 border-gray-600">
+                          <CardContent className="pt-6">
+                            <h2 className="text-xl font-semibold mb-4 text-white">Das brauchst du</h2>
+                            <div className="space-y-3">
+                              {(currentStepData.components as string[]).map((component, index) => (
+                                <div key={index} className="flex items-start space-x-2">
+                                  <Checkbox
+                                    id={`component-${index}`}
+                                    checked={checkedComponents[component] || false}
+                                    onCheckedChange={() => toggleComponent(component)}
+                                    className="border-gray-500 data-[state=checked]:bg-blue-600 data-[state=checked]:text-white"
+                                  />
+                                  <Label
+                                    htmlFor={`component-${index}`}
+                                    className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 cursor-pointer text-gray-300"
+                                  >
+                                    {component}
+                                  </Label>
+                                </div>
+                              ))}
+                            </div>
+                          </CardContent>
+                        </Card>
+
+                        <Card className="bg-gray-800 border-gray-600">
+                          <CardContent className="pt-6">
+                            <h2 className="text-xl font-semibold mb-4 text-white">Anleitung</h2>
+                            <ol className="list-decimal pl-5 space-y-3">
+                              {currentStepData.instructions.map((instruction, index) => (
+                                <li key={index} className="text-gray-300">
+                                  {instruction}
+                                </li>
+                              ))}
+                            </ol>
+                          </CardContent>
+                        </Card>
                       </div>
-                    ) : (
-                      <Image
-                        src={currentStepData.image || "/placeholder.svg"}
-                        alt={`Schritt ${currentStep}`}
-                        width={400}
-                        height={400}
-                        className="rounded-lg shadow-md"
-                      />
                     )}
                   </div>
                 )}
 
-                <div className="grid md:grid-cols-2 gap-6">
-                  <Card className="bg-gray-800 border-gray-600">
-                    <CardContent className="pt-6">
-                      <h2 className="text-xl font-semibold mb-4 text-white">Das brauchst du</h2>
-                      <div className="space-y-3">
-                        {(currentStepData.components as string[]).map((component, index) => (
-                          <div key={index} className="flex items-start space-x-2">
-                            <Checkbox
-                              id={`component-${index}`}
-                              checked={checkedComponents[component] || false}
-                              onCheckedChange={() => toggleComponent(component)}
-                              className="border-gray-500 data-[state=checked]:bg-blue-600 data-[state=checked]:text-white"
-                            />
-                            <Label
-                              htmlFor={`component-${index}`}
-                              className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 cursor-pointer text-gray-300"
-                            >
-                              {component}
-                            </Label>
-                          </div>
-                        ))}
-                      </div>
-                    </CardContent>
-                  </Card>
+                <div className="flex justify-between pt-4">
+                  <Button
+                    onClick={goToPreviousStep}
+                    disabled={currentStep === 1}
+                    variant="outline"
+                    className="border-gray-600 bg-gray-700 text-gray-200 hover:bg-gray-600 rounded-xl"
+                  >
+                    <ArrowLeft className="mr-2 h-4 w-4" />
+                    Zurück
+                  </Button>
 
-                  <Card className="bg-gray-800 border-gray-600">
-                    <CardContent className="pt-6">
-                      <h2 className="text-xl font-semibold mb-4 text-white">Anleitung</h2>
-                      <ol className="list-decimal pl-5 space-y-3">
-                        {currentStepData.instructions.map((instruction, index) => (
-                          <li key={index} className="text-gray-300">
-                            {instruction}
-                          </li>
-                        ))}
-                      </ol>
-                    </CardContent>
-                  </Card>
+                  {currentStep < totalSteps ? (
+                    <Button
+                      onClick={goToNextStep}
+                      className="bg-blue-600 hover:bg-blue-700 rounded-xl"
+                    >
+                      Weiter zu Schritt {currentStep + 1}
+                      <ArrowRight className="ml-2 h-4 w-4" />
+                    </Button>
+                  ) : (
+                    <Button
+                      onClick={goToNextStep}
+                      className="bg-green-600 hover:bg-green-700 rounded-xl"
+                    >
+                      <CheckCircle2 className="mr-2 h-4 w-4" />
+                      Anleitung abschließen
+                    </Button>
+                  )}
                 </div>
               </div>
             )}
-
-            <div className="flex justify-between pt-4">
-              <Button
-                onClick={goToPreviousStep}
-                disabled={currentStep === 1}
-                variant="outline"
-                className="border-gray-600 bg-gray-700 text-gray-200 hover:bg-gray-600 rounded-xl"
-              >
-                <ArrowLeft className="mr-2 h-4 w-4" />
-                Zurück
-              </Button>
-
-              {currentStep < totalSteps ? (
-                <Button
-                  onClick={goToNextStep}
-                  className="bg-blue-600 hover:bg-blue-700 rounded-xl"
-                >
-                  Weiter zu Schritt {currentStep + 1}
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </Button>
-              ) : (
-                <Button
-                  onClick={goToNextStep}
-                  className="bg-green-600 hover:bg-green-700 rounded-xl"
-                >
-                  <CheckCircle2 className="mr-2 h-4 w-4" />
-                  Anleitung abschließen
-                </Button>
-              )}
-            </div>
           </div>
         </div>
       </div>
