@@ -11,6 +11,7 @@ import { useRouter } from "next/navigation"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Label } from "@/components/ui/label"
 import { Table, TableHeader, TableBody, TableCell, TableRow, TableHead } from "@/components/ui/table"
+import { motion, AnimatePresence } from "framer-motion"
 
 interface Component {
   name: string
@@ -358,19 +359,29 @@ export default function InstructionStepsPage() {
   return (
     <main className="flex min-h-screen flex-col p-6 bg-gradient-to-b from-gray-800 to-gray-900">
       <div className="max-w-6xl mx-auto w-full">
-        <div className="flex justify-between items-center mb-8">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="flex justify-between items-center mb-8"
+        >
           <Link href="/instructions">
             <Button
               variant="ghost"
-              className="flex items-center gap-2 text-gray-200 bg-gray-700 hover:bg-gray-600 rounded-xl"
+              className="flex items-center gap-2 text-gray-200 bg-gray-700 hover:bg-gray-600 rounded-xl transition-all duration-300 hover:scale-105"
             >
               <ArrowLeft className="h-4 w-4" />
               Zurück zur Übersicht
             </Button>
           </Link>
-        </div>
+        </motion.div>
 
-        <div className="mb-8">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+          className="mb-8"
+        >
           <div className="flex justify-between items-center mb-2">
             <p className="text-gray-300">Fortschritt der Anleitung</p>
             <span className="text-sm font-medium text-gray-300">
@@ -378,9 +389,14 @@ export default function InstructionStepsPage() {
             </span>
           </div>
           <Progress value={progress} className="h-2 bg-gray-600 [&>div]:bg-blue-600" />
-        </div>
+        </motion.div>
 
-        <div className="bg-gray-700 rounded-lg shadow-lg overflow-hidden">
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="bg-gray-700 rounded-lg shadow-lg overflow-hidden"
+        >
           <div className="p-4 bg-blue-600 text-white">
             <h1 className="text-2xl font-bold">
               Schritt {currentStep}: {currentStepData.title}
@@ -388,97 +404,110 @@ export default function InstructionStepsPage() {
           </div>
 
           <div className="p-6">
-            {currentStep === 1 ? (
-              <div className="space-y-6">
-                <div className="bg-gray-800 rounded-lg p-6">
-                  <p className="text-gray-300 mb-4">
-                    Zuerst musst du dir die nötigen elektronischen sowie mechanischen Komponenten bestellen. 
-                    In der nachfolgenden Einkaufsliste findest du alle benötigten Teile mit Links zu den jeweiligen Händlern.
-                  </p>
-                  <p className="text-gray-300">
-                    Falls du die Bauteile bereits besorgt hast, kannst du diesen Schritt überspringen. 
-                    Eine alternative Übersicht findest du auch auf der Startseite unter "Komponenten und Downloads".
-                  </p>
-                </div>
-
-                <div className="overflow-x-auto">
-                  <h2 className="text-xl font-semibold mb-4 text-white">Einkaufsliste</h2>
-                  <Table className="border-collapse w-full">
-                    <TableHeader>
-                      <TableRow className="border-b border-gray-600">
-                        <TableHead className="w-[100px] text-gray-200">Bild</TableHead>
-                        <TableHead className="w-[200px] text-gray-200">Komponente</TableHead>
-                        <TableHead className="w-[300px] text-gray-200">Beschreibung</TableHead>
-                        <TableHead className="text-gray-200">Preis (ca.)</TableHead>
-                        <TableHead className="text-right text-gray-200">Link</TableHead>
-                      </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                      {(currentStepData.components as Component[]).map((component, index) => (
-                        <TableRow key={index} className="border-b border-gray-600">
-                          <TableCell className="w-[100px]">
-                            <div className="relative w-20 h-20 rounded-lg overflow-hidden">
-                              <Image
-                                src={component.image}
-                                alt={component.name}
-                                width={80}
-                                height={80}
-                                className="object-cover"
-                              />
-                            </div>
-                          </TableCell>
-                          <TableCell className="font-medium text-white">{component.name}</TableCell>
-                          <TableCell className="text-gray-300">{component.description}</TableCell>
-                          <TableCell className="text-gray-300">{component.price}</TableCell>
-                          <TableCell className="text-right">
-                            <a
-                              href={component.link}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="inline-flex items-center text-blue-400 hover:text-blue-300"
-                            >
-                              <ShoppingCart className="h-4 w-4 mr-1" />
-                              <span className="hidden sm:inline">Kaufen</span>
-                              <ExternalLink className="h-3 w-3 ml-1" />
-                            </a>
-                          </TableCell>
-                        </TableRow>
-                      ))}
-                    </TableBody>
-                  </Table>
-                </div>
-              </div>
-            ) : (
-              <div className="space-y-6">
-                {currentStep === 2 ? (
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={currentStep}
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -20 }}
+                transition={{ duration: 0.3 }}
+              >
+                {currentStep === 1 ? (
                   <div className="space-y-6">
                     <div className="bg-gray-800 rounded-lg p-6">
-                      <h2 className="text-xl font-semibold mb-4 text-white">Lade folgende Dateien herunter</h2>
-                      <div className="flex flex-col gap-4">
-                        <Button
-                          asChild
-                          className="bg-blue-600 hover:bg-blue-700 text-white"
-                        >
-                          <Link href="https://drive.google.com/file/d/1KpDreYGmDURJrR_RDKt6IjK-QTh45qdg/view?usp=sharing">
-                            <Download className="mr-2 h-4 w-4" />
-                            STL-Dateien herunterladen
-                          </Link>
-                        </Button>
-                        <Button
-                          asChild
-                          className="bg-blue-600 hover:bg-blue-700 text-white"
-                        >
-                          <Link href="https://drive.google.com/file/d/1z3g_nLzVUI8tefPy9BgpnXQ7TdAwLYP4/view?usp=sharing">
-                            <Download className="mr-2 h-4 w-4" />
-                            Betriebssystem-Image herunterladen
-                          </Link>
-                        </Button>
+                      <p className="text-gray-300 mb-4">
+                        Zuerst musst du dir die nötigen elektronischen sowie mechanischen Komponenten bestellen. 
+                        In der nachfolgenden Einkaufsliste findest du alle benötigten Teile mit Links zu den jeweiligen Händlern.
+                      </p>
+                      <p className="text-gray-300">
+                        Falls du die Bauteile bereits besorgt hast, kannst du diesen Schritt überspringen. 
+                        Eine alternative Übersicht findest du auch auf der Startseite unter "Komponenten und Downloads".
+                      </p>
+                    </div>
+
+                    <div className="overflow-x-auto">
+                      <h2 className="text-xl font-semibold mb-4 text-white">Einkaufsliste</h2>
+                      <Table className="border-collapse w-full">
+                        <TableHeader>
+                          <TableRow className="border-b border-gray-600">
+                            <TableHead className="w-[100px] text-gray-200">Bild</TableHead>
+                            <TableHead className="w-[200px] text-gray-200">Komponente</TableHead>
+                            <TableHead className="w-[300px] text-gray-200">Beschreibung</TableHead>
+                            <TableHead className="text-gray-200">Preis (ca.)</TableHead>
+                            <TableHead className="text-right text-gray-200">Link</TableHead>
+                          </TableRow>
+                        </TableHeader>
+                        <TableBody>
+                          {(currentStepData.components as Component[]).map((component, index) => (
+                            <TableRow key={index} className="border-b border-gray-600">
+                              <TableCell className="w-[100px]">
+                                <div className="relative w-20 h-20 rounded-lg overflow-hidden">
+                                  <Image
+                                    src={component.image}
+                                    alt={component.name}
+                                    width={80}
+                                    height={80}
+                                    className="object-cover"
+                                  />
+                                </div>
+                              </TableCell>
+                              <TableCell className="font-medium text-white">{component.name}</TableCell>
+                              <TableCell className="text-gray-300">{component.description}</TableCell>
+                              <TableCell className="text-gray-300">{component.price}</TableCell>
+                              <TableCell className="text-right">
+                                <a
+                                  href={component.link}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="inline-flex items-center text-blue-400 hover:text-blue-300"
+                                >
+                                  <ShoppingCart className="h-4 w-4 mr-1" />
+                                  <span className="hidden sm:inline">Kaufen</span>
+                                  <ExternalLink className="h-3 w-3 ml-1" />
+                                </a>
+                              </TableCell>
+                            </TableRow>
+                          ))}
+                        </TableBody>
+                      </Table>
+                    </div>
+                  </div>
+                ) : currentStep === 2 ? (
+                  <div className="space-y-6">
+                    <div className="space-y-6">
+                      <div className="bg-gray-800 rounded-lg p-6">
+                        <h2 className="text-xl font-semibold mb-4 text-white">Lade folgende Dateien herunter</h2>
+                        <div className="flex flex-col gap-4">
+                          <Button
+                            asChild
+                            className="bg-blue-600 hover:bg-blue-700 text-white"
+                          >
+                            <Link href="https://drive.google.com/file/d/1KpDreYGmDURJrR_RDKt6IjK-QTh45qdg/view?usp=sharing">
+                              <Download className="mr-2 h-4 w-4" />
+                              STL-Dateien herunterladen
+                            </Link>
+                          </Button>
+                          <Button
+                            asChild
+                            className="bg-blue-600 hover:bg-blue-700 text-white"
+                          >
+                            <Link href="https://drive.google.com/file/d/1z3g_nLzVUI8tefPy9BgpnXQ7TdAwLYP4/view?usp=sharing">
+                              <Download className="mr-2 h-4 w-4" />
+                              Betriebssystem-Image herunterladen
+                            </Link>
+                          </Button>
+                        </div>
                       </div>
                     </div>
                   </div>
                 ) : currentStep === 3 ? (
                   <div className="space-y-6">
-                    <div className="flex justify-center items-center bg-gray-800 rounded-lg p-4">
+                    <motion.div 
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.5 }}
+                      className="flex justify-center items-center bg-gray-800 rounded-lg p-4"
+                    >
                       <div className="aspect-video w-full max-w-3xl">
                         <iframe
                           width="100%"
@@ -488,15 +517,20 @@ export default function InstructionStepsPage() {
                           frameBorder="0"
                           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                           allowFullScreen
-                          className="rounded-lg"
+                          className="rounded-lg shadow-lg"
                         ></iframe>
                       </div>
-                    </div>
+                    </motion.div>
 
-                    <div className="bg-gray-800 rounded-lg p-6 text-center">
+                    <motion.div 
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.5, delay: 0.2 }}
+                      className="bg-gray-800 rounded-lg p-6 text-center"
+                    >
                       <Button
                         asChild
-                        className="bg-blue-600 hover:bg-blue-700 text-white mb-4 text-lg py-6"
+                        className="bg-blue-600 hover:bg-blue-700 text-white mb-4 text-lg py-6 transition-all duration-300 hover:scale-105"
                       >
                         <Link href="https://www.3ddesign24.de/produkt/3d-druck-service/">
                           Hier gehts zum 3D-Druck-Shop
@@ -505,16 +539,21 @@ export default function InstructionStepsPage() {
                       <p className="text-gray-300">
                         Falls du einen eigenen 3D-Drucker besitzt oder dir die Teile bei einem anderen Anbieter ausdrucken lassen möchtest, kannst du diesen Schritt überspringen.
                       </p>
-                    </div>
+                    </motion.div>
                   </div>
                 ) : currentStep === 4 ? (
                   <div className="space-y-6">
-                    <div className="bg-gray-800 rounded-lg p-6">
+                    <motion.div 
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.5 }}
+                      className="bg-gray-800 rounded-lg p-6"
+                    >
                       <div className="flex items-center space-x-2 mb-6">
                         <Checkbox
                           checked={allChecked}
                           onCheckedChange={handleCheckAll}
-                          className="h-6 w-6 border-2 border-blue-500 data-[state=checked]:bg-blue-500"
+                          className="h-6 w-6 border-2 border-blue-500 data-[state=checked]:bg-blue-500 transition-all duration-300"
                         />
                         <Label
                           className="text-lg font-medium text-white"
@@ -527,7 +566,13 @@ export default function InstructionStepsPage() {
                         {steps[3].components.map((component, index) => {
                           if ('category' in component) {
                             return (
-                              <div key={index} className="space-y-2">
+                              <motion.div 
+                                key={index}
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ duration: 0.5, delay: index * 0.1 }}
+                                className="space-y-2"
+                              >
                                 <h3 className="text-lg font-semibold text-white flex items-center gap-2">
                                   {component.category === "Elektronik und Montageteile" && <Cpu className="h-5 w-5 text-blue-400" />}
                                   {component.category === "3D-Druckteile" && <Printer className="h-5 w-5 text-blue-400" />}
@@ -536,88 +581,54 @@ export default function InstructionStepsPage() {
                                 </h3>
                                 <div className="space-y-2 pl-4">
                                   {component.items.map((item, itemIndex) => (
-                                    <div key={itemIndex} className="flex items-center space-x-2 bg-gray-700 p-3 rounded-lg hover:bg-gray-600 transition-colors">
+                                    <motion.div 
+                                      key={itemIndex}
+                                      initial={{ opacity: 0, x: -20 }}
+                                      animate={{ opacity: 1, x: 0 }}
+                                      transition={{ duration: 0.3, delay: itemIndex * 0.05 }}
+                                      className="flex items-center space-x-2 bg-gray-700 p-3 rounded-lg hover:bg-gray-600 transition-all duration-300 hover:scale-[1.02]"
+                                    >
                                       <Checkbox
                                         checked={checkedItems[item.name] || false}
                                         onCheckedChange={(checked) => handleItemCheck(item.name, checked as boolean)}
-                                        className="h-5 w-5 border-2 border-blue-500 data-[state=checked]:bg-blue-500"
+                                        className="h-5 w-5 border-2 border-blue-500 data-[state=checked]:bg-blue-500 transition-all duration-300"
                                       />
                                       <label className="text-white flex-1">{item.name}</label>
                                       {checkedItems[item.name] && (
-                                        <CheckCircle2 className="h-5 w-5 text-green-500" />
+                                        <motion.div
+                                          initial={{ scale: 0 }}
+                                          animate={{ scale: 1 }}
+                                          transition={{ type: "spring", stiffness: 500, damping: 30 }}
+                                        >
+                                          <CheckCircle2 className="h-5 w-5 text-green-500" />
+                                        </motion.div>
                                       )}
-                                    </div>
+                                    </motion.div>
                                   ))}
                                 </div>
-                              </div>
+                              </motion.div>
                             )
                           }
                           return null
                         })}
                       </div>
-                    </div>
+                    </motion.div>
                   </div>
-                ) : (
-                  <div className="flex justify-center items-center bg-gray-800 rounded-lg p-4">
-                    <Image
-                      src={currentStepData.image || "/placeholder.svg"}
-                      alt={`Schritt ${currentStep}`}
-                      width={400}
-                      height={400}
-                      className="rounded-lg shadow-md"
-                    />
-                  </div>
-                )}
+                ) : null}
+              </motion.div>
+            </AnimatePresence>
 
-                {currentStep !== 2 && currentStep !== 3 && currentStep !== 4 && (
-                  <div className="grid md:grid-cols-2 gap-6">
-                    <Card className="bg-gray-800 border-gray-600">
-                      <CardContent className="pt-6">
-                        <h2 className="text-xl font-semibold mb-4 text-white">Das brauchst du</h2>
-                        <div className="space-y-3">
-                          {componentNames.map((component, index) => (
-                            <div key={index} className="flex items-start space-x-2">
-                              <Checkbox
-                                id={`component-${index}`}
-                                checked={checkedItems[component] || false}
-                                onCheckedChange={(checked) => handleItemCheck(component, checked as boolean)}
-                                className="border-gray-500 data-[state=checked]:bg-blue-600 data-[state=checked]:text-white"
-                              />
-                              <Label
-                                htmlFor={`component-${index}`}
-                                className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 cursor-pointer text-gray-300"
-                              >
-                                {component}
-                              </Label>
-                            </div>
-                          ))}
-                        </div>
-                      </CardContent>
-                    </Card>
-
-                    <Card className="bg-gray-800 border-gray-600">
-                      <CardContent className="pt-6">
-                        <h2 className="text-xl font-semibold mb-4 text-white">Anleitung</h2>
-                        <ol className="list-decimal pl-5 space-y-3">
-                          {currentStepData.instructions?.map((instruction, index) => (
-                            <li key={index} className="text-gray-300">
-                              {instruction}
-                            </li>
-                          ))}
-                        </ol>
-                      </CardContent>
-                    </Card>
-                  </div>
-                )}
-              </div>
-            )}
-
-            <div className="flex justify-between pt-4">
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+              className="flex justify-between pt-4"
+            >
               <Button
                 onClick={goToPreviousStep}
                 disabled={currentStep === 1}
                 variant="outline"
-                className="border-gray-600 bg-gray-700 text-gray-200 hover:bg-gray-600 rounded-xl"
+                className="border-gray-600 bg-gray-700 text-gray-200 hover:bg-gray-600 rounded-xl transition-all duration-300 hover:scale-105"
               >
                 <ArrowLeft className="mr-2 h-4 w-4" />
                 Zurück
@@ -626,7 +637,7 @@ export default function InstructionStepsPage() {
               {currentStep < totalSteps ? (
                 <Button
                   onClick={goToNextStep}
-                  className="bg-blue-600 hover:bg-blue-700 rounded-xl"
+                  className="bg-blue-600 hover:bg-blue-700 rounded-xl transition-all duration-300 hover:scale-105"
                 >
                   Weiter zu Schritt {currentStep + 1}
                   <ArrowRight className="ml-2 h-4 w-4" />
@@ -634,15 +645,15 @@ export default function InstructionStepsPage() {
               ) : (
                 <Button
                   onClick={goToNextStep}
-                  className="bg-green-600 hover:bg-green-700 rounded-xl"
+                  className="bg-green-600 hover:bg-green-700 rounded-xl transition-all duration-300 hover:scale-105"
                 >
                   <CheckCircle2 className="mr-2 h-4 w-4" />
                   Anleitung abschließen
                 </Button>
               )}
-            </div>
+            </motion.div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </main>
   )
