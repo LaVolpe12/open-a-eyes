@@ -1,13 +1,13 @@
 "use client"
 
-import { useState, useRef } from "react"
+import { useState, useRef, useEffect } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { ArrowLeft, ArrowRight, CheckCircle2, ShoppingCart, ExternalLink, Download, Cpu, Printer, Wrench, CircuitBoard, Box, Settings } from "lucide-react"
 import { Card, CardContent } from "@/components/ui/card"
 import { Progress } from "@/components/ui/progress"
-import { useRouter } from "next/navigation"
+import { useRouter, useSearchParams } from "next/navigation"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Label } from "@/components/ui/label"
 import { Table, TableHeader, TableBody, TableCell, TableRow, TableHead } from "@/components/ui/table"
@@ -53,7 +53,18 @@ export default function InstructionStepsPage() {
   const [checkedItems, setCheckedItems] = useState<{ [key: string]: boolean }>({})
   const [allChecked, setAllChecked] = useState(false)
   const router = useRouter()
+  const searchParams = useSearchParams()
   const videoRef = useRef<HTMLIFrameElement>(null)
+
+  useEffect(() => {
+    const stepParam = searchParams.get('step')
+    if (stepParam) {
+      const stepNumber = parseInt(stepParam)
+      if (!isNaN(stepNumber) && stepNumber >= 1 && stepNumber <= totalSteps) {
+        setCurrentStep(stepNumber)
+      }
+    }
+  }, [searchParams])
 
   const totalSteps = 8
   const progress = (currentStep / totalSteps) * 100
