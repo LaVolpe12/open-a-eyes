@@ -55,7 +55,7 @@ export default function InstructionStepsPage() {
   const router = useRouter()
   const videoRef = useRef<HTMLIFrameElement>(null)
 
-  const totalSteps = 7
+  const totalSteps = 8
   const progress = (currentStep / totalSteps) * 100
 
   const steps: Step[] = [
@@ -254,6 +254,29 @@ export default function InstructionStepsPage() {
           { time: "15:58", title: "Fassung & Kabelführung" },
           { time: "19:29", title: "Lautsprecher-Gehäuse" },
           { time: "21:11", title: "Linker Bügel" }
+        ]
+      }
+    },
+    {
+      title: "Deine Brille ist einsatzbereit!",
+      components: [],
+      instructions: [
+        "1. Aktiviere den Hotspot auf deinem Smartphone",
+        "2. Schließe eine Powerbank an deiner Brille an",
+        "3. Warte auf das Audio-Signal deiner Brille. Sie ist dann startbereit.",
+        "4. Drücke den Knopf auf der rechten Seite einmal, um ein Bild aufzunehmen und deine Anweisung zu sprechen. Probiere: Was liegt vor mir auf dem Tisch?",
+        "5. Drücke den Knopf nochmal, um die Aufnahmen zu stoppen und abzuschicken.",
+        "6. In wenigen Sekunden hörst du die Antwort deiner Brille!"
+      ],
+      video: {
+        url: "https://www.youtube.com/embed/fj6VpSGgQFs",
+        timestamps: [
+          { time: "00:00", title: "Einleitung" },
+          { time: "00:30", title: "Hotspot aktivieren" },
+          { time: "01:15", title: "Powerbank anschließen" },
+          { time: "02:00", title: "Brille starten" },
+          { time: "03:30", title: "Bild aufnehmen und Anweisung geben" },
+          { time: "04:45", title: "Antwort erhalten" }
         ]
       }
     }
@@ -551,7 +574,7 @@ export default function InstructionStepsPage() {
                       transition={{ duration: 0.5, delay: 0.2 }}
                       className="bg-gray-800 rounded-lg p-6"
                     >
-                      <h2 className="text-xl font-semibold mb-4 text-white">Abschnitte und Link</h2>
+                      <h2 className="text-xl font-semibold mb-4 text-white">Abschnitte und Links</h2>
                       <div className="space-y-4">
                         {currentStepData.video?.timestamps.map((timestamp, index) => (
                           <button
@@ -705,7 +728,7 @@ export default function InstructionStepsPage() {
                       transition={{ duration: 0.5, delay: 0.2 }}
                       className="bg-gray-800 rounded-lg p-6"
                     >
-                      <h2 className="text-xl font-semibold mb-4 text-white">Abschnitte und Link</h2>
+                      <h2 className="text-xl font-semibold mb-4 text-white">Abschnitte und Links</h2>
                       <div className="space-y-4">
                         {currentStepData.video?.timestamps.map((timestamp, index) => (
                           <button
@@ -762,7 +785,7 @@ export default function InstructionStepsPage() {
                       transition={{ duration: 0.5, delay: 0.2 }}
                       className="bg-gray-800 rounded-lg p-6"
                     >
-                      <h2 className="text-xl font-semibold mb-4 text-white">Abschnitte und Link</h2>
+                      <h2 className="text-xl font-semibold mb-4 text-white">Abschnitte</h2>
                       <div className="space-y-4">
                         {currentStepData.video?.timestamps.map((timestamp, index) => (
                           <button
@@ -787,6 +810,43 @@ export default function InstructionStepsPage() {
                             </Button>
                           </div>
                         )}
+                      </div>
+                    </motion.div>
+                  </div>
+                ) : currentStep === 8 ? (
+                  <div className="space-y-6">
+                    <motion.div 
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.5 }}
+                      className="flex justify-center items-center bg-gray-800 rounded-lg p-4"
+                    >
+                      <div className="aspect-video w-full max-w-3xl">
+                        <iframe
+                          ref={videoRef}
+                          width="100%"
+                          height="100%"
+                          src={currentStepData.video?.url}
+                          title="Deine Brille ist einsatzbereit!"
+                          frameBorder="0"
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                          allowFullScreen
+                          className="rounded-lg shadow-lg"
+                        ></iframe>
+                      </div>
+                    </motion.div>
+
+                    <motion.div 
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.5, delay: 0.2 }}
+                      className="bg-gray-800 rounded-lg p-6"
+                    >
+                      <h2 className="text-xl font-semibold mb-4 text-white">Anweisungen</h2>
+                      <div className="space-y-4">
+                        {currentStepData.instructions?.map((instruction, index) => (
+                          <p key={index} className="text-gray-300">{instruction}</p>
+                        ))}
                       </div>
                     </motion.div>
                   </div>
