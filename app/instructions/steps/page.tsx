@@ -4,7 +4,7 @@ import { useState, useRef, useEffect, Suspense } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
-import { ArrowLeft, ArrowRight, CheckCircle2, ShoppingCart, ExternalLink, Download, Cpu, Printer, Wrench, CircuitBoard, Box, Settings } from "lucide-react"
+import { ArrowLeft, ArrowRight, CheckCircle2, ShoppingCart, ExternalLink, Download, Cpu, Printer, Wrench, CircuitBoard, Box, Settings, X } from "lucide-react"
 import { Card, CardContent } from "@/components/ui/card"
 import { Progress } from "@/components/ui/progress"
 import { useRouter, useSearchParams } from "next/navigation"
@@ -12,6 +12,7 @@ import { Checkbox } from "@/components/ui/checkbox"
 import { Label } from "@/components/ui/label"
 import { Table, TableHeader, TableBody, TableCell, TableRow, TableHead } from "@/components/ui/table"
 import { motion, AnimatePresence } from "framer-motion"
+import { Dialog, DialogContent } from "@/components/ui/dialog"
 
 interface Component {
   name: string
@@ -60,6 +61,7 @@ function InstructionStepsContent() {
   const [currentStep, setCurrentStep] = useState(1)
   const [checkedItems, setCheckedItems] = useState<{ [key: string]: boolean }>({})
   const [allChecked, setAllChecked] = useState(false)
+  const [selectedImage, setSelectedImage] = useState<string | null>(null)
   const router = useRouter()
   const searchParams = useSearchParams()
   const videoRef = useRef<HTMLIFrameElement>(null)
@@ -464,13 +466,20 @@ function InstructionStepsContent() {
                           {(currentStepData.components as Component[]).map((component, index) => (
                             <TableRow key={index} className="border-b border-gray-600">
                               <TableCell className="w-[100px]">
-                                <div className="relative w-20 h-20 rounded-lg overflow-hidden">
+                                <div 
+                                  className="relative w-20 h-20 rounded-lg overflow-hidden cursor-pointer transition-transform hover:scale-105"
+                                  onClick={() => setSelectedImage(component.image)}
+                                >
                                   <Image
                                     src={component.image}
                                     alt={component.name}
                                     width={80}
                                     height={80}
                                     className="object-cover"
+                                    priority={false}
+                                    loading="lazy"
+                                    sizes="80px"
+                                    quality={75}
                                   />
                                 </div>
                               </TableCell>
@@ -910,6 +919,34 @@ function InstructionStepsContent() {
           </div>
         </motion.div>
       </div>
+
+      <Dialog open={!!selectedImage} onOpenChange={() => setSelectedImage(null)}>
+        <DialogContent className="max-w-4xl bg-gray-800 border-gray-700">
+          <div className="relative aspect-square w-full">
+            <Button
+              variant="ghost"
+              size="icon"
+              className="absolute right-2 top-2 z-10 rounded-full bg-gray-900/50 text-gray-200 hover:bg-gray-900/75"
+              onClick={() => setSelectedImage(null)}
+            >
+              <X className="h-4 w-4" />
+            </Button>
+            {selectedImage && (
+              <Image
+                src={selectedImage}
+                alt="Vergrößerte Ansicht"
+                width={800}
+                height={800}
+                className="object-contain"
+                priority={true}
+                loading="eager"
+                sizes="(max-width: 768px) 100vw, 800px"
+                quality={90}
+              />
+            )}
+          </div>
+        </DialogContent>
+      </Dialog>
     </main>
   )
 }
