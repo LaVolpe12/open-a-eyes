@@ -4,7 +4,7 @@ import { useState } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
-import { ArrowLeft, ArrowRight, CheckCircle2, ShoppingCart, ExternalLink } from "lucide-react"
+import { ArrowLeft, ArrowRight, CheckCircle2, ShoppingCart, ExternalLink, Download } from "lucide-react"
 import { Card, CardContent } from "@/components/ui/card"
 import { Progress } from "@/components/ui/progress"
 import { useRouter } from "next/navigation"
@@ -107,17 +107,14 @@ export default function InstructionStepsPage() {
       image: null
     },
     {
-      title: "Zusammenbau",
-      components: ["Brillengestell", "Bügel Links", "Bügel Rechts", "Kleine Schrauben (M2)", "Imbusschlüssel"],
+      title: "Download der benötigten Dateien",
+      components: [],
       instructions: [
-        "Nimm das 3D-gedruckte Brillengestell und überprüfe, ob alle Kanten glatt sind.",
-        "Falls nötig, schleife raue Kanten mit feinem Sandpapier ab.",
-        "Positioniere den linken Bügel an der entsprechenden Stelle am Gestell.",
-        "Befestige den Bügel mit zwei M2-Schrauben und ziehe sie mit dem Imbusschlüssel fest.",
-        "Wiederhole den Vorgang für den rechten Bügel.",
-        "Überprüfe, ob beide Bügel fest sitzen und sich gleichmäßig bewegen lassen.",
+        "Lade folgende Dateien herunter:",
+        "1. STL-Datei mit allen benötigten 3D-Druckteilen",
+        "2. Image-Datei mit dem speziellen Open-A-Eyes Betriebssystem"
       ],
-      image: "/placeholder.svg?height=400&width=400",
+      image: null
     },
     {
       title: "Installation der Elektronik",
@@ -274,30 +271,58 @@ export default function InstructionStepsPage() {
               </div>
             ) : (
               <div className="space-y-6">
-                <div className="flex justify-center items-center bg-gray-800 rounded-lg p-4">
-                  {currentStep === 2 ? (
-                    <div className="aspect-video w-full max-w-3xl">
-                      <iframe
-                        width="100%"
-                        height="100%"
-                        src="https://www.youtube.com/embed/AB-y0bRjPt8"
-                        title="Open-A-Eyes Zusammenbau Anleitung"
-                        frameBorder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowFullScreen
-                        className="rounded-lg"
-                      ></iframe>
+                {currentStep === 2 ? (
+                  <div className="space-y-6">
+                    <div className="bg-gray-800 rounded-lg p-6">
+                      <h2 className="text-xl font-semibold mb-4 text-white">Downloads</h2>
+                      <div className="flex flex-col gap-4">
+                        <Button
+                          asChild
+                          className="bg-blue-600 hover:bg-blue-700 text-white"
+                        >
+                          <Link href="https://drive.google.com/file/d/1KpDreYGmDURJrR_RDKt6IjK-QTh45qdg/view?usp=sharing">
+                            <Download className="mr-2 h-4 w-4" />
+                            STL-Dateien herunterladen
+                          </Link>
+                        </Button>
+                        <Button
+                          asChild
+                          className="bg-blue-600 hover:bg-blue-700 text-white"
+                        >
+                          <Link href="https://drive.google.com/file/d/1z3g_nLzVUI8tefPy9BgpnXQ7TdAwLYP4/view?usp=sharing">
+                            <Download className="mr-2 h-4 w-4" />
+                            Betriebssystem-Image herunterladen
+                          </Link>
+                        </Button>
+                      </div>
                     </div>
-                  ) : (
-                    <Image
-                      src={currentStepData.image || "/placeholder.svg"}
-                      alt={`Schritt ${currentStep}`}
-                      width={400}
-                      height={400}
-                      className="rounded-lg shadow-md"
-                    />
-                  )}
-                </div>
+                  </div>
+                ) : (
+                  <div className="flex justify-center items-center bg-gray-800 rounded-lg p-4">
+                    {currentStep === 3 ? (
+                      <div className="aspect-video w-full max-w-3xl">
+                        <iframe
+                          width="100%"
+                          height="100%"
+                          src="https://www.youtube.com/embed/AB-y0bRjPt8"
+                          title="Open-A-Eyes Zusammenbau Anleitung"
+                          frameBorder="0"
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                          allowFullScreen
+                          className="rounded-lg"
+                        ></iframe>
+                      </div>
+                    ) : (
+                      <Image
+                        src={currentStepData.image || "/placeholder.svg"}
+                        alt={`Schritt ${currentStep}`}
+                        width={400}
+                        height={400}
+                        className="rounded-lg shadow-md"
+                      />
+                    )}
+                  </div>
+                )}
 
                 <div className="grid md:grid-cols-2 gap-6">
                   <Card className="bg-gray-800 border-gray-600">
