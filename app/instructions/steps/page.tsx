@@ -50,7 +50,7 @@ export default function InstructionStepsPage() {
   const [allChecked, setAllChecked] = useState(false)
   const router = useRouter()
 
-  const totalSteps = 6
+  const totalSteps = 7
   const progress = (currentStep / totalSteps) * 100
 
   const steps: Step[] = [
@@ -146,6 +146,20 @@ export default function InstructionStepsPage() {
         }
       ],
       image: "/placeholder.svg"
+    },
+    {
+      title: "OpenAI API-Key erstellen",
+      components: [],
+      instructions: [],
+      video: {
+        url: "https://www.youtube.com/embed/We2D3KKj648",
+        timestamps: [
+          { time: "00:00", title: "Einleitung" },
+          { time: "00:14", title: "Registrierung" },
+          { time: "02:34", title: "API-Key generieren" },
+          { time: "04:20", title: "Zahlungsmethode hinterlegen" }
+        ]
+      }
     },
     {
       title: "Überprüfe, ob alle Komponenten vorhanden sind",
@@ -684,6 +698,69 @@ export default function InstructionStepsPage() {
                               const [minutes, seconds] = timestamp.time.split(':').map(Number);
                               const timeInSeconds = minutes * 60 + seconds;
                               player.src = `${steps[5].video?.url}?start=${timeInSeconds}`;
+                            }}
+                          >
+                            <span className="text-blue-400 font-medium">{timestamp.time}</span>
+                            <span className="text-white flex-1">{timestamp.title}</span>
+                            {timestamp.link && (
+                              <a
+                                href={timestamp.link}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-blue-400 hover:text-blue-300"
+                                onClick={(e) => e.stopPropagation()}
+                              >
+                                <ExternalLink className="h-4 w-4" />
+                              </a>
+                            )}
+                          </motion.div>
+                        ))}
+                      </div>
+                    </motion.div>
+                  </div>
+                ) : currentStep === 7 ? (
+                  <div className="space-y-6">
+                    <motion.div 
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.5 }}
+                      className="flex justify-center items-center bg-gray-800 rounded-lg p-4"
+                    >
+                      <div className="aspect-video w-full max-w-3xl">
+                        <iframe
+                          width="100%"
+                          height="100%"
+                          src={steps[6].video?.url}
+                          title="Zusammenbau"
+                          frameBorder="0"
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                          allowFullScreen
+                          className="rounded-lg shadow-lg"
+                          id="youtube-player"
+                        ></iframe>
+                      </div>
+                    </motion.div>
+
+                    <motion.div 
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.5, delay: 0.2 }}
+                      className="bg-gray-800 rounded-lg p-6"
+                    >
+                      <h2 className="text-xl font-semibold mb-4 text-white">Abschnitte</h2>
+                      <div className="space-y-3">
+                        {steps[6].video?.timestamps.map((timestamp, index) => (
+                          <motion.div
+                            key={index}
+                            initial={{ opacity: 0, x: -20 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ duration: 0.3, delay: index * 0.1 }}
+                            className="flex items-center space-x-2 bg-gray-700 p-3 rounded-lg hover:bg-gray-600 transition-all duration-300 hover:scale-[1.02] cursor-pointer"
+                            onClick={() => {
+                              const player = document.getElementById('youtube-player') as HTMLIFrameElement;
+                              const [minutes, seconds] = timestamp.time.split(':').map(Number);
+                              const timeInSeconds = minutes * 60 + seconds;
+                              player.src = `${steps[6].video?.url}?start=${timeInSeconds}`;
                             }}
                           >
                             <span className="text-blue-400 font-medium">{timestamp.time}</span>
