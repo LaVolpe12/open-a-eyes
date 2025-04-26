@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { ArrowLeft, ArrowRight, ShoppingCart, Download, Box, CheckCircle2, HardDrive, Wrench, PlayCircle, Cpu } from "lucide-react"
+import { ArrowLeft, ArrowRight, ShoppingCart, Download, Box, CheckCircle2, HardDrive, Wrench, PlayCircle, Cpu, Glasses } from "lucide-react"
 import { Card, CardContent } from "@/components/ui/card"
 import { motion, AnimatePresence } from "framer-motion"
 
@@ -52,7 +52,7 @@ const steps = [
   {
     title: "Deine Brille ist einsatzbereit!",
     description: "Lerne, wie du deine KI-Brille benutzt und starte durch!",
-    icon: PlayCircle,
+    icon: Glasses,
     color: "from-blue-500 to-blue-600"
   }
 ]
@@ -89,10 +89,10 @@ export default function InstructionsPage() {
             <div className="flex justify-center mb-8">
               <Link href="/instructions/steps">
                 <Button
-                  className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white text-lg py-6 px-8 rounded-xl transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl"
+                  className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white text-xl py-8 px-12 rounded-xl transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl"
                   size="lg"
                 >
-                  <PlayCircle className="mr-2 h-6 w-6" />
+                  <PlayCircle className="mr-2 h-8 w-8" />
                   Anleitung starten
                 </Button>
               </Link>
