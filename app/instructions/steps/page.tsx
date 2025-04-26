@@ -4,7 +4,7 @@ import { useState } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
-import { ArrowLeft, ArrowRight, CheckCircle2, ShoppingCart, ExternalLink, Download, Cpu, Printer, Wrench } from "lucide-react"
+import { ArrowLeft, ArrowRight, CheckCircle2, ShoppingCart, ExternalLink, Download, Cpu, Printer, Wrench, CircuitBoard, Box, Settings } from "lucide-react"
 import { Card, CardContent } from "@/components/ui/card"
 import { Progress } from "@/components/ui/progress"
 import { useRouter } from "next/navigation"
@@ -574,9 +574,33 @@ export default function InstructionStepsPage() {
                                 className="space-y-2"
                               >
                                 <h3 className="text-lg font-semibold text-white flex items-center gap-2">
-                                  {component.category === "Elektronik und Montageteile" && <Cpu className="h-5 w-5 text-blue-400" />}
-                                  {component.category === "3D-Druckteile" && <Printer className="h-5 w-5 text-blue-400" />}
-                                  {component.category === "Sonstiges" && <Wrench className="h-5 w-5 text-blue-400" />}
+                                  {component.category === "Elektronik und Montageteile" && (
+                                    <motion.div
+                                      initial={{ scale: 0 }}
+                                      animate={{ scale: 1 }}
+                                      transition={{ type: "spring", stiffness: 500, damping: 30 }}
+                                    >
+                                      <CircuitBoard className="h-5 w-5 text-blue-400" />
+                                    </motion.div>
+                                  )}
+                                  {component.category === "3D-Druckteile" && (
+                                    <motion.div
+                                      initial={{ scale: 0 }}
+                                      animate={{ scale: 1 }}
+                                      transition={{ type: "spring", stiffness: 500, damping: 30 }}
+                                    >
+                                      <Box className="h-5 w-5 text-blue-400" />
+                                    </motion.div>
+                                  )}
+                                  {component.category === "Sonstiges" && (
+                                    <motion.div
+                                      initial={{ scale: 0 }}
+                                      animate={{ scale: 1 }}
+                                      transition={{ type: "spring", stiffness: 500, damping: 30 }}
+                                    >
+                                      <Settings className="h-5 w-5 text-blue-400" />
+                                    </motion.div>
+                                  )}
                                   {component.category}
                                 </h3>
                                 <div className="space-y-2 pl-4">
