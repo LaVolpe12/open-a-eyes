@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { ArrowLeft, ArrowRight, ShoppingCart, Download, Printer, CheckCircle2, Settings, Cpu, Wrench } from "lucide-react"
+import { ArrowLeft, ArrowRight, ShoppingCart, Download, Box, CheckCircle2, HardDrive, Wrench, PlayCircle } from "lucide-react"
 import { Card, CardContent } from "@/components/ui/card"
 import { motion, AnimatePresence } from "framer-motion"
 
@@ -22,7 +22,7 @@ const steps = [
   {
     title: "3D-Druckteile bestellen",
     description: "Bestelle die 3D-gedruckten Teile oder drucke sie selbst aus.",
-    icon: Printer,
+    icon: Box,
     color: "from-blue-500 to-blue-600"
   },
   {
@@ -34,7 +34,7 @@ const steps = [
   {
     title: "SD-Karte vorbereiten",
     description: "Richte die SD-Karte mit dem Betriebssystem ein und konfiguriere die API-Keys.",
-    icon: Settings,
+    icon: HardDrive,
     color: "from-blue-500 to-blue-600"
   },
   {
@@ -80,7 +80,7 @@ export default function InstructionsPage() {
                   className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white text-lg py-6 px-8 rounded-xl transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl"
                   size="lg"
                 >
-                  <Cpu className="mr-2 h-6 w-6" />
+                  <PlayCircle className="mr-2 h-6 w-6" />
                   Anleitung starten
                 </Button>
               </Link>
@@ -101,11 +101,6 @@ export default function InstructionsPage() {
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                   className="relative"
                 >
-                  {/* Connection Line */}
-                  {index < steps.length - 1 && (
-                    <div className="absolute left-12 top-16 bottom-0 w-0.5 bg-gradient-to-b from-blue-500 to-transparent" />
-                  )}
-
                   <Link href={`/instructions/steps?step=${index + 1}`}>
                     <Card className="bg-gray-800 border-gray-700 hover:border-blue-500 transition-all duration-300 hover:scale-[1.02] cursor-pointer group">
                       <CardContent className="p-6">
