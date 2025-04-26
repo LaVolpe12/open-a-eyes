@@ -91,15 +91,21 @@ export default function InstructionsPage() {
             {/* Background Grid */}
             <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-10" />
             
-            {/* Interactive Map */}
-            <div className="relative grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {/* Timeline */}
+            <div className="relative space-y-8">
               {steps.map((step, index) => (
                 <motion.div
                   key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
+                  className="relative"
                 >
+                  {/* Connection Line */}
+                  {index < steps.length - 1 && (
+                    <div className="absolute left-6 top-16 bottom-0 w-0.5 bg-gradient-to-b from-blue-500 to-transparent" />
+                  )}
+
                   <Link href={`/instructions/steps?step=${index + 1}`}>
                     <Card className="bg-gray-800 border-gray-700 hover:border-blue-500 transition-all duration-300 hover:scale-[1.02] cursor-pointer group">
                       <CardContent className="p-6">
@@ -126,30 +132,6 @@ export default function InstructionsPage() {
                   </Link>
                 </motion.div>
               ))}
-            </div>
-
-            {/* Connection Lines */}
-            <div className="absolute inset-0 pointer-events-none hidden lg:block">
-              {steps.map((_, index) => {
-                if (index < steps.length - 1) {
-                  return (
-                    <motion.div
-                      key={index}
-                      className="absolute h-0.5 bg-gradient-to-r from-blue-500 to-blue-600"
-                      style={{
-                        top: '50%',
-                        left: `${(index + 1) * (100 / steps.length)}%`,
-                        width: `${100 / steps.length}%`,
-                        transform: 'translateY(-50%)',
-                      }}
-                      initial={{ scaleX: 0 }}
-                      animate={{ scaleX: 1 }}
-                      transition={{ duration: 0.5, delay: index * 0.1 }}
-                    />
-                  )
-                }
-                return null
-              })}
             </div>
           </div>
         </motion.div>
