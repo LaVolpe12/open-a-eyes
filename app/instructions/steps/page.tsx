@@ -41,6 +41,10 @@ interface Step {
   video?: {
     url: string
     timestamps: { time: string; title: string; link?: string }[]
+    link?: {
+      title: string
+      url: string
+    }
   }
 }
 
@@ -148,24 +152,21 @@ export default function InstructionStepsPage() {
       image: "/placeholder.svg"
     },
     {
-      title: "4. SD-Karte vorbereiten",
+      title: "OpenAI API-Key erstellen",
       components: [],
-      instructions: [
-        "1. Lade den Raspberry Pi Imager herunter und installiere ihn",
-        "2. Schließe die SD-Karte an deinen Computer an",
-        "3. Wähle das Open-A-Eyes Image aus",
-        "4. Schreibe das Image auf die SD-Karte",
-        "5. Füge deinen API-Key in die Konfigurationsdatei ein"
-      ],
+      instructions: [],
       video: {
-        url: "https://www.youtube.com/embed/i4tvI5U2_mM",
+        url: "https://www.youtube.com/embed/We2D3KKj648",
         timestamps: [
-          { time: "00:25", title: "Raspberry PI Imager installieren", link: "https://www.raspberrypi.com/software/" },
-          { time: "01:31", title: "Image konfigurieren und auf SD-Karte schreiben" },
-          { time: "06:39", title: "API Key einfügen" },
-          { time: "08:44", title: "Informationen zur ersten Einrichtung" },
-          { time: "09:22", title: "Informationen, wie weitere API-Keys eingefügt werden können" }
-        ]
+          { time: "00:00", title: "Einleitung" },
+          { time: "00:14", title: "Registrierung" },
+          { time: "02:34", title: "API-Key generieren" },
+          { time: "04:20", title: "Zahlungsmethode hinterlegen" }
+        ],
+        link: {
+          title: "OpenAI API-Webseite",
+          url: "https://auth.openai.com/log-in"
+        }
       }
     },
     {
