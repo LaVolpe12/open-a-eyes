@@ -4,12 +4,28 @@ import { useState } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
-import { ArrowLeft, ArrowRight, CheckCircle2 } from "lucide-react"
+import { ArrowLeft, ArrowRight, CheckCircle2, ShoppingCart, ExternalLink } from "lucide-react"
 import { Card, CardContent } from "@/components/ui/card"
 import { Progress } from "@/components/ui/progress"
 import { useRouter } from "next/navigation"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Label } from "@/components/ui/label"
+import { Table, TableHeader, TableBody, TableCell, TableRow, TableHead } from "@/components/ui/table"
+
+type Component = {
+  name: string
+  description: string
+  price: string
+  link: string
+  image: string
+}
+
+type Step = {
+  title: string
+  components: Component[] | string[]
+  instructions: string[]
+  image: string | null
+}
 
 export default function InstructionStepsPage() {
   const [currentStep, setCurrentStep] = useState(1)
@@ -19,28 +35,76 @@ export default function InstructionStepsPage() {
   const totalSteps = 4
   const progress = (currentStep / totalSteps) * 100
 
-  const steps = [
+  const steps: Step[] = [
     {
       title: "Elektronik und Bauteile bestellen",
       components: [
-        "Raspberry PI Zero 2 WH (15-20€)",
-        "SeeedStudio reSpeaker 2-Mics PI HAT (25-30€)",
-        "ZeroCam (15-20€)",
-        "Lautsprecher mit JST-PH2.0 mm (16.99€)",
-        "SD-Karte (min. 64 GB) (12.90€)",
-        "M2 x 20 mm Gewindeschraube (4 Stück) (2-3€)",
-        "M2 x 16 mm Gewindeschraube (6 Stück) (2-3€)",
-        "M2 x 6 mm Gewindeschraube (1 Stück) (1-2€)",
-        "M2 Mutter (11 Stück) (2-3€)"
+        {
+          name: "Raspberry PI Zero 2 WH",
+          description: "Minicomputer für die Verarbeitung",
+          price: "15-20€",
+          link: "https://www.raspberrypi.com/products/raspberry-pi-zero-2-w/",
+          image: "/Einzelteile/Raspberry_PI_Zero_2_WH.jpg"
+        },
+        {
+          name: "SeeedStudio reSpeaker 2-Mics PI HAT",
+          description: "Mikrofonmodul für Sprachbefehle",
+          price: "25-30€",
+          link: "https://www.seeedstudio.com/ReSpeaker-2-Mics-Pi-HAT.html",
+          image: "/Einzelteile/reSpeaker_2-Mics_PI_HAT.jpg"
+        },
+        {
+          name: "ZeroCam",
+          description: "Kamera für Bilderfassung",
+          price: "15-20€",
+          link: "https://www.reichelt.de/de/de/shop/produkt/raspberry_pi_zero_-_kamera_5mp_160_-242757",
+          image: "/Einzelteile/ZeroCam.jpg"
+        },
+        {
+          name: "Lautsprecher mit JST-PH2.0 mm",
+          description: "Für Audioausgabe",
+          price: "16.99€",
+          link: "https://www.az-delivery.de/products/2-stuck-dfplayer-mini-3-watt-8-ohm-mini-lautsprecher-mit-jst-ph2-0-mm-pin-schnittstelle-fur-arduino-raspberry-pi-und-elektronische-diy-projekte-inklusive-e-book",
+          image: "/Einzelteile/Lautsprecher.jpg"
+        },
+        {
+          name: "SD-Karte (min. 64 GB)",
+          description: "Für Betriebssystem und Software",
+          price: "12.90€",
+          link: "https://www.cyberport.de/?DEEP=4H20-04W",
+          image: "/Einzelteile/SD-Karte.jpg"
+        },
+        {
+          name: "M2 x 20 mm Gewindeschraube",
+          description: "4 Stück",
+          price: "2-3€",
+          link: "#",
+          image: "/Einzelteile/Schrauben_und_Muttern.jpg"
+        },
+        {
+          name: "M2 x 16 mm Gewindeschraube",
+          description: "6 Stück",
+          price: "2-3€",
+          link: "#",
+          image: "/Einzelteile/Schrauben_und_Muttern.jpg"
+        },
+        {
+          name: "M2 x 6 mm Gewindeschraube",
+          description: "1 Stück",
+          price: "1-2€",
+          link: "#",
+          image: "/Einzelteile/Schrauben_und_Muttern.jpg"
+        },
+        {
+          name: "M2 Mutter",
+          description: "11 Stück",
+          price: "2-3€",
+          link: "#",
+          image: "/Einzelteile/Schrauben_und_Muttern.jpg"
+        }
       ],
-      instructions: [
-        "Bestelle alle elektronischen Komponenten und mechanischen Bauteile aus der Liste.",
-        "Achte darauf, dass die SD-Karte mindestens 64 GB Speicherplatz hat.",
-        "Überprüfe die Lieferzeiten der Komponenten und bestelle rechtzeitig.",
-        "Lager die Komponenten sicher und trocken, bis du mit dem Zusammenbau beginnst.",
-        "Überprüfe alle Komponenten auf Beschädigungen nach Erhalt."
-      ],
-      image: "/placeholder.svg?height=400&width=400",
+      instructions: [],
+      image: null
     },
     {
       title: "Zusammenbau",
@@ -147,70 +211,120 @@ export default function InstructionStepsPage() {
             </h1>
           </div>
 
-          <div className="p-6 space-y-6">
-            <div className="flex justify-center items-center bg-gray-800 rounded-lg p-4">
-              {currentStep === 2 ? (
-                <div className="aspect-video w-full max-w-3xl">
-                  <iframe
-                    width="100%"
-                    height="100%"
-                    src="https://www.youtube.com/embed/AB-y0bRjPt8"
-                    title="Open-A-Eyes Zusammenbau Anleitung"
-                    frameBorder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                    className="rounded-lg"
-                  ></iframe>
+          <div className="p-6">
+            {currentStep === 1 ? (
+              <div className="overflow-x-auto">
+                <Table className="border-collapse w-full">
+                  <TableHeader>
+                    <TableRow className="border-b border-gray-600">
+                      <TableHead className="w-[100px] text-gray-200">Bild</TableHead>
+                      <TableHead className="w-[200px] text-gray-200">Komponente</TableHead>
+                      <TableHead className="w-[300px] text-gray-200">Beschreibung</TableHead>
+                      <TableHead className="text-gray-200">Preis (ca.)</TableHead>
+                      <TableHead className="text-right text-gray-200">Link</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {(currentStepData.components as Component[]).map((component, index) => (
+                      <TableRow key={index} className="border-b border-gray-600">
+                        <TableCell className="w-[100px]">
+                          <div className="relative w-20 h-20 rounded-lg overflow-hidden">
+                            <Image
+                              src={component.image}
+                              alt={component.name}
+                              width={80}
+                              height={80}
+                              className="object-cover"
+                            />
+                          </div>
+                        </TableCell>
+                        <TableCell className="font-medium text-white">{component.name}</TableCell>
+                        <TableCell className="text-gray-300">{component.description}</TableCell>
+                        <TableCell className="text-gray-300">{component.price}</TableCell>
+                        <TableCell className="text-right">
+                          <a
+                            href={component.link}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center text-blue-400 hover:text-blue-300"
+                          >
+                            <ShoppingCart className="h-4 w-4 mr-1" />
+                            <span className="hidden sm:inline">Kaufen</span>
+                            <ExternalLink className="h-3 w-3 ml-1" />
+                          </a>
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </div>
+            ) : (
+              <div className="space-y-6">
+                <div className="flex justify-center items-center bg-gray-800 rounded-lg p-4">
+                  {currentStep === 2 ? (
+                    <div className="aspect-video w-full max-w-3xl">
+                      <iframe
+                        width="100%"
+                        height="100%"
+                        src="https://www.youtube.com/embed/AB-y0bRjPt8"
+                        title="Open-A-Eyes Zusammenbau Anleitung"
+                        frameBorder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                        className="rounded-lg"
+                      ></iframe>
+                    </div>
+                  ) : (
+                    <Image
+                      src={currentStepData.image || "/placeholder.svg"}
+                      alt={`Schritt ${currentStep}`}
+                      width={400}
+                      height={400}
+                      className="rounded-lg shadow-md"
+                    />
+                  )}
                 </div>
-              ) : (
-                <Image
-                  src={currentStepData.image || "/placeholder.svg"}
-                  alt={`Schritt ${currentStep}`}
-                  width={400}
-                  height={400}
-                  className="rounded-lg shadow-md"
-                />
-              )}
-            </div>
 
-            <div className="grid md:grid-cols-2 gap-6">
-              <Card className="bg-gray-800 border-gray-600">
-                <CardContent className="pt-6">
-                  <h2 className="text-xl font-semibold mb-4 text-white">Das brauchst du</h2>
-                  <div className="space-y-3">
-                    {currentStepData.components.map((component, index) => (
-                      <div key={index} className="flex items-start space-x-2">
-                        <Checkbox
-                          id={`component-${index}`}
-                          checked={checkedComponents[component] || false}
-                          onCheckedChange={() => toggleComponent(component)}
-                          className="border-gray-500 data-[state=checked]:bg-blue-600 data-[state=checked]:text-white"
-                        />
-                        <Label
-                          htmlFor={`component-${index}`}
-                          className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 cursor-pointer text-gray-300"
-                        >
-                          {component}
-                        </Label>
+                <div className="grid md:grid-cols-2 gap-6">
+                  <Card className="bg-gray-800 border-gray-600">
+                    <CardContent className="pt-6">
+                      <h2 className="text-xl font-semibold mb-4 text-white">Das brauchst du</h2>
+                      <div className="space-y-3">
+                        {(currentStepData.components as string[]).map((component, index) => (
+                          <div key={index} className="flex items-start space-x-2">
+                            <Checkbox
+                              id={`component-${index}`}
+                              checked={checkedComponents[component] || false}
+                              onCheckedChange={() => toggleComponent(component)}
+                              className="border-gray-500 data-[state=checked]:bg-blue-600 data-[state=checked]:text-white"
+                            />
+                            <Label
+                              htmlFor={`component-${index}`}
+                              className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 cursor-pointer text-gray-300"
+                            >
+                              {component}
+                            </Label>
+                          </div>
+                        ))}
                       </div>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
+                    </CardContent>
+                  </Card>
 
-              <Card className="bg-gray-800 border-gray-600">
-                <CardContent className="pt-6">
-                  <h2 className="text-xl font-semibold mb-4 text-white">Anleitung</h2>
-                  <ol className="list-decimal pl-5 space-y-3">
-                    {currentStepData.instructions.map((instruction, index) => (
-                      <li key={index} className="text-gray-300">
-                        {instruction}
-                      </li>
-                    ))}
-                  </ol>
-                </CardContent>
-              </Card>
-            </div>
+                  <Card className="bg-gray-800 border-gray-600">
+                    <CardContent className="pt-6">
+                      <h2 className="text-xl font-semibold mb-4 text-white">Anleitung</h2>
+                      <ol className="list-decimal pl-5 space-y-3">
+                        {currentStepData.instructions.map((instruction, index) => (
+                          <li key={index} className="text-gray-300">
+                            {instruction}
+                          </li>
+                        ))}
+                      </ol>
+                    </CardContent>
+                  </Card>
+                </div>
+              </div>
+            )}
 
             <div className="flex justify-between pt-4">
               <Button
