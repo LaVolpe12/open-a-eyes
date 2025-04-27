@@ -17,17 +17,41 @@ export default function Home() {
           </p>
         </div>
 
-        {/* YouTube Shorts Video */}
-        <div className="aspect-[9/16] w-full max-w-[300px] mx-auto bg-gray-800 rounded-lg overflow-hidden">
-          <iframe
-            width="100%"
-            height="100%"
-            src="https://www.youtube.com/embed/TImiFf-Whj4"
-            title="Open-A-Eyes Demo"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-            className="w-full h-full"
-          />
+        {/* YouTube Shorts Videos Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 justify-items-center">
+          <div className="aspect-[9/16] w-full max-w-[255px] bg-gray-800 rounded-lg overflow-hidden">
+            <iframe
+              width="100%"
+              height="100%"
+              src="https://www.youtube.com/embed/TImiFf-Whj4"
+              title="Open-A-Eyes Demo 1"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+              className="w-full h-full"
+            />
+          </div>
+          <div className="aspect-[9/16] w-full max-w-[255px] bg-gray-800 rounded-lg overflow-hidden">
+            <iframe
+              width="100%"
+              height="100%"
+              src="https://www.youtube.com/embed/kwV-fQEeKrc"
+              title="Open-A-Eyes Demo 2"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+              className="w-full h-full"
+            />
+          </div>
+          <div className="aspect-[9/16] w-full max-w-[255px] bg-gray-800 rounded-lg overflow-hidden">
+            <iframe
+              width="100%"
+              height="100%"
+              src="https://www.youtube.com/embed/vRx5oL_EMwU"
+              title="Open-A-Eyes Demo 3"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+              className="w-full h-full"
+            />
+          </div>
         </div>
 
         <div className="space-y-6 max-w-md mx-auto w-full">
