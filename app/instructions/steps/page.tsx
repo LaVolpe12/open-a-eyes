@@ -290,7 +290,7 @@ function InstructionStepsContent() {
         "6. In wenigen Sekunden hörst du die Antwort deiner Brille!"
       ],
       video: {
-        url: "https://www.youtube.com/embed/fj6VpSGgQFs",
+        url: "https://youtu.be/Ny6eou196mU",
         timestamps: [
           { time: "00:00", title: "Einleitung" },
           { time: "00:30", title: "Hotspot aktivieren" },
