@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button"
 import { ArrowLeft, ArrowRight, ShoppingCart, Download, Box, CheckCircle2, HardDrive, Wrench, PlayCircle, Cpu, Glasses } from "lucide-react"
 import { Card, CardContent } from "@/components/ui/card"
 import { motion, AnimatePresence } from "framer-motion"
+import Image from "next/image"
 
 const steps = [
   {
@@ -86,10 +87,19 @@ export default function InstructionsPage() {
               Willkommen bei der Open-A-Eyes Anleitung! Hier findest du eine detaillierte Schritt-für-Schritt-Anleitung zum Zusammenbau deiner KI-Brille.
             </p>
 
-            <div className="flex justify-center mb-8">
+            <div className="flex items-center justify-center gap-4 mb-8">
+              <div className="relative w-[300px] h-[200px] rounded-lg overflow-hidden">
+                <Image
+                  src="/Einzelteile/Animation.gif"
+                  alt="Open-A-Eyes Animation"
+                  fill
+                  className="object-cover"
+                  unoptimized
+                />
+              </div>
               <Link href="/instructions/steps">
                 <Button
-                  className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white text-xl py-8 px-12 rounded-xl transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl"
+                  className="h-[200px] w-[300px] bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white text-xl rounded-lg transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl"
                   size="lg"
                 >
                   <PlayCircle className="mr-2 h-8 w-8" />
