@@ -87,8 +87,8 @@ export default function InstructionsPage() {
               Willkommen bei der Open-A-Eyes Anleitung! Hier findest du eine detaillierte Schritt-für-Schritt-Anleitung zum Zusammenbau deiner KI-Brille.
             </p>
 
-            <div className="flex items-center justify-center gap-4 mb-8">
-              <div className="relative w-[300px] h-[200px] rounded-lg overflow-hidden">
+            <div className="flex flex-col items-center justify-center gap-6 mb-8">
+              <div className="relative w-[300px] h-[200px] rounded-xl overflow-hidden border-2 border-blue-500/20 shadow-lg hover:border-blue-500/40 transition-all duration-300">
                 <Image
                   src="/Einzelteile/Animation.gif"
                   alt="Open-A-Eyes Animation"
@@ -96,13 +96,14 @@ export default function InstructionsPage() {
                   className="object-cover"
                   unoptimized
                 />
+                <div className="absolute inset-0 bg-gradient-to-t from-gray-900/50 to-transparent" />
               </div>
               <Link href="/instructions/steps">
                 <Button
-                  className="h-[200px] w-[300px] bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white text-xl rounded-lg transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl"
+                  className="w-[250px] bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white text-xl py-6 rounded-xl transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl"
                   size="lg"
                 >
-                  <PlayCircle className="mr-2 h-8 w-8" />
+                  <PlayCircle className="mr-2 h-6 w-6" />
                   Anleitung starten
                 </Button>
               </Link>
