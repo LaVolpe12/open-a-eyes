@@ -17,6 +17,19 @@ export default function Home() {
           </p>
         </div>
 
+        {/* YouTube Shorts Video */}
+        <div className="aspect-[9/16] w-full max-w-[300px] mx-auto bg-gray-800 rounded-lg overflow-hidden">
+          <iframe
+            width="100%"
+            height="100%"
+            src="https://www.youtube.com/embed/TImiFf-Whj4"
+            title="Open-A-Eyes Demo"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+            className="w-full h-full"
+          />
+        </div>
+
         <div className="space-y-6 max-w-md mx-auto w-full">
           <Link href="/instructions" className="block w-full">
             <Button
