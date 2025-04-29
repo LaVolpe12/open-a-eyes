@@ -870,7 +870,7 @@ export default function QuestionnairePage() {
               Frage {currentQuestionIndex + 1} von {questions.length}
             </span>
           </div>
-          <Progress value={progress} className="h-2 bg-gray-600" />
+          <Progress value={progress} className="h-2 bg-gray-600 [&>div]:bg-blue-600" />
         </div>
 
         <Card className="bg-gray-700 border-gray-600">
