@@ -12,8 +12,7 @@ export default function Home() {
           </div>
           <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-white">Open-A-Eyes</h1>
           <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-            Willkommen beim Open-A-Eyes Projekt! Baue deine eigene KI-Brille mit handelsüblichen Teilen und wenig
-            technischem Know-how.
+            Willkommen bei Open‑A‑Eyes! Baue deine eigene KI‑Brille mit wenig technischem Know‑how und kleinem Budget. Unser Ziel ist es, mehr Menschen den Zugang zu moderner KI‑Technologie zu eröffnen und so die digitale Teilhabe aktiv zu fördern. Open‑A‑Eyes ist ein studentisches Projekt der TH Köln im Studiengang Maschinenbau – Product Engineering and Context, entwickelt von Denis Tolkovets, Adriano Volpe und Ferdinand Lührig.
           </p>
         </div>
 
