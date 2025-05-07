@@ -122,28 +122,28 @@ function InstructionStepsContent() {
           name: "M2 x 20 mm Gewindeschraube",
           description: "4 Stück",
           price: "2-3€",
-          link: "#",
+          link: "https://www.amazon.de/dp/B0D49DZS8Q?ref=ppx_yo2ov_dt_b_fed_asin_title",
           image: "/Einzelteile/Schrauben_und_Muttern.jpg"
         },
         {
           name: "M2 x 16 mm Gewindeschraube",
           description: "6 Stück",
           price: "2-3€",
-          link: "#",
+          link: "https://www.amazon.de/dp/B0D49DZS8Q?ref=ppx_yo2ov_dt_b_fed_asin_title",
           image: "/Einzelteile/Schrauben_und_Muttern.jpg"
         },
         {
           name: "M2 x 6 mm Gewindeschraube",
           description: "1 Stück",
           price: "1-2€",
-          link: "#",
+          link: "https://www.amazon.de/dp/B0D49DZS8Q?ref=ppx_yo2ov_dt_b_fed_asin_title",
           image: "/Einzelteile/Schrauben_und_Muttern.jpg"
         },
         {
           name: "M2 Mutter",
           description: "11 Stück",
           price: "2-3€",
-          link: "#",
+          link: "https://www.amazon.de/dp/B0D49DZS8Q?ref=ppx_yo2ov_dt_b_fed_asin_title",
           image: "/Einzelteile/Schrauben_und_Muttern.jpg"
         }
       ],
@@ -279,27 +279,15 @@ function InstructionStepsContent() {
       }
     },
     {
-      title: "Deine Brille ist einsatzbereit!",
+      title: "Wie du deine Open-A-Eyes-Brille benutzt",
       components: [],
       instructions: [
         "1. Aktiviere den Hotspot auf deinem Smartphone",
         "2. Schließe eine Powerbank an deiner Brille an",
-        "3. Warte auf das Audio-Signal deiner Brille. Sie ist dann startbereit.",
+        "3. Warte, bis die Brille mit dem Hotspot verbunden ist",
         "4. Drücke den Knopf auf der rechten Seite einmal, um ein Bild aufzunehmen und deine Anweisung zu sprechen. Probiere: Was liegt vor mir auf dem Tisch?",
-        "5. Drücke den Knopf nochmal, um die Aufnahmen zu stoppen und abzuschicken.",
-        "6. In wenigen Sekunden hörst du die Antwort deiner Brille!"
-      ],
-      video: {
-        url: "https://www.youtube.com/embed/juspDw7lDec",
-        timestamps: [
-          { time: "00:00", title: "Einleitung" },
-          { time: "00:30", title: "Hotspot aktivieren" },
-          { time: "01:15", title: "Powerbank anschließen" },
-          { time: "02:00", title: "Brille starten" },
-          { time: "03:30", title: "Bild aufnehmen und Anweisung geben" },
-          { time: "04:45", title: "Antwort erhalten" }
-        ]
-      }
+        "5. Drücke den Knopf zweimal, um die Brille auszuschalten"
+      ]
     }
   ]
 

@@ -141,28 +141,28 @@ export default function ComponentsPage() {
       name: "M2 x 20 mm Gewindeschraube",
       description: "4 Stück",
       price: "2-3€",
-      link: "#",
+      link: "https://www.amazon.de/dp/B0D49DZS8Q?ref=ppx_yo2ov_dt_b_fed_asin_title",
       image: "/Einzelteile/Schrauben_und_Muttern.jpg"
     },
     {
       name: "M2 x 16 mm Gewindeschraube",
       description: "6 Stück",
       price: "2-3€",
-      link: "#",
+      link: "https://www.amazon.de/dp/B0D49DZS8Q?ref=ppx_yo2ov_dt_b_fed_asin_title",
       image: "/Einzelteile/Schrauben_und_Muttern.jpg"
     },
     {
       name: "M2 x 6 mm Gewindeschraube",
       description: "1 Stück",
       price: "1-2€",
-      link: "#",
+      link: "https://www.amazon.de/dp/B0D49DZS8Q?ref=ppx_yo2ov_dt_b_fed_asin_title",
       image: "/Einzelteile/Schrauben_und_Muttern.jpg"
     },
     {
       name: "M2 Mutter",
       description: "11 Stück",
       price: "2-3€",
-      link: "#",
+      link: "https://www.amazon.de/dp/B0D49DZS8Q?ref=ppx_yo2ov_dt_b_fed_asin_title",
       image: "/Einzelteile/Schrauben_und_Muttern.jpg"
     },
   ]

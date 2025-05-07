@@ -51,7 +51,7 @@ const steps = [
     color: "from-blue-500 to-blue-600"
   },
   {
-    title: "Deine Brille ist einsatzbereit!",
+    title: "Wie du deine Open-A-Eyes-Brille benutzt",
     description: "Lerne, wie du deine KI-Brille benutzt und starte durch!",
     icon: Glasses,
     color: "from-blue-500 to-blue-600"
