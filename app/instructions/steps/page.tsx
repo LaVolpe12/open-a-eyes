@@ -287,7 +287,18 @@ function InstructionStepsContent() {
         "3. Warte, bis die Brille mit dem Hotspot verbunden ist",
         "4. Drücke den Knopf auf der rechten Seite einmal, um ein Bild aufzunehmen und deine Anweisung zu sprechen. Probiere: Was liegt vor mir auf dem Tisch?",
         "5. Drücke den Knopf zweimal, um die Brille auszuschalten"
-      ]
+      ],
+      video: {
+        url: "https://www.youtube.com/embed/juspDw7lDec",
+        timestamps: [
+          { time: "00:00", title: "Einleitung" },
+          { time: "00:30", title: "Hotspot aktivieren" },
+          { time: "01:00", title: "Powerbank anschließen" },
+          { time: "01:30", title: "Verbindung warten" },
+          { time: "02:00", title: "Bild aufnehmen und Anweisung geben" },
+          { time: "02:30", title: "Brille ausschalten" }
+        ]
+      }
     }
   ]
 
